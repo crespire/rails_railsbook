@@ -1,24 +1,3 @@
-# README
+This repository holds the final Ruby on Rails project, an implementation of core Facebook functionality.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I've chosen to do it with a pet theme, so pets will have profile pages and can sent each other likes, etc.
