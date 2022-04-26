@@ -8,4 +8,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :email, format: Devise.email_regexp
+
+  has_many :posts
 end
