@@ -19,5 +19,5 @@ class User < ApplicationRecord
            foreign_key: :receiver_id,
            class_name: :Request
 
-  has_many :friends, through: :friendships
+  has_many :friends, :through => :friendship
 end
