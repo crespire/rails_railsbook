@@ -19,9 +19,15 @@ class User < ApplicationRecord
            foreign_key: :receiver_id,
            class_name: :Request
 
-  has_many :friendships_sent, class_name: :Friendship, foreign_key: 'requestor_id'
-  has_many :friends_sent, :through => :friendships_sent, :source => 'receiver'
+  def friends
+    sent = User.joins(:sent_requests).where('accepted = true').where('receiver_id = ?', id)
+    received = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
+    sent + received
+  end
 
-  has_many :friendships_received, class_name: :Friendship, foreign_key: 'receiver_id'
-  has_many :friends_received, :through => :friendships_received, :source => 'requestor'
+  def pending_friends
+    sent = User.joins(:sent_requests).where('accepted = false').where('receiver_id = ?', id)
+    received = User.joins(:received_requests).where('accepted = false').where('requestor_id = ?', id)
+    sent + received
+  end
 end
