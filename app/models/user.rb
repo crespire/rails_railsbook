@@ -20,14 +20,14 @@ class User < ApplicationRecord
            class_name: :Request
 
   def friends
-    sent = User.joins(:sent_requests).where('accepted = true').where('receiver_id = ?', id)
-    received = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
+    sent = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
+    received = User.joins(:sent_requests).where('accepted = true').where('receiver_id = ?', id)
     sent + received
   end
 
   def pending_friends
-    sent = User.joins(:sent_requests).where('accepted = false').where('receiver_id = ?', id)
-    received = User.joins(:received_requests).where('accepted = false').where('requestor_id = ?', id)
+    sent = User.joins(:received_requests).where('accepted = false').where('requestor_id = ?', id)
+    received = User.joins(:sent_requests).where('accepted = false').where('receiver_id = ?', id)
     sent + received
   end
 end
