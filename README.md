@@ -46,6 +46,6 @@ A connection
 - belongs to user as receiver
 
 # Thinking about how to implement friend requests.
-I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through assocation.
+I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through assocation. There's the join model (request) which links to users.
 
-There's the join model (request) which links to users.
+I ended up leveraging the request join model and a boolean so as to implement the idea of friend as a scope on requests.
