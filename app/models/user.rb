@@ -13,11 +13,11 @@ class User < ApplicationRecord
 
   has_many :sent_requests,
            foreign_key: :requestor_id,
-           class_name: :request
+           class_name: :Request
 
   has_many :received_requests,
            foreign_key: :receiver_id,
-           class_name: :request
+           class_name: :Request
 
   has_many :friends, through: :friendships
 end
