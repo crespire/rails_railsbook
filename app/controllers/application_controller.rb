@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, unless: :redirect?
 
   protected
 
@@ -6,7 +7,13 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       super
     else
-      redirect_to login_path, notice: 'Please log in first.'
+      redirect_to new_user_session_path(next: request.fullpath), notice: 'Please log in first.'
     end
+  end
+
+  private
+
+  def redirect?
+    params['next'].present?
   end
 end
