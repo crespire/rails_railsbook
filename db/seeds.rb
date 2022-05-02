@@ -5,3 +5,23 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+3.times do |i|
+  u = User.create(name: "test#{i}", email: "test#{i}@test.com", password: 'password')
+  u.save
+end
+
+puts 'Created three users'
+
+u1 = User.first
+u2 = User.find(2)
+
+u1.sent_requests.build(receiver: u2, accepted: true).save
+u2.sent_requests.build(receiver: User.last).save
+
+puts 'Created 2 requests, accepted between U1 and U2, pending between U2 and U3'
+
+post = u1.posts.build(title: 'Test Post 0', content: 'Content of the post')
+post.save
+
+puts 'Created post that belongs to U1'
