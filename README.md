@@ -40,12 +40,12 @@ A like
 - belongs to likable
 - belongs to likeable (polymorphic)
 
-A connection
+A reqeuest
 
 - belongs to user as sender
 - belongs to user as receiver
 
-# Thinking about how to implement friend requests.
-I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through assocation. There's the join model (request) which links to users.
+# Implemention notes
+I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through assocation. There's the join model (request) which links to users. I ended up leveraging the request join model and a boolean so as to implement the idea of friend as a scope on requests. I ended up implementning both the like and comment as polymorphic associations, so that we can like and comment on anything.
 
-I ended up leveraging the request join model and a boolean so as to implement the idea of friend as a scope on requests.
+Currently, thinking about how to write specs so that behaviours of the models can be verified automatically.
