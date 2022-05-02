@@ -1,8 +1,5 @@
-<% @posts.each do |post| %>
-  <div>
-    <h1><%= post.title %></h1>
-    <p><%= post.content %></p>
-    <p>Posted by: <%= post.user.name %></p>
-    <p>Likes: <%= post.likes_count %></p>
-  </div>
-<% end %>
+<div class="container">
+  <% @posts.each do |post| %>
+    <%= render 'posts/post', post: post %>
+  <% end %>
+</div>
