@@ -2,6 +2,7 @@
   <div>
     <h1><%= post.title %></h1>
     <p><%= post.content %></p>
-    <p><%= post.user.name %></p>
+    <p>Posted by: <%= post.user.name %></p>
+    <p>Likes: <%= post.likes_count %></p>
   </div>
 <% end %>
