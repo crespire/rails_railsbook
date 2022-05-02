@@ -20,7 +20,7 @@ class User < ApplicationRecord
            foreign_key: :receiver_id,
            class_name: :Request
 
-  has_many :likes, as: :likeable
+  has_many :likes, as: :likeable, dependent: :destroy
 
   def friends
     sent = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
