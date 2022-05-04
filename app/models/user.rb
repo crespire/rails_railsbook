@@ -9,8 +9,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, format: Devise.email_regexp
 
-  has_many :posts, dependent: :destroy
-
   has_many :sent_requests,
            foreign_key: :requestor_id,
            class_name: :Request,
@@ -20,8 +18,9 @@ class User < ApplicationRecord
            foreign_key: :receiver_id,
            class_name: :Request
 
-  has_many :likes, as: :likeable, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :likes, class_name: :Like, foreign_key: :liked_by, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def friends
     sent = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
