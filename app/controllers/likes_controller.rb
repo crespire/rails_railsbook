@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   before_action :set_user, only: %i[ new edit update destroy ]
+  before_action :authenticate_user!
 
   private
 
