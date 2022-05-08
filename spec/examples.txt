@@ -1,0 +1,8 @@
+example_id                             | status  | run_time        |
+-------------------------------------- | ------- | --------------- |
+./spec/models/comment_spec.rb[1:1]     | pending | 0.00009 seconds |
+./spec/models/like_spec.rb[1:1]        | pending | 0.00003 seconds |
+./spec/models/post_spec.rb[1:1]        | pending | 0 seconds       |
+./spec/models/request_spec.rb[1:1]     | pending | 0.00001 seconds |
+./spec/models/user_spec.rb[1:1]        | pending | 0 seconds       |
+./spec/system/user_system_spec.rb[1:1] | failed  | 0.10284 seconds |

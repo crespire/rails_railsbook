@@ -59,7 +59,7 @@ group :development, :test do
   gem 'letter_opener', '~> 1.8', '>= 1.8.1'
 
   # Use RSpec
-  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
 end
 
 group :development do
