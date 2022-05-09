@@ -27,6 +27,6 @@ RSpec.describe 'User system', type: :system do
     fill_in 'Password confirmation', with: 'password'
     click_button 'Sign up'
 
-    expect(page).to have_text('Email is required.')
+    expect(page).to have_text('errors prohibited')
   end
 end

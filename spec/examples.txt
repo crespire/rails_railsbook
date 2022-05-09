@@ -5,5 +5,5 @@ example_id                             | status  | run_time        |
 ./spec/models/post_spec.rb[1:1]        | pending | 0 seconds       |
 ./spec/models/request_spec.rb[1:1]     | pending | 0.00001 seconds |
 ./spec/models/user_spec.rb[1:1]        | pending | 0 seconds       |
-./spec/system/user_system_spec.rb[1:1] | passed  | 2.25 seconds    |
-./spec/system/user_system_spec.rb[1:2] | failed  | 2.59 seconds    |
+./spec/system/user_system_spec.rb[1:1] | passed  | 0.59318 seconds |
+./spec/system/user_system_spec.rb[1:2] | passed  | 2.98 seconds    |
