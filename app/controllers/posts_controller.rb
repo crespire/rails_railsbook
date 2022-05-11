@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.includes(:user).all
+    @post = current_user.posts.build
   end
 
   def new
