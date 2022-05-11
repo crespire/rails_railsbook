@@ -1,4 +1,4 @@
-<%= form_for model: @post do |form| %>
+<%= form_with model: @post do |form| %>
   <%= form.text_field :content %>
   <%= form.submit 'Post' %>
 <% end %>
