@@ -1,6 +1,8 @@
-<div class="container">
+<div class="l-feed">
   <%= render 'posts/form' %>
-  <% @posts.each do |post| %>
-    <%= render 'posts/post', post: post %>
+  <%= turbo_frame_tag 'post_feed' do %> 
+    <% @posts.each do |post| %>
+      <%= render 'posts/post', post: post %>
+    <% end %>
   <% end %>
 </div>
