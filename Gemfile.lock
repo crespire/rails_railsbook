@@ -97,6 +97,8 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     erubi (1.10.0)
+    factory_bot (4.11.1)
+      activesupport (>= 3.0.0)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -261,6 +263,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.8)
+  factory_bot (~> 4.8, >= 4.8.2)
   importmap-rails
   jbuilder
   letter_opener (~> 1.8, >= 1.8.1)

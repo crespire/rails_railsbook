@@ -1,4 +1,7 @@
 <%= form_with model: @post do |form| %>
-  <%= form.text_area :content, size: '60x5', placeholder: "What's on your mind?", required: true %>
+  <%= form.text_area :content,
+                     size: '60x5',
+                     placeholder: "What's on your mind?",
+                     required: true %>
   <%= form.submit 'Post' %>
 <% end %>
