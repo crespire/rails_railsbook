@@ -60,6 +60,12 @@ group :development, :test do
 
   # Use RSpec
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
+
+  # Use FactoryBoy
+  gem 'factory_bot_rails'
+
+  # Use Faker
+  gem 'faker'
 end
 
 group :development do
@@ -78,5 +84,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem 'factory_bot', '~> 4.8', '>= 4.8.2'
 end
