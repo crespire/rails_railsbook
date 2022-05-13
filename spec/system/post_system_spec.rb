@@ -25,5 +25,17 @@ RSpec.describe 'Post system', type: :system do
 
       expect(page).to have_text('Test Post from Capybara')
     end
+
+    it 'does not allow submission of an empty post' do
+      login_as(user, scope: :user)
+
+      visit root_path
+      click_button 'Post'
+
+      message = page.find('#post_content').native.attribute('validationMessage')
+
+      expect(message).to have_text('Please fill in this field.')
+      expect(current_path).to eq(root_path)
+    end
   end
 end
