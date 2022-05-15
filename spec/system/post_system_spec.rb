@@ -21,7 +21,7 @@ RSpec.describe 'Post system', type: :system do
       create :post
 
       visit root_path
-      fill_in 'post_content', with: 'Test Post from Capybara'
+      find('div.l-new_post').fill_in 'post_content', with: 'Test Post from Capybara'
       click_button 'Post'
 
       expect(page).to have_text('Test Post from Capybara')
@@ -39,7 +39,7 @@ RSpec.describe 'Post system', type: :system do
       expect(current_path).to eq(root_path)
     end
 
-    it "does not allow a user to edit a non-owned post" do
+    it 'does not allow a user to edit a non-owned post' do
       login_as(user)
       FactoryBot.create(:post)
       expect(page).not_to have_text('Edit')
@@ -53,8 +53,8 @@ RSpec.describe 'Post system', type: :system do
       click_link 'Edit'
       expect(current_path).to eq(root_path)
 
-      fill_in 'post_content', with: 'Test Post from Capybara with an edit!'
-      click_button 'Post'
+      find('div.l-feed').fill_in 'post_content', with: 'Test Post from Capybara with an edit!'
+      find('div.l-feed').click_button 'Post'
       expect(page).to have_text('Test Post from Capybara with an edit!')
       expect(current_path).to eq root_path
     end
