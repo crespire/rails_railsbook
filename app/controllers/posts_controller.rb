@@ -13,7 +13,11 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    redirect_to :root, alert: "Not authorized to edit another user's posts." unless @post.user.id == current_user.id
+    if @post.user.id == current_user.id
+      render :edit
+    else
+      redirect_to :root, alert: "Not authorized to edit another user's posts."
+    end
   end
 
   # POST /posts or /posts.json
