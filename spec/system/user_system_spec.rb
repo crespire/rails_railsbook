@@ -47,4 +47,17 @@ RSpec.describe 'User system', type: :system do
     expect(message).to have_text('Please include')
     expect(current_path).to eq new_user_registration_path
   end
+
+  it 'does not allow a user to register with an email that is already used' do
+    user = FactoryBot.create(:user)
+
+    visit '/users/sign_up'
+    fill_in 'Email', with: user.email
+    fill_in 'Name', with: 'Fake user'
+    fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+    click_button 'Sign up'
+
+    expect(page).to have_text('Email has already been taken')
+  end
 end
