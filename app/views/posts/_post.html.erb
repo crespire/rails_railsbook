@@ -1,10 +1,19 @@
 <div class="c-post">
-  <div class="c-post__badge">
-    <span class="c-post__image">img</span>
-    <span class="c-post__name"><%= post.user.name %></span>
+  <div class="c-post__header">
+    <div class="c-post__badge">
+      <span class="c-post__image">img</span>
+      <span class="c-post__name"><%= post.user.name %></span>
+    </div>
+    <div class="c-post__actions">
+      <% if current_user.id == post.user.id %>
+        <%= link_to 'Edit', edit_post_path(post), data: { "turbo_frame": dom_id(post)} %>
+      <% end %>
+    </div>
   </div>
   <div class="c-post__content">
-    <p class="c-post__body"><%= post.content %></p>
+    <%= turbo_frame_tag post do %>
+      <p class="c-post__body"><%= post.content %></p>
+    <% end %>
   </div>
   <div class="c-post__status">
     <p class="c-post__info">

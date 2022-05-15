@@ -39,16 +39,22 @@ RSpec.describe 'Post system', type: :system do
       expect(current_path).to eq(root_path)
     end
 
-    it 'allows a user to edit a post' do
+    it "does not allow a user to edit a non-owned post" do
+      login_as(user)
+      FactoryBot.create(:post)
+      expect(page).not_to have_text('Edit')
+    end
+
+    it 'allows a user to edit their own post' do
       login_as(user, scope: :user)
       FactoryBot.create(:post, user_id: user.id)
 
       visit root_path
-      click_button 'Edit'
+      click_link 'Edit'
       expect(current_path).to eq(root_path)
 
       fill_in 'post_content', with: 'Test Post from Capybara with an edit!'
-      click_button 'Done'
+      click_button 'Post'
       expect(page).to have_text('Test Post from Capybara with an edit!')
       expect(current_path).to eq root_path
     end
