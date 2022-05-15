@@ -8,7 +8,7 @@ RSpec.describe 'Post system', type: :system do
   context 'when there is no user logged in' do
     it 'redirects the user to authenticate' do
       visit root_path
-      # expect(page).to have_text('You need to sign in or sign up before continuing.')
+      expect(page).to have_text('You need to sign in or sign up before continuing.')
       expect(current_path).to eq(new_user_session_path)
     end
   end
@@ -18,6 +18,7 @@ RSpec.describe 'Post system', type: :system do
 
     it 'successfully posts a post as a user' do
       login_as(user, scope: :user)
+      create :post
 
       visit root_path
       fill_in 'post_content', with: 'Test Post from Capybara'
@@ -36,6 +37,20 @@ RSpec.describe 'Post system', type: :system do
 
       expect(message).to have_text('Please fill in this field.')
       expect(current_path).to eq(root_path)
+    end
+
+    it 'allows a user to edit a post' do
+      login_as(user, scope: :user)
+      FactoryBot.create(:post, user_id: user.id)
+
+      visit root_path
+      click_button 'Edit'
+      expect(current_path).to eq(root_path)
+
+      fill_in 'post_content', with: 'Test Post from Capybara with an edit!'
+      click_button 'Done'
+      expect(page).to have_text('Test Post from Capybara with an edit!')
+      expect(current_path).to eq root_path
     end
   end
 end
