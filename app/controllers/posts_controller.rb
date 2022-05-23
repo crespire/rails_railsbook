@@ -58,6 +58,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to :root, notice: "Post was successfully removed." }
+      format.turbo_stream { flash.now[:notice] = 'Post removed!' }
       format.json { head :no_content }
     end
   end

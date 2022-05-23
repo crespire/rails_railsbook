@@ -1,46 +1,48 @@
-<div class="c-post">
-  <div class="c-post__header">
-    <div class="c-post__badge">
-      <span class="c-post__image">img</span>
-      <span class="c-post__name"><%= post.user.name %></span>
+<%= turbo_frame_tag dom_id(post) do %>
+  <div class="c-post">
+    <div class="c-post__header">
+      <div class="c-post__badge">
+        <span class="c-post__image">img</span>
+        <span class="c-post__name"><%= post.user.name %></span>
+      </div>
+      <div class="c-post__actions">
+        <% if current_user.id == post.user.id %>
+          <%= link_to 'Edit', edit_post_path(post), data: { turbo_frame: dom_id(post) } %>
+          <%= link_to 'Delete', post_path(post), data: { turbo_frame: dom_id(post), turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
     </div>
-    <div class="c-post__actions">
-      <% if current_user.id == post.user.id %>
-        <%= link_to 'Edit', edit_post_path(post), data: { "turbo_frame": post } %>
-        <%= link_to 'Delete', post_path(post), data: { "turbo_frame": post, turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+    <div class="c-post__content">
+      <%= turbo_frame_tag post do %>
+        <p class="c-post__body"><%= post.content %></p>
       <% end %>
     </div>
-  </div>
-  <div class="c-post__content">
-    <%= turbo_frame_tag post do %>
-      <p class="c-post__body"><%= post.content %></p>
-    <% end %>
-  </div>
-  <div class="c-post__status">
-    <p class="c-post__info">
-      <span>Likes: <%= post.likes.size %></span>
-      <span><%=post.comments.size %> Comments</span>
-    </p>
-  </div>
-  <div class="post__responses">
-    <!-- the following element should probably go in a comment partial -->
-    <div class="post__comment"> 
-      <div class="c-post__badge-comment">
-        <span class="c-post__image-comment">img</span>
-        <span class="c-post__name-comment">comment's user</span>
-      </div>
-      <div class="c-post__content-comment">
-        <p class="c-post__body-comment">comment content</p>
-      </div>
-      <div class="c-post__status-comment">
-        <p class="c-post__info">
-          <span>Likes: 56</span>
-          <span>Reply: <button>reply</button></span>
-        </p>
+    <div class="c-post__status">
+      <p class="c-post__info">
+        <span>Likes: <%= post.likes.size %></span>
+        <span><%=post.comments.size %> Comments</span>
+      </p>
+    </div>
+    <div class="post__responses">
+      <!-- the following element should probably go in a comment partial -->
+      <div class="post__comment"> 
+        <div class="c-post__badge-comment">
+          <span class="c-post__image-comment">img</span>
+          <span class="c-post__name-comment">comment's user</span>
+        </div>
+        <div class="c-post__content-comment">
+          <p class="c-post__body-comment">comment content</p>
+        </div>
+        <div class="c-post__status-comment">
+          <p class="c-post__info">
+            <span>Likes: 56</span>
+            <span>Reply: <button>reply</button></span>
+          </p>
+        </div>
       </div>
     </div>
+    <div class="post__input">
+      <!-- form for making a comment -->
+    </div>
   </div>
-  <div class="post__input">
-    <!-- form for making a comment -->
-  </div>
-</div>
+<% end %>
