@@ -70,8 +70,8 @@ RSpec.describe 'Post system', type: :system do
       end
       expect(current_path).to eq(root_path)
 
+      expect(user.posts.count).to eq(0)
       expect(page).not_to have_text('Test Delete')
-      expect(current_path).to eq root_path
     end
   end
 end
