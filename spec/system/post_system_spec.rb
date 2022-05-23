@@ -58,5 +58,20 @@ RSpec.describe 'Post system', type: :system do
       expect(page).to have_text('Test Post from Capybara with an edit!')
       expect(current_path).to eq root_path
     end
+
+    it 'allows a user to delete their own post' do
+      login_as(user, scope: :user)
+      FactoryBot.create(:post, user_id: user.id, content: 'Test Delete')
+
+      visit root_path
+      expect(page).to have_text('Test Delete')
+      accept_confirm do
+        find('div.l-feed').click_link 'Delete'
+      end
+      expect(current_path).to eq(root_path)
+
+      expect(page).not_to have_text('Test Delete')
+      expect(current_path).to eq root_path
+    end
   end
 end
