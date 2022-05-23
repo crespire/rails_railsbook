@@ -6,7 +6,8 @@
     </div>
     <div class="c-post__actions">
       <% if current_user.id == post.user.id %>
-        <%= link_to 'Edit', edit_post_path(post), data: { "turbo_frame": dom_id(post)} %>
+        <%= link_to 'Edit', edit_post_path(post), data: { "turbo_frame": post } %>
+        <%= link_to 'Delete', post_path(post), data: { "turbo_frame": post, turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
       <% end %>
     </div>
   </div>
