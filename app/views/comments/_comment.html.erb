@@ -1,0 +1,17 @@
+<%= turbo_frame_tag dom_id(comment) do%>
+  <div class="post__comment"> 
+    <div class="c-post__badge-comment">
+      <span class="c-post__image-comment">img</span>
+      <span class="c-post__name-comment">comment's user</span>
+    </div>
+    <div class="c-post__content-comment">
+      <p class="c-post__body-comment">comment content</p>
+    </div>
+    <div class="c-post__status-comment">
+      <p class="c-post__info">
+        <span>Likes: 56</span>
+        <span>Reply: <button>reply</button></span>
+      </p>
+    </div>
+  </div>
+<% end %>
