@@ -49,3 +49,13 @@ A reqeuest
 I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through assocation. There's the join model (request) which links to users. I ended up leveraging the request join model and a boolean so as to implement the idea of friend as a scope on requests. I ended up implementning both the like and comment as polymorphic associations, so that we can like and comment on anything.
 
 Currently, thinking about how to write specs so that behaviours of the models can be verified automatically.
+
+Having completed the post system tests and post system (for the most part), I am now shifting to working on comments for posts.
+
+Typically, comments are pretty straight-forward: a post has many comments, and comments belong to a post and a user. But I've taken the route of making comments a polymorphic assocation so that you can comment on comments, etc.
+
+I've set up my model this way, but now I am wondering how I can set up the controller to accomodate this. I have no intention of allowing individual comment views, or have an "index of" comments, as comments require context (ie, a post or the parent comment, which loops back to requiring the post).
+
+I think the first step to sorting out my comments is to make commenting on posts work (via the appropriate controller actions) to confirm that the model/assocaiations are set up correctly.
+
+Once that is done, then I can work on commenting on comments, as I will at least (hopefully) have a basis for starting after getting commenting done.
