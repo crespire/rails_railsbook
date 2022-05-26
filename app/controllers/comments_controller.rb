@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
-  before_action :set_post, only: %i[new, create]
+  before_action :set_parent, only: %i[new, create]
   before_action :authenticate_user!
 
   def new
@@ -35,7 +35,6 @@ class CommentsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
-
   end
 
   def destroy
@@ -54,8 +53,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  def set_post
-    @post = Post.find(params[:id])
+  def set_parent
+    # Think about how to identify the parent type
+    # We need a way to search up the parent commentable.
+    @parent = Post.find(params[:id])
   end
 
   def comment_params
