@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
-  before_action :set_parent, only: %i[new, create]
+  before_action :set_parent, only: %i[new create]
   before_action :authenticate_user!
 
   def new
