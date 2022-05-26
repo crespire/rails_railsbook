@@ -1,0 +1,9 @@
+<%= form_with model: parent  do |form| %>
+  <%= fields_for :comments, parent.comments do |comment_form| %>
+    <%= comment_form.text_area :content,
+                               size: '15x1',
+                               placeholder: "Add a comment...",
+                               required: true%>
+  <% end %>
+  <%= form.submit 'Post' %>
+<% end %>
