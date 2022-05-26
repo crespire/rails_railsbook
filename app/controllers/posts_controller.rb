@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @posts = Post.includes(:user).all.order(id: :desc)
+    @posts = Post.includes(:user, :comments, :likes).all.order(id: :desc)
     @post = current_user.posts.build
   end
 

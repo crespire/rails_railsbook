@@ -23,11 +23,15 @@
         <span><%=post.comments.size %> Comments</span>
       </p>
     </div>
-    <div class="post__responses">
-      <%= render 'comments/index', post: post %>
-    </div>
-    <div class="post__input">
+    <div class="c-post__input">
       <!-- form for making a comment -->
+    </div>
+    <div class="c-post__responses">
+      <%= turbo_frame_tag "#{dom_id(post)}_comments" do %>
+        <% post.comments.each do |comment| %>
+          <%= render 'comments/comment', comment: comment %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>
