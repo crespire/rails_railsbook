@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[edit update destroy]
-  before_action :set_parent, only: %i[new create]
+  before_action :set_comment, only: %i[show edit update destroy]
+  # Does Shallow Resource take care of this for me?
+  # before_action :set_parent, only: %i[index new create]
   before_action :authenticate_user!
 
   def new
@@ -8,9 +9,9 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    if @comment.user.id == current_user.id
-      render :edit
-    end
+    return unless @comment.user.id == current_user.id
+
+    render :edit
   end
 
   def create
@@ -51,12 +52,6 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
-  end
-
-  def set_parent
-    # Think about how to identify the parent type
-    # We need a way to search up the parent commentable.
-    @parent = Post.find(params[:id])
   end
 
   def comment_params
