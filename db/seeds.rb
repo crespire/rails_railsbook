@@ -25,3 +25,8 @@ post = u1.posts.build(title: 'Test Post 0', content: 'Content of the post')
 post.save
 
 puts 'Created post that belongs to user1'
+
+comment = post.comments.build(content: 'Comment on post 0', user_id: 1)
+comment.save
+
+puts 'Created a comment on post.'
