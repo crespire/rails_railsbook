@@ -59,3 +59,8 @@ I've set up my model this way, but now I am wondering how I can set up the contr
 I think the first step to sorting out my comments is to make commenting on posts work (via the appropriate controller actions) to confirm that the model/assocaiations are set up correctly.
 
 Once that is done, then I can work on commenting on comments, as I will at least (hopefully) have a basis for starting after getting commenting done.
+
+**May 27**
+Having considered how to approach nested comments, I think it's a little bit more complicated than I want to get on this project. I've decided to approach comments are a nested child resource of post, and stick with that for the meantime.
+
+Nested comments seemed to be difficult to implement on the view side without causing a bunch of N+1 problems. Not a trivial task. I am not well versed enough in the Rails framework (yet!!) to come up with a good solution for it, and I think having posts with just one level of comments is sufficient. I also still want to keep Likes as a polymorphic model, so I will still have some exposure to using them in the project.
