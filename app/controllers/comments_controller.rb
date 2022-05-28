@@ -1,11 +1,16 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
-  # Does Shallow Resource take care of this for me?
-  # before_action :set_parent, only: %i[index new create]
+  before_action :set_parent, only: %i[index new create]
   before_action :authenticate_user!
 
+  def index
+    @comments = @post.comments
+  end
+
   def new
+    print 'Failed to save comment'
     @comment = @post.comments.build
+    # @comment.user = current_user
   end
 
   def edit
@@ -16,12 +21,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.build(comment_params)
+    @comment.user_id = current_user.id
 
     respond_to do |format|
       if @comment.save
+        format.turbo_stream { flash.now[:notice] = 'Comment added!' }
         format.html { redirect_to :root, notice: 'Comment added!' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :root, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +61,11 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
+  def set_parent
+    @post = Post.find(params[:post_id])
+  end
+
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, :post_id)
   end
 end

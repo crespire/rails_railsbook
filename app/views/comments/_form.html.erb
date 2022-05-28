@@ -1,1 +1,7 @@
-<!-- pending set up of routes and associations -->
+<%= form_with model: Comment.new, url: post_comments_path(post) do |form| %>
+  <%= form.text_area :content,
+                     size: '30x2',
+                     placeholer: "Add a comment...",
+                     required: true %>
+  <%= form.submit %>
+<% end %>
