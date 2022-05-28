@@ -75,7 +75,21 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'allows a user to delete their own post with comments' do
-      # Make post with comments that we then try to delete
+      login_as(user, scope: :user)
+      FactoryBot.create(:post, user_id: user.id, content: 'Test Delete')
+      post = Post.first
+      comment = post.comments.build(content: "Test Comment", user_id: user.id)
+      comment.save
+
+      visit root_path
+      expect(page).to have_text('Test Delete')
+      accept_confirm do
+        find('div.l-feed').click_link 'Delete'
+      end
+      expect(current_path).to eq(root_path)
+
+      expect(user.posts.count).to eq(0)
+      expect(page).not_to have_text('Test Delete')
     end
   end
 end

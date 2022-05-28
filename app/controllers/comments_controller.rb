@@ -8,9 +8,8 @@ class CommentsController < ApplicationController
   end
 
   def new
-    print 'Failed to save comment'
     @comment = @post.comments.build
-    # @comment.user = current_user
+    @comment.user_id = current_user.id
   end
 
   def edit
@@ -24,11 +23,11 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     respond_to do |format|
-      if @comment.save
+      if @comment.save!
         format.turbo_stream { flash.now[:notice] = 'Comment added!' }
         format.html { redirect_to :root, notice: 'Comment added!' }
       else
-        format.html { render :root, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -66,6 +65,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :post_id)
+    params.require(:comment).permit(:content, :post_id, :user_id)
   end
 end
