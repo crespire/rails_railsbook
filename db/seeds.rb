@@ -21,7 +21,7 @@ u2.sent_requests.build(receiver: User.last).save
 
 puts 'Created 2 requests, accepted between user1 and user2, pending between user2 and user3'
 
-post = u1.posts.build(title: 'Test Post 0', content: 'Content of the post')
+post = u1.posts.build(content: 'Content of the post')
 post.save
 
 puts 'Created post that belongs to user1'
