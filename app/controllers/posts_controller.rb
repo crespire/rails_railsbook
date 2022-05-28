@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   def destroy
     return unless @post.user.id == current_user.id
 
-    @post.destroy
+    @post.destroy!
 
     respond_to do |format|
       format.html { redirect_to :root, notice: "Post was successfully removed." }
@@ -72,6 +72,6 @@ class PostsController < ApplicationController
 
   # Strong parameters
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:content)
   end
 end
