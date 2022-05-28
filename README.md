@@ -64,3 +64,6 @@ Once that is done, then I can work on commenting on comments, as I will at least
 Having considered how to approach nested comments, I think it's a little bit more complicated than I want to get on this project. I've decided to approach comments are a nested child resource of post, and stick with that for the meantime.
 
 Nested comments seemed to be difficult to implement on the view side without causing a bunch of N+1 problems. Not a trivial task. I am not well versed enough in the Rails framework (yet!!) to come up with a good solution for it, and I think having posts with just one level of comments is sufficient. I also still want to keep Likes as a polymorphic model, so I will still have some exposure to using them in the project.
+
+** May 28**
+Running into an issue with my Post/Comment association. I'm having issues either executing a Post destroy due to comment assocations, or having issues adding comments. Think on this a little bit.
