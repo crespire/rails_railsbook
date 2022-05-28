@@ -73,5 +73,9 @@ RSpec.describe 'Post system', type: :system do
       expect(user.posts.count).to eq(0)
       expect(page).not_to have_text('Test Delete')
     end
+
+    it 'allows a user to delete their own post with comments' do
+      # Make post with comments that we then try to delete
+    end
   end
 end
