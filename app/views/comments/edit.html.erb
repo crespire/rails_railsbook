@@ -4,8 +4,8 @@
               data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' } do |form| %>
   <%= form.text_area :content,
                      size: '30x2',
-                     placeholer: "Add a comment...",
+                     placeholer: "Can't be blank...",
                      required: true %>
-  <%= form.submit %>
+  <%= form.submit 'Update' %>
   <% end %>
 <% end %>
