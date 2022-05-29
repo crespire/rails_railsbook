@@ -1,1 +1,1 @@
-<%= turbo_stream.append @comment %>
+<%= turbo_stream.append "#{dom_id(@post)}_comments", @comment %>
