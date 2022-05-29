@@ -67,6 +67,10 @@ Running into an issue with my Post/Comment association. I'm having issues either
 
 I've updated the readme to reflect the changes in my approach for my models.
 
+**May 29**
+Resolved my dependent destroy issue. I was using `counter_cache` on the wrong side of my association. It belongs to the `belongs_to` side. D'oh. Now, the task today is to sort out how to update a post's comments using Turbo, as new comments are committing correctly, but not updating in the view.
+
 #TODO
-* Write a system test for friend requests
-* Figure out what's going on with comment/post association that's causing problems either deleting posts with comments, or adding new comments.
+* Fix comment views so we update comments via turbo
+* Write comment system tests.
+* Flesh out requests system (with tests)
