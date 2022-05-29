@@ -9,35 +9,32 @@ Models
 - Post
 - Comment
 - Like
-- Connection
+- Request
 
 Model Associations
 
 A user:
 
 - has many posts
-- has many comments_made, inverse_of commenter
-- has many comments_received, as commentable
-- has many likes_given, inverse of liker
-- has many likes_recevied, as likeable
-- has many friends through connections
+- has many comments
+- has many likes
+- has many requests_sent
+- has many requests_received
 
 A post
 
-- belongs to a user
+- belongs to user
 - has many likes
-- has many comments as commentable (polymorphic)
+- has many comments
 
 A comment
 
-- belongs to commenter, class user
-- belongs to a commentable (polymorphic association)
-- has many comments as commentable
+- belongs to user
+- belongs to post
 
 A like
 
 - belongs to a liker, class user
-- belongs to likable
 - belongs to likeable (polymorphic)
 
 A reqeuest
@@ -65,5 +62,11 @@ Having considered how to approach nested comments, I think it's a little bit mor
 
 Nested comments seemed to be difficult to implement on the view side without causing a bunch of N+1 problems. Not a trivial task. I am not well versed enough in the Rails framework (yet!!) to come up with a good solution for it, and I think having posts with just one level of comments is sufficient. I also still want to keep Likes as a polymorphic model, so I will still have some exposure to using them in the project.
 
-** May 28**
+**May 28**
 Running into an issue with my Post/Comment association. I'm having issues either executing a Post destroy due to comment assocations, or having issues adding comments. Think on this a little bit.
+
+I've updated the readme to reflect the changes in my approach for my models.
+
+#TODO
+* Write a system test for friend requests
+* Figure out what's going on with comment/post association that's causing problems either deleting posts with comments, or adding new comments.
