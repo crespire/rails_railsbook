@@ -84,11 +84,12 @@ RSpec.describe 'Post system', type: :system do
       visit root_path
       expect(page).to have_text('Test Delete')
       accept_confirm do
-        find('div.l-feed').click_link 'Delete'
+        find('div.c-post__actions').click_link 'Delete'
       end
       expect(current_path).to eq(root_path)
 
       expect(user.posts.count).to eq(0)
+      expect(user.comments.count).to eq(0)
       expect(page).not_to have_text('Test Delete')
     end
   end

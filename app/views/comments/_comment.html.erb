@@ -12,7 +12,7 @@
         </p>      
     </div>
     <div class="c-post__status-comment">
-      <p class="c-post__info-comment">
+      <p class="c-post__actions-comment">
         <span>Likes: <%= comment.likes.size %> </span>
         <% if current_user.id == comment.user.id %>
           <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: "#{dom_id(comment)}_text" } %>

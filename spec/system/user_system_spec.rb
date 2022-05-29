@@ -60,4 +60,8 @@ RSpec.describe 'User system', type: :system do
 
     expect(page).to have_text('Email has already been taken')
   end
+
+  it 'deletes a user with posts and comments' do
+    # stub - I wonder if this test wouldn't be better done in a controller spec.
+  end
 end
