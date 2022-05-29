@@ -8,8 +8,12 @@
       <p class="c-post__body-comment"><%= comment.content %></p>
     </div>
     <div class="c-post__status-comment">
-      <p class="c-post__info">
+      <p class="c-post__info-comment">
         <span>Likes: <%= comment.likes.size %> </span>
+        <% if current_user.id == comment.user.id %>
+          <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: dom_id(comment) } %>
+          <%= link_to 'Delete', comment_path(comment), data: { turbo_frame: dom_id(comment), turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+        <% end %>
       </p>
     </div>
   </div>
