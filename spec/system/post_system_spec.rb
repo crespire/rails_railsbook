@@ -16,8 +16,11 @@ RSpec.describe 'Post system', type: :system do
   context 'when a user is logged in' do
     let(:user) { FactoryBot.create(:user) }
 
-    it 'successfully posts a post as a user' do
+    before do
       login_as(user, scope: :user)
+    end
+
+    it 'successfully posts a post as a user' do
       create :post
 
       visit root_path
@@ -28,8 +31,6 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'does not allow submission of an empty post' do
-      login_as(user, scope: :user)
-
       visit root_path
       click_button 'Post'
 
@@ -40,13 +41,11 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'does not allow a user to edit a non-owned post' do
-      login_as(user)
       FactoryBot.create(:post)
       expect(page).not_to have_text('Edit')
     end
 
     it 'allows a user to edit their own post' do
-      login_as(user, scope: :user)
       FactoryBot.create(:post, user_id: user.id)
 
       visit root_path
@@ -60,7 +59,6 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'allows a user to delete their own post' do
-      login_as(user, scope: :user)
       FactoryBot.create(:post, user_id: user.id, content: 'Test Delete')
 
       visit root_path
@@ -75,7 +73,6 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'allows a user to delete their own post with comments' do
-      login_as(user, scope: :user)
       FactoryBot.create(:post, user_id: user.id, content: 'Test Delete')
       post = Post.first
       comment = post.comments.build(content: "Test Comment", user_id: user.id)
