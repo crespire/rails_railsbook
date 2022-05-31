@@ -35,15 +35,39 @@ RSpec.describe 'Comment system', type: :system do
         expect(current_path).to eq(root_path)
       end
 
-      xit 'allows a user to edit their own comment' do
+      it 'allows a user to edit their own comment' do
+        visit root_path
+        find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+        click_button 'Add comment'
+
+        find('div.c-post__responses').click_link 'Edit'
+        find('div.c-post__responses').fill_in 'comment_content', with: 'Test Comment Edited'
+        click_button 'Update'
+
+        expect(page).to have_text('Test Comment Edited')
+        expect(current_path).to eq(root_path)
       end
-  
-      xit 'does not allow a user to update to a blank comment' do
+
+      it 'does not allow a user to update to a blank comment' do
+        visit root_path
+        find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+        click_button 'Add comment'
+
+        find('div.c-post__responses').click_link 'Edit'
+
+        element = find('div.c-post__comment-content#comment_content')
+        element.native.clear
+        click_button 'Update'
+
+        message = page.find('div.c-post__responses#comment_content').native.attribute('validationMessage')
+
+        expect(message).to have_text('Please fill in this field.')
+        expect(current_path).to eq(root_path)
       end
-  
+
       xit 'does not allow a user to edit another users comment' do
       end
-  
+
       xit 'allows a user to delete their own comment' do
       end
     end
