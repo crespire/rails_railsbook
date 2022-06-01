@@ -69,12 +69,16 @@ RSpec.describe 'Comment system', type: :system do
         click_button 'Add comment'
 
         expect(page).to have_text('Test Comment')
+        user.reload
+        expect(user.comments.size).to eq(1)
 
         accept_confirm do
           find('p.c-post__actions-comment').click_link 'Delete'
         end
 
         expect(page).to_not have_text('Test Comment')
+        user.reload
+        expect(user.comments.size).to eq(0)
       end
     end
   end
