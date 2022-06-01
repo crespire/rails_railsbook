@@ -54,21 +54,28 @@ RSpec.describe 'Comment system', type: :system do
         click_button 'Add comment'
 
         find('div.c-post__responses').click_link 'Edit'
-
-        element = find('div.c-post__comment-content#comment_content')
-        element.native.clear
+        find('div.c-post__responses').fill_in 'comment_content', with: ''
         click_button 'Update'
 
-        message = page.find('div.c-post__responses#comment_content').native.attribute('validationMessage')
+        message = page.find('div.c-post__responses').find('#comment_content').native.attribute('validationMessage')
 
         expect(message).to have_text('Please fill in this field.')
         expect(current_path).to eq(root_path)
       end
 
-      xit 'does not allow a user to edit another users comment' do
-      end
+      it 'allows a user to delete their own comment' do
+        visit root_path
+        find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+        click_button 'Add comment'
 
-      xit 'allows a user to delete their own comment' do
+        expect(page).to have_text('Test Comment')
+        expect(user.comments.size).to eq(1)
+
+        accept_confirm do
+          find('p.c-post__actions-comment').click_link 'Delete'
+        end
+
+        expect(user.comments.size).to eq(0)
       end
     end
   end
