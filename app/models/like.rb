@@ -1,6 +1,6 @@
 class Like < ApplicationRecord
   belongs_to :likeable, polymorphic: true, counter_cache: true
-  belongs_to :user, foreign_key: :liked_by
+  belongs_to :user, foreign_key: :liked_by, counter_cache: true
 
   validates :liked_by, presence: true
   validates :likeable_type, presence: true
