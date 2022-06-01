@@ -51,6 +51,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to :root, notice: 'Comment deleted!' }
+      format.turbo_stream { flash.now[:notice] = 'Comment deleted!' }
     end
   end
 
