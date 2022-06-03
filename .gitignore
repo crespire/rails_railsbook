@@ -32,3 +32,6 @@
 
 # Ignore rspec testing output
 /spec/*.txt
+
+# Ignore solargraph
+.solargraph.yml
