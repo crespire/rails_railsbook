@@ -21,17 +21,27 @@ class User < ApplicationRecord
   has_many :likes, foreign_key: :liked_by, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :notifications, depdent: :destroy
+  has_many :notifications, dependent: :destroy
 
-  def friends
+  def accepted_requests
     sent = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
     received = User.joins(:sent_requests).where('accepted = true').where('receiver_id = ?', id)
     sent + received
   end
 
-  def pending_friends
+  def pending_requests
     sent = User.joins(:received_requests).where('accepted = false').where('requestor_id = ?', id)
     received = User.joins(:sent_requests).where('accepted = false').where('receiver_id = ?', id)
     sent + received
   end
+
+  def all_requests
+    sent = User.joins(:received_requests).where('requestor_id = ?', id)
+    received = User.joins(:sent_requests).where('receiver_id = ?', id)
+    sent + received
+  end
+
+  alias friends accepted_requests
+  alias pending_friends pending_requests
+
 end
