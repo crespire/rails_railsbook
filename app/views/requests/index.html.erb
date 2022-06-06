@@ -1,0 +1,12 @@
+<h1><%= @user.name %>'s requests</h1>
+<sub>ID: <%= @user.id %></sub>
+<div>
+  <% @requests.each do |request| %>
+    <div>
+      <ul>
+        <li>Requestor ID: <%= request.requestor_id %></li>
+        <li>Receiver ID: <%= request.receiver_id %></li>
+        <li>Accepted? <%= request.accepted %></li>
+    </div>
+  <% end %>
+</div>

@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
 
   # Show index of requests for current user
   def index
+    @requests = @user.all_requests
   end
 
   private
