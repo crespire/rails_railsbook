@@ -5,8 +5,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  # Is there a way to get this testing without also declaring resources :users?
-  resources :users, shallow: true do
+  resources :users, only: %i[show], shallow: true do
     resources :requests
     resources :notifications
   end
