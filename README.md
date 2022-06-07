@@ -57,18 +57,29 @@ I think the first step to sorting out my comments is to make commenting on posts
 
 Once that is done, then I can work on commenting on comments, as I will at least (hopefully) have a basis for starting after getting commenting done.
 
-**May 27**
+**May**
 Having considered how to approach nested comments, I think it's a little bit more complicated than I want to get on this project. I've decided to approach comments are a nested child resource of post, and stick with that for the meantime.
 
 Nested comments seemed to be difficult to implement on the view side without causing a bunch of N+1 problems. Not a trivial task. I am not well versed enough in the Rails framework (yet!!) to come up with a good solution for it, and I think having posts with just one level of comments is sufficient. I also still want to keep Likes as a polymorphic model, so I will still have some exposure to using them in the project.
 
-**May 28**
 Running into an issue with my Post/Comment association. I'm having issues either executing a Post destroy due to comment assocations, or having issues adding comments. Think on this a little bit.
 
 I've updated the readme to reflect the changes in my approach for my models.
 
-**May 29**
 Resolved my dependent destroy issue. I was using `counter_cache` on the wrong side of my association. It belongs to the `belongs_to` side. D'oh. Now, the task today is to sort out how to update a post's comments using Turbo, as new comments are committing correctly, but not updating in the view.
+
+**June**
+Working now on requests between users. The associations and model seem to work as I expect in the console, so now the challenge is to build the controller and the views to support the functionality.
+
+I think the approach should be that you have a requests "hub" that show your pending requests, and also a list of accepted requests. I am not sure how I should handle initiating requests. Should I have it where you can see another user's posts and have the option to friend them if they are not already your friend? This way, I can maybe style a friend's posts differently than if they are not your friend?
+
+Or should I have a list of users that you can browse and can send requests that way? I think the way Facebook does it, is that you can look up a user via search, and then from their profile page, you can send them a request. I've got this set up where I have a `user#show` path, so perhaps this is the way to go.
+
+This would mean that I should implement:
+* A user collection search
+* A user#show view
+
+Then after those are done, I can work on the requests.
 
 #TODO
 * Fix comment views so we update comments via turbo
