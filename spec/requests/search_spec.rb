@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Search", type: :request do
+RSpec.describe 'Search', type: :request do
   describe 'Exact match search' do
     let(:searching_user) { FactoryBot.create(:user) }
 
