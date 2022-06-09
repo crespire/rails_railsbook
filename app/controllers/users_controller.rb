@@ -3,20 +3,19 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   # GET /users/1 or /users/1.json
-  def show
-  end
+  def show; end
 
   # GET /search
   def search
     return unless params[:query].present?
 
     @param = params[:query].downcase
-    @results = User.where('lower(name) LIKE :query', query: "%#{@param}%").order("RANDOM()")
+    @results = User.where('lower(name) LIKE :query', query: "%#{@param}%").order('RANDOM()')
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set user before show action
   def set_user
     @user = User.find(params[:id])
   end
