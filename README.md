@@ -81,7 +81,4 @@ This would mean that I should implement:
 
 Then after those are done, I can work on the requests.
 
-#TODO
-* Fix comment views so we update comments via turbo
-* Write comment system tests.
-* Flesh out requests system (with tests)
+Having completed a basic user search and the user#show view to accompany it, I think it's a good time to write some tests for it. I probably don't need to do system tests, and would probably just do some request specs to verify some test cases.
