@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     resources :notifications
   end
 
-  root "posts#index"
-
+  root 'posts#index'
   get '/search', to: 'users#search'
 end
