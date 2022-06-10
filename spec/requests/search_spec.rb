@@ -20,13 +20,15 @@ RSpec.describe 'Search', type: :request do
     let(:search_user) { FactoryBot.create(:user) }
 
     before do
-      10.times { |i| FactoryBot.create(:user, name: "test#{i}") }
+      FactoryBot.create(:user, name: 'Bob')
+      FactoryBot.create(:user, name: 'Bobby')
+      FactoryBot.create(:user, name: 'Susan')
       login_as(search_user, scope: :user)
     end
 
     it 'returns all partial matches' do
-      get '/search?query=test&commit=Search'
-      expect(response.body).to include('<li>').at_least(10).times
+      get '/search?query=Bob&commit=Search'
+      expect(response.body).to include('Bob').at_least(2).times
     end
   end
 end
