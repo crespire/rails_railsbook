@@ -82,3 +82,15 @@ This would mean that I should implement:
 Then after those are done, I can work on the requests.
 
 Having completed a basic user search and the user#show view to accompany it, I think it's a good time to write some tests for it. I probably don't need to do system tests, and would probably just do some request specs to verify some test cases.
+
+The next step here is to work on the Requests controller and required views for it. I currently have requests working on the console, so it's a matter of fleshing the system out, then writing some tests for it.
+
+I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
+
+Features List to be implemented:
+* Friend requests and displays (current task)
+* Likes system
+* Notifications for requests, likes and comments
+* Omniauth using two end points
+  * Twitter
+  * Google
