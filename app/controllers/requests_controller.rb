@@ -5,6 +5,7 @@ class RequestsController < ApplicationController
 
   # Show index of requests for current user
   def index
+    # Is @user always current_user?
     @requests = @user.requests.accepted
   end
 
