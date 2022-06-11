@@ -18,38 +18,26 @@ class User < ApplicationRecord
            foreign_key: :receiver_id,
            class_name: :Request
 
+  has_many :friends, through: :requests
+
   has_many :likes, foreign_key: :liked_by, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
   def friends
-    sent = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
-    received = User.joins(:sent_requests).where('accepted = true').where('receiver_id = ?', id)
+    sent = User.joins(:received_requests).where('accepted = true AND requestor_id = ?', id)
+    received = User.joins(:sent_requests).where('accepted = true AND receiver_id = ?', id)
     sent + received
   end
 
   def pending_friends
-    sent = User.joins(:received_requests).where('accepted = false').where('requestor_id = ?', id)
-    received = User.joins(:sent_requests).where('accepted = false').where('receiver_id = ?', id)
+    sent = User.joins(:received_requests).where('accepted = false AND requestor_id = ?', id)
+    received = User.joins(:sent_requests).where('accepted = false AND receiver_id = ?', id)
     sent + received
   end
 
-  def all_requests
-    sent = Request.where('requestor_id = ?', id)
-    received = Request.where('receiver_id = ?', id)
-    sent + received
-  end
-
-  def pending_requests
-    sent = Request.where('requestor_id = ?', id).where('accepted = ?', false)
-    received = Request.where('receiver_id = ?', id).where('accepted = ?', false)
-    sent + received
-  end
-
-  def accepted_requests
-    sent = Request.where('requestor_id = ?', id).where('accepted = ?', true)
-    received = Request.where('receiver_id = ?', id).where('accepted = ?', true)
-    sent + received
+  def requests
+    Request.where('requestor_id = :requestor OR receiver_id = :receiver', { requestor: id, receiver: id })
   end
 end
