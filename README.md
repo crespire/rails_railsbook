@@ -85,6 +85,13 @@ Having completed a basic user search and the user#show view to accompany it, I t
 
 The next step here is to work on the Requests controller and required views for it. I currently have requests working on the console, so it's a matter of fleshing the system out, then writing some tests for it.
 
+I am thinking I should utilize some sort of join model for "friends" instead of utilizing a query on the user model here, so I will have to re-think some of my associations.
+
+Ideally, I should be able to call `current_user.friends` with scopes `pending` and `accepted` - similiar to my requests right now. So I think I'll have to have a think about how to accomplish that.
+
+
+#Post Script
+
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
 
 Features List to be implemented:
