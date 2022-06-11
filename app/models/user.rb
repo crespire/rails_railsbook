@@ -23,25 +23,33 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  def accepted_requests
+  def friends
     sent = User.joins(:received_requests).where('accepted = true').where('requestor_id = ?', id)
     received = User.joins(:sent_requests).where('accepted = true').where('receiver_id = ?', id)
     sent + received
   end
 
-  def pending_requests
+  def pending_friends
     sent = User.joins(:received_requests).where('accepted = false').where('requestor_id = ?', id)
     received = User.joins(:sent_requests).where('accepted = false').where('receiver_id = ?', id)
     sent + received
   end
 
   def all_requests
-    sent = User.joins(:received_requests).where('requestor_id = ?', id)
-    received = User.joins(:sent_requests).where('receiver_id = ?', id)
+    sent = Request.where('requestor_id = ?', id)
+    received = Request.where('receiver_id = ?', id)
     sent + received
   end
 
-  alias friends accepted_requests
-  alias pending_friends pending_requests
+  def pending_requests
+    sent = Request.where('requestor_id = ?', id).where('accepted = ?', false)
+    received = Request.where('receiver_id = ?', id).where('accepted = ?', false)
+    sent + received
+  end
 
+  def accepted_requests
+    sent = Request.where('requestor_id = ?', id).where('accepted = ?', true)
+    received = Request.where('receiver_id = ?', id).where('accepted = ?', true)
+    sent + received
+  end
 end
