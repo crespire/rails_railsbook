@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :requests, dependent: :destroy
 
   has_many :friends, -> { merge(Request.accepted) }, through: :requests
-  has_many :pending, -> { merge(Request.pending) }, through: :requests
+  has_many :pending, -> { merge(Request.pending) }, through: :requests, source: :friend
 
   has_many :likes, foreign_key: :liked_by, dependent: :destroy
   has_many :posts, dependent: :destroy
