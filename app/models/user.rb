@@ -18,7 +18,7 @@ class User < ApplicationRecord
            foreign_key: :friend_id,
            class_name: :Request
 
-  has_many :friends_sent, -> { merge(Request.accepted) }, through: :requests, source: :friend
+  has_many :friends_sent, -> { merge(Request.accepted) }, through: :sent_requests, source: :friend
   has_many :friends_rec, -> { merge(Request.accepted) }, through: :received_requests, source: :user
   has_many :pending_sent, -> { merge(Request.pending) }, through: :sent_requests, source: :friend
   has_many :pending_rec, -> { merge(Request.pending) }, through: :received_requests, source: :user
@@ -27,4 +27,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
+
+  def friends
+    friends_sent + friends_rec
+  end
 end
