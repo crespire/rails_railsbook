@@ -16,14 +16,16 @@ puts 'Created three users'
 u1 = User.first
 u2 = User.find(2)
 
-u1.sent_requests.create(friend: u2)
-u2.sent_requests.create(friend: User.last).save
+u1.requests.create(friend: u2)
+u2.requests.create(friend: User.last).save
+
+puts 'Two requests created (u1 <-> u2, u2 <-> u3'
 
 r = Request.first
 r.accepted = true
 r.save
 
-puts 'Created 2 requests, accepted between user1 and user2, pending between user2 and user3'
+puts 'Accepted between user1 and user2 only'
 
 post = u1.posts.build(content: 'Content of the post')
 post.save

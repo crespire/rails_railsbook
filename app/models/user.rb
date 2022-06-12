@@ -9,26 +9,13 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, format: Devise.email_regexp
 
-  has_many :sent_requests,
-           foreign_key: :user_id,
-           class_name: :Request,
-           dependent: :destroy
+  has_many :requests, dependent: :destroy
 
-  has_many :received_requests,
-           foreign_key: :friend_id,
-           class_name: :Request
-
-  has_many :friends_sent, -> { merge(Request.accepted) }, through: :sent_requests, source: :friend
-  has_many :friends_rec, -> { merge(Request.accepted) }, through: :received_requests, source: :user
-  has_many :pending_sent, -> { merge(Request.pending) }, through: :sent_requests, source: :friend
-  has_many :pending_rec, -> { merge(Request.pending) }, through: :received_requests, source: :user
+  has_many :friends, -> { merge(Request.accepted) }, through: :requests
+  has_many :pending, -> { merge(Request.pending) }, through: :requests
 
   has_many :likes, foreign_key: :liked_by, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
-
-  def friends
-    friends_sent + friends_rec
-  end
 end
