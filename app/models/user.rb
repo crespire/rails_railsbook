@@ -8,15 +8,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :email, format: Devise.email_regexp
-
-  has_many :sent_requests,
-           foreign_key: :requestor_id,
-           class_name: :Request,
-           dependent: :destroy
-
-  has_many :received_requests,
-           foreign_key: :receiver_id,
-           class_name: :Request
+          
+  has_many :requests
+  has_many :friends, through: :requests
 
   has_many :likes, foreign_key: :liked_by, dependent: :destroy
   has_many :posts, dependent: :destroy
