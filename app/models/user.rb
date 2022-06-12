@@ -8,9 +8,10 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :email, format: Devise.email_regexp
-          
+
   has_many :requests
-  has_many :friends, through: :requests
+  has_many :friends, -> { merge(Request.accepted) }, through: :requests
+  has_many :pending_friends, -> { merge(Request.pending) }, source: :friend, through: :requests
 
   has_many :likes, foreign_key: :liked_by, dependent: :destroy
   has_many :posts, dependent: :destroy
