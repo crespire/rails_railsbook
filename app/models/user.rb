@@ -16,20 +16,4 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
-
-  def friends
-    sent = User.joins(:received_requests).where('accepted = true AND requestor_id = ?', id)
-    received = User.joins(:sent_requests).where('accepted = true AND receiver_id = ?', id)
-    sent + received
-  end
-
-  def pending_friends
-    sent = User.joins(:received_requests).where('accepted = false AND requestor_id = ?', id)
-    received = User.joins(:sent_requests).where('accepted = false AND receiver_id = ?', id)
-    sent + received
-  end
-
-  def requests
-    Request.where('requestor_id = :requestor OR receiver_id = :receiver', { requestor: id, receiver: id })
-  end
 end
