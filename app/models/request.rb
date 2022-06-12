@@ -1,6 +1,6 @@
 class Request < ApplicationRecord
   after_save :create_inverse
-  after_update :accept_inverse, if: :accepted_change_to_be_saved
+  after_update :accept_inverse
   after_destroy :destroy_inverse
 
   belongs_to :user
@@ -22,22 +22,21 @@ class Request < ApplicationRecord
   end
 
   def accept_inverse
-    puts 'accept inverse'
     return unless accepted
 
-    p self
     inverse = Request.find_by(friend: user, user: friend)
-    p inverse
+    return if inverse.accepted
+
+    puts 'Updating inverse'
     inverse.accepted = inverse.accepted ? false : true
     inverse.save
   end
 
   def destroy_inverse
-    r = Request.find_by(friend: user, user: friend)
-    return unless r
+    inverse = Request.find_by(friend: user, user: friend)
+    return unless inverse
 
     puts 'Destorying inverse'
-
-    r.destroy
+    inverse.destroy
   end
 end
