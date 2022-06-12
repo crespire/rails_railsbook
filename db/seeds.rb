@@ -16,8 +16,8 @@ puts 'Created three users'
 u1 = User.first
 u2 = User.find(2)
 
-u1.requests.build(friend: u2).save
-u2.requests.build(friend: User.last).save
+u1.sent_requests.create(friend: u2)
+u2.sent_requests.create(friend: User.last).save
 
 r = Request.first
 r.accepted = true

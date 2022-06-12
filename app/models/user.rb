@@ -9,8 +9,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, format: Devise.email_regexp
 
-  has_many :requests
-
   has_many :sent_requests,
            foreign_key: :user_id,
            class_name: :Request,
