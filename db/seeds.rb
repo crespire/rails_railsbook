@@ -16,8 +16,12 @@ puts 'Created three users'
 u1 = User.first
 u2 = User.find(2)
 
-u1.requests.build(friend: u2, accepted: true).save
+u1.requests.build(friend: u2).save
 u2.requests.build(friend: User.last).save
+
+r = Request.first
+r.accepted = true
+r.save
 
 puts 'Created 2 requests, accepted between user1 and user2, pending between user2 and user3'
 
