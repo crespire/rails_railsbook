@@ -27,7 +27,6 @@ class Request < ApplicationRecord
     inverse = Request.find_by(friend: user, user: friend)
     return if inverse.accepted
 
-    puts 'Updating inverse'
     inverse.accepted = inverse.accepted ? false : true
     inverse.save
   end
@@ -36,7 +35,6 @@ class Request < ApplicationRecord
     inverse = Request.find_by(friend: user, user: friend)
     return unless inverse
 
-    puts 'Destorying inverse'
     inverse.destroy
   end
 end
