@@ -91,6 +91,10 @@ Ideally, I should be able to call `current_user.friends` with scopes `pending` a
 
 Currently have friends working in a "one way" basis. The requestor/sender side works, but I am not sure how to make sure the other side (receiver) also work. Thinking on it...
 
+I have decided to utilize callbacks to generate two join models for each friendship, with callbacks to also keep their status in sync. This way, when a user initiates a request, an inverse request is generated. The same goes for when a status changes, or when a record is destroyed. I have indexed the requests so that they are unique by user/friend id, which means you can only friend the person once. I prefer this approach as SQL is fast and cheap, and it means my associations can be simple-ish, and I am able to add pending friends by using the shovel operator on friends. I don't get `current_user.friends.pending` but I do get `current_user.friends` and `current_user.pending_friends`. I do get to use scopes with the `current_user.requests` association though, which should be good enough for me for now.
+
+The next step is to revisit the routes, and start to work on the controller and supporting views.
+
 
 #Post Script
 
