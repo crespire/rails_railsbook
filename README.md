@@ -89,6 +89,8 @@ I am thinking I should utilize some sort of join model for "friends" instead of 
 
 Ideally, I should be able to call `current_user.friends` with scopes `pending` and `accepted` - similiar to my requests right now. So I think I'll have to have a think about how to accomplish that.
 
+Currently have friends working in a "one way" basis. The requestor/sender side works, but I am not sure how to make sure the other side (receiver) also work. Thinking on it...
+
 
 #Post Script
 
