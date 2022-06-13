@@ -27,7 +27,7 @@ class Request < ApplicationRecord
     inverse = Request.find_by(friend: user, user: friend)
     return if inverse.accepted
 
-    inverse.accepted = inverse.accepted ? false : true
+    inverse.accepted = true
     inverse.save
   end
 
