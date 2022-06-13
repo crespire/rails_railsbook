@@ -1,29 +1,15 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: %i[index create new]
-  before_action :set_request, only: %i[show edit update destroy]
-
-  # Show index of requests for current user
-  def index
-    # Is @user always current_user?
-    @requests = @user.requests.accepted
-  end
-
-  def new
-    @request = Request.new
-  end
-
-  def show
-  end
+  before_action :set_user, only: %i[create]
+  before_action :set_request, only: %i[update destroy]
 
   def create
   end
 
-  def destroy
+  def update
   end
 
-  # Used to accept friendship, I wonder if we can alias 'update' with 'accept'
-  def update
+  def destroy
   end
 
   private
