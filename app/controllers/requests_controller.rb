@@ -4,12 +4,18 @@ class RequestsController < ApplicationController
   before_action :set_request, only: %i[update destroy]
 
   def create
-  end
+    @request = current_user.sent_requests.build(request_params)
 
-  def update
+    if @request.save
+      # Do stuff
+    end
   end
 
   def destroy
+    @request = current_user.sent_requests.find(params[:id])
+    if @request.destroy
+      #do stuff
+    end
   end
 
   private
@@ -24,5 +30,6 @@ class RequestsController < ApplicationController
 
   # Strong Params
   def request_params
+    params.require(:request).permit(:friend_id, :user_id)
   end
 end

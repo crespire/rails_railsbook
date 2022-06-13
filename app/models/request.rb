@@ -8,4 +8,8 @@ class Request < ApplicationRecord
 
   scope :accepted, -> { where('accepted = true') }
   scope :pending, -> { where('accepted = false') }
+
+  def accept_request
+    self.accepted = true
+  end
 end
