@@ -1,6 +1,8 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_request, only: %i[destroy]
+  before_action :set_request, only: %i[update destroy]
+
+  def index; end
 
   def create
     @request = current_user.sent_requests.build(request_params)
@@ -8,6 +10,13 @@ class RequestsController < ApplicationController
     if @request.save
       # Do stuff
     end
+  end
+
+  def update
+    return unless params[:accept]
+
+    @request.accepted = true
+    @request.save
   end
 
   def destroy
@@ -19,7 +28,7 @@ class RequestsController < ApplicationController
   private
 
   def set_request
-    @request = current_user.sent_requests.find(params[:id])
+    @request = Request.find(params[:id])
   end
 
   # Strong Params
