@@ -91,9 +91,15 @@ Ideally, I should be able to call `current_user.friends` with scopes `pending` a
 
 Currently have friends working in a "one way" basis. The requestor/sender side works, but I am not sure how to make sure the other side (receiver) also work. Thinking on it...
 
-I have decided to utilize callbacks to generate two join models for each friendship, with callbacks to also keep their status in sync. This way, when a user initiates a request, an inverse request is generated. The same goes for when a status changes, or when a record is destroyed. I have indexed the requests so that they are unique by user/friend id, which means you can only friend the person once. I prefer this approach as SQL is fast and cheap, and it means my associations can be simple-ish, and I am able to add pending friends by using the shovel operator on friends. I don't get `current_user.friends.pending` but I do get `current_user.friends` and `current_user.pending_friends`. I do get to use scopes with the `current_user.requests` association though, which should be good enough for me for now.
+~~I have decided to utilize callbacks to generate two join models for each friendship, with callbacks to also keep their status in sync. This way, when a user initiates a request, an inverse request is generated. The same goes for when a status changes, or when a record is destroyed. I have indexed the requests so that they are unique by user/friend id, which means you can only friend the person once. I prefer this approach as SQL is fast and cheap, and it means my associations can be simple-ish, and I am able to add pending friends by using the shovel operator on friends. I don't get `current_user.friends.pending` but I do get `current_user.friends` and `current_user.pending_friends`. I do get to use scopes with the `current_user.requests` association though, which should be good enough for me for now.~~
 
-The next step is to revisit the routes, and start to work on the controller and supporting views.
+As an update, I have decided against the "mirrored" relationship approach. While it seems fine in concept, I think it will have problems at scale, both relying on callbacks that get triggered for each transaction, and how quickly the data might grow as you add users. I know this is essentially a toy app, so that won't be something I have to really worry about, but I still think it's worth thinking at that scale as an exercise.
+
+I've stuck with the bi-furcated associations approach, and added a few custom methods to my User model to consolidate the associations into a single method call. This is similiar to how I was doing it previously, but instead of writing queries in the custom methods, I am leveraging Rails associations.
+
+I've got the Request controller fleshed out (I think), with the key elements I need to make sure requests can be created. I think a "TDD" approach here would be helpful, because I have to think about how I want the over all system to work (in terms of where users can request friends, etc), then build out the testing to support the views, etc.
+
+It will be interesting to see how I can do all fo this with Turbo. 
 
 
 #Post Script
@@ -104,6 +110,6 @@ Features List to be implemented:
 * Friend requests and displays (current task)
 * Likes system
 * Notifications for requests, likes and comments
-* Omniauth using two end points
+* Omniauth using two end points (remember to turn off Turbo for these links, as we are not sending ajax requests)
   * Twitter
   * Google
