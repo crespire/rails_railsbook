@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: %i[show], shallow: true do
-    resources :requests
+    resources :requests, only: %i[index create update destroy]
     resources :notifications
   end
 
