@@ -24,8 +24,7 @@ class RequestsController < ApplicationController
   private
 
   def set_request
-    @requests = current_user.all_requests
-    @request = @requests.find(params[:id])
+    @request = current_user.all_requests.find(params[:id])
   end
 
   # Strong Params
