@@ -16,13 +16,16 @@ class RequestsController < ApplicationController
   end
 
   def destroy
+    return unless @request
+
     @request.destroy
   end
 
   private
 
   def set_request
-    @request = Request.find(params[:id])
+    @requests = current_user.all_requests
+    @request = @requests.find(params[:id])
   end
 
   # Strong Params
