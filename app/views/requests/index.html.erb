@@ -1,7 +1,8 @@
-<h1><%= current_user.name %>'s pending requests</h1>
+<h1><%= current_user.name %>'s requests</h1>
 <sub>My user ID: <%= current_user.id %></sub>
 <div>
   <div>
+      <h3>Pending Requests</h3>
       <ul>
         <% current_user.received_requests.pending.each do |request| %>
           <li>Request recieved from <%= request.user.name %>
