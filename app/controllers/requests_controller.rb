@@ -16,9 +16,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    if @request.destroy
-      #do stuff
-    end
+    @request.destroy
   end
 
   private
