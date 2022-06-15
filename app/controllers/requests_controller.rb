@@ -15,8 +15,7 @@ class RequestsController < ApplicationController
   def update
     return unless params[:accept]
 
-    @request.accepted = true
-    @request.save
+    @request.accept_request
   end
 
   def destroy

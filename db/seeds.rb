@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-3.times do |i|
+(1..3).to_a.each do |i|
   u = User.create(name: "test#{i}", email: "test#{i}@test.com", password: 'password')
   u.save
 end
