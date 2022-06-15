@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def pending_friends
     pending_friends_sent + pending_friends_rec
   end
+
+  def all_friends
+    friends + pending_friends
+  end
 end

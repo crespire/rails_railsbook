@@ -6,10 +6,7 @@ class RequestsController < ApplicationController
 
   def create
     @request = current_user.sent_requests.build(request_params)
-
-    if @request.save
-      # Do stuff
-    end
+    @request.save
   end
 
   def update
