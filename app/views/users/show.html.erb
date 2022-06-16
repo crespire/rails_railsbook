@@ -1,5 +1,14 @@
 <div>
   <%= @user.name %>
   <h3>My friends</h3>
-    Show list of friends (accepted requests) - add link to delete friend (delete request)
+  <ul>
+    <% @user.friends.each do |friend| %>
+      <li>
+        <% request = @user.find_request(friend) %>
+        <%= turbo_frame_tag dom_id(request) do %>
+          <%= link_to friend.name, user_path(friend) %>        
+          (<%= link_to 'Delete?', request_path(request), data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure?'} %>)
+        <% end %>
+      </li>
+    <% end %>
 </div>

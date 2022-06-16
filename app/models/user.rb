@@ -43,4 +43,10 @@ class User < ApplicationRecord
   def all_requests
     sent_requests + received_requests
   end
+
+  def find_request(other)
+    return if other == self
+
+    Request.find_by(friend: other) || Request.find_by(user: other)
+  end
 end
