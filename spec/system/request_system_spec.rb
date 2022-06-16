@@ -14,5 +14,8 @@ RSpec.describe 'User system', type: :system do
 
     it 'allows a user to delete a pending request' do
     end
+    
+    it 'allows a user to delete an accepted request' do
+    end
   end
 end
