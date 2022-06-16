@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User system', type: :system do
+RSpec.describe 'Request/friend system', type: :system do
   before do
     driven_by(:selenium_chrome_headless)
   end
