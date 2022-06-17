@@ -1,7 +1,7 @@
 <nav>
   <div>
     <%= link_to 'Home', root_path %> 
-    <%= render 'layouts/search' %>
+    <%= render 'layouts/search' if user_signed_in? %>
   </div>
   <div>
     <% if user_signed_in? %>    
