@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-(1..3).to_a.each do |i|
+(1..10).to_a.each do |i|
   u = User.create(name: "test#{i}", email: "test#{i}@test.com", password: 'password')
   u.save
 end
 
-puts 'Created three users'
+puts 'Created 10 users'
 
 u1 = User.first
 u2 = User.find(2)
@@ -19,7 +19,7 @@ u2 = User.find(2)
 u1.sent_requests.create(friend: u2)
 u2.sent_requests.create(friend: User.last).save
 
-puts 'Two requests created (u1 <-> u2, u2 <-> u3'
+puts 'Two requests created (u1 <-> u2, u2 <-> u10'
 
 r = Request.first
 r.accepted = true
