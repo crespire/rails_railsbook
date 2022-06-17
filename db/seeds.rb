@@ -6,33 +6,39 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-(1..10).to_a.each do |i|
-  u = User.create(name: "test#{i}", email: "test#{i}@test.com", password: 'password')
-  u.save
+User.create(name: 'test1', email: 'test1@test.com', password: 'password')
+
+(2..50).to_a.each do |i|
+  User.create(name: Faker::Name.name, email: "test#{i}@test.com", password: 'password')
 end
 
-puts 'Created 10 users'
+puts 'Created 50 users'
 
-u1 = User.first
-u2 = User.find(2)
+until Request.count == 25
+  user_a = User.all.sample
+  user_b = User.all.sample
+  next if user_a == user_b
 
-u1.sent_requests.create(friend: u2)
-u2.sent_requests.create(friend: User.last).save
+  user_a.sent_requests.create(friend: user_b)
+end
 
-puts 'Two requests created (u1 <-> u2, u2 <-> u10'
+puts 'Created 25 requests'
 
-r = Request.first
-r.accepted = true
-r.save
+10.times do
+  request = Request.all.sample
+  request.accept_request
+end
 
-puts 'Accepted between user1 and user2 only'
+puts 'Accepted 10 requests'
 
-post = u1.posts.build(content: 'Content of the post')
-post.save
+12.times do |i|
+  User.all.sample.posts.create(content: "Content of #{i} post")
+end
 
-puts 'Created post that belongs to user1'
+puts 'Created 12 posts belonging to random users'
 
-comment = post.comments.build(content: 'Comment on post 0', user_id: 1)
-comment.save
+6.times do
+  Post.all.sample.comments.create(content: 'Comment on post', user: User.all.sample)
+end
 
-puts 'Created a comment on post.'
+puts 'Created 6 comments on random posts, belonging to random users.'
