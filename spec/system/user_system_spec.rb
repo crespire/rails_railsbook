@@ -14,7 +14,7 @@ RSpec.describe 'User system', type: :system do
     fill_in 'Password confirmation', with: 'password'
     click_button 'Sign up'
 
-    expect(page).to have_text('Hello test0.')
+    expect(page).to have_text('Hello, test0!')
     expect(page).to have_text('You have signed up successfully.')
     expect(User.count).to eq(1)
   end
