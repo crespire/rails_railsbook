@@ -5,7 +5,7 @@
       <h3>Pending Requests</h3>
       <ul>
         <% current_user.received_requests.pending.each do |request| %>
-          <li>Request recieved from <%= request.user.name %>
+          <li>Request received from <%= request.user.name %>
             <%= turbo_frame_tag dom_id(request) do %>
               <%= link_to 'Accept', request_path(request, accept: true), data: { 'turbo-method': :patch } %>
             <% end %>
