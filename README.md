@@ -101,6 +101,14 @@ I've got the Request controller fleshed out (I think), with the key elements I n
 
 It will be interesting to see how I can do all fo this with Turbo. 
 
+I've got the Requests/Friend system working as I want, so now it is time to move on to the likes system. I think doing likes next is good, as then I can just bolt on a notifcation system to all the moving parts after liking is completed.
+
+In terms of the like system:
+* You can like a post or comment from other users
+* You cannot like your own posts or comments
+
+Basically, a user owns a like, and the target is a post or comment (polymorphic). Each post or comment should keep a cache of its like count.
+
 
 #Post Script
 
