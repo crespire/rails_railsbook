@@ -11,6 +11,6 @@ class Request < ApplicationRecord
 
   def accept_request
     self.accepted = true
-    save
+    self.save
   end
 end
