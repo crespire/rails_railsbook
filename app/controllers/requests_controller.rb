@@ -10,7 +10,7 @@ class RequestsController < ApplicationController
   end
 
   def update
-    return unless params[:accept]
+    return unless params[:accept].present?
 
     @request.accept_request
   end
@@ -24,7 +24,7 @@ class RequestsController < ApplicationController
   private
 
   def set_request
-    @request = current_user.all_requests.find { |req| req.id = params[:id] }
+    @request = current_user.all_requests.find { |r| r.id == params[:id].to_i }
   end
 
   # Strong Params
