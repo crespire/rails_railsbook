@@ -109,6 +109,8 @@ In terms of the like system:
 
 Basically, a user owns a like, and the target is a post or comment (polymorphic). Each post or comment should keep a cache of its like count.
 
+Thinking about how to implement likes, I think having a route concern to pass in an option for the like controller is the way to go. This way, I have a path helper to pass in the ID of the likeable, and the likeable type as an option I can reference in the controller.
+
 
 #Post Script
 
