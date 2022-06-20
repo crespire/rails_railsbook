@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :posts, shallow: true do
-    resources :comments
+  concern :likeable do
+    resources :likes, only: %i[create destroy]
+  end
+
+  resources :posts, shallow: true, concerns: :likeable, likeable_type: 'Post' do
+    resources :comments, concerns: :likeable, likeable_type: 'Comment'
   end
 
   resources :users, only: %i[show], shallow: true do
@@ -11,5 +15,6 @@ Rails.application.routes.draw do
   end
 
   root 'posts#index'
+
   get '/search', to: 'users#search'
 end
