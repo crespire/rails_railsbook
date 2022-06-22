@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_183637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "post_id"
+    t.integer "likes_count"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
