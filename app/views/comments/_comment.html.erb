@@ -13,6 +13,11 @@
     </div>
     <div class="c-post__status-comment">
       <p class="c-post__actions-comment">
+        <% if current_user.already_liked?(comment) %>
+          <%= link_to 'Unlike', like_path(comment), data: { turbo_method: :delete } %>
+        <% else %>
+          <%= link_to 'Like', comment_likes_path(comment, like: {liked_by: current_user.id, likeable_id: comment.id, likeable_type: 'Comment'}), data: { turbo_method: :post } %>
+        <% end %>
         <span>Likes: <%= comment.likes.size %> </span>
         <% if current_user.id == comment.user.id %>
           <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: "#{dom_id(comment)}_text" } %>
