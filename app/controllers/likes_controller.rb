@@ -2,7 +2,6 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    params[:like][:liked_by] = current_user.id
     @like = Like.new(like_params)
     if @like.save
       flash[:success] = 'Thanks for liking!'
@@ -12,12 +11,13 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = current_user.likes.find(params[:id])
+    @like = current_user.likes.find_by(likeable_id: params[:id], likeable_type: params[:likeable_type])
+    @like.destroy
   end
 
   private
 
   def like_params
-    params.require(:like).permit(:liked_by, :likeable_id, :likeable_type)
+    params.require(:like).permit(:liked_by, :likeable_type, :likeable_id)
   end
 end
