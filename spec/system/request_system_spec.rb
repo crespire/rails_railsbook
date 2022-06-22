@@ -65,11 +65,13 @@ RSpec.describe 'Request/friend system', type: :system do
 
   context 'after an accepted request' do
     before(:each) do
-      login_as(user_a)
-      visit root_path
-      find('input#query').fill_in with: 'Bob'
-      click_button 'Search'
-      first('li').click_link('Send request')
+      using_session('Ken') do
+        login_as(user_a)
+        visit root_path
+        find('input#query').fill_in with: 'Bob'
+        click_button 'Search'
+        first('li').click_link('Send request')
+      end
 
       using_session('Bob') do
         login_as(user_b)
