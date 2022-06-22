@@ -131,6 +131,8 @@ This additional helper can also provide some information, but I wonder if I need
 
 Having sorted out the routes and the options, I think the rest is fairly simple. Check if the user has already liked the resource. If not, show a link to Like#create. Otherwise, show a link to Like#destroy.
 
+I've added liking and unliking on the comment partial, but I would like for the counts and actions to update in real time, so it seems like I'll have to fiddle around with a trubo frame!
+
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
