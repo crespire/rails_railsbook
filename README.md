@@ -105,20 +105,38 @@ I've got the Requests/Friend system working as I want, so now it is time to move
 
 In terms of the like system:
 * You can like a post or comment from other users
-* You cannot like your own posts or comments
+* ~~You cannot like your own posts or comments~~
 
 Basically, a user owns a like, and the target is a post or comment (polymorphic). Each post or comment should keep a cache of its like count.
 
 Thinking about how to implement likes, I think having a route concern to pass in an option for the like controller is the way to go. This way, I have a path helper to pass in the ID of the likeable, and the likeable type as an option I can reference in the controller.
 
+I think the first thing to take care of is to check if the current user has already liked the given resource. I feel like this belongs in the User model. Something like:
+
+```ruby
+def already_liked?(resource)
+  Like.where(liked_by: self.id, likeable_type: resource.class.to_s, likeable_id: resource.id).exists?
+end
+```
+
+I feel like this is a logical method: when I have a view, I want to check if the user has liked this partiuclar resource. If they have, show a delete option, otherwise they can like the resource. The more I think about it, why not allow a user to like their own stuff?
+
+```ruby
+def own_resource?(resource)
+  resource.user_id == self.id
+end
+```
+
+This additional helper can also provide some information, but I wonder if I need it.
+
+Having sorted out the routes and the options, I think the rest is fairly simple. Check if the user has already liked the resource. If not, show a link to Like#create. Otherwise, show a link to Like#destroy.
 
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
 
 Features List to be implemented:
-* Friend requests and displays (current task)
-* Likes system
+* Likes system (current task)
 * Notifications for requests, likes and comments
 * Omniauth using two end points (remember to turn off Turbo for these links, as we are not sending ajax requests)
   * Twitter
