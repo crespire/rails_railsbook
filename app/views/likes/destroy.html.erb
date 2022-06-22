@@ -1,0 +1,10 @@
+<% resource = params[:likeable_type].constantize.find(params[:id]) %>
+
+<%= turbo_frame_tag "#{params[:likeable_type].downcase}_#{params[:id]}_likes" do %>
+  <% if resource.is_a?(Comment) %>
+    <%= link_to 'Like', comment_likes_path(resource, like: {liked_by: current_user.id, likeable_id: resource.id, likeable_type: params[:likeable_type]}), data: { turbo_method: :post } %>
+  <% elsif resource.is_a?(Post) %>
+    <%= link_to 'Like', post_likes_path(resource, like: {liked_by: current_user.id, likeable_id: resource.id, likeable_type: params[:likeable_type]}), data: { turbo_method: :post } %>
+  <% end %>
+  <span>Likes: <%= resource.likes.size %> </span>
+<% end %>
