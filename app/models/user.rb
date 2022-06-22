@@ -49,4 +49,8 @@ class User < ApplicationRecord
 
     Request.find_by(friend: other, user: self) || Request.find_by(user: other, friend: self)
   end
+
+  def already_liked?(resource)
+    Like.where(liked_by: id, likeable_type: resource.class.to_s, likeable_id: resource.id).exists?
+  end
 end
