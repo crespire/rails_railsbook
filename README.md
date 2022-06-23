@@ -121,17 +121,13 @@ end
 
 I feel like this is a logical method: when I have a view, I want to check if the user has liked this partiuclar resource. If they have, show a delete option, otherwise they can like the resource. The more I think about it, why not allow a user to like their own stuff?
 
-```ruby
-def own_resource?(resource)
-  resource.user_id == self.id
-end
-```
-
-This additional helper can also provide some information, but I wonder if I need it.
-
 Having sorted out the routes and the options, I think the rest is fairly simple. Check if the user has already liked the resource. If not, show a link to Like#create. Otherwise, show a link to Like#destroy.
 
 I've added liking and unliking on the comment partial, but I would like for the counts and actions to update in real time, so it seems like I'll have to fiddle around with a turbo frame! I think I will work on this until it's good, then port it over to the post like button.
+
+Completed like/unlike on Post and Comment resources. I am not 100% sure I implemented them in the best way possible, but I am happy with how it works. My next step is to write an automated system test suite.
+
+After that, I think I can move on to basic notifications, and get that working/tested. Then after that we're in the home stretch with CSS BEM styling and adding avatars, etc.
 
 #Post Script
 
@@ -143,3 +139,4 @@ Features List to be implemented:
 * Omniauth using two end points (remember to turn off Turbo for these links, as we are not sending ajax requests)
   * Twitter
   * Google
+* BEM CSS styling
