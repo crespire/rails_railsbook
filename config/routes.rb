@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     resources :likes, only: %i[create destroy]
   end
 
-  resources :posts, shallow: true, concerns: :likeable, likeable_type: 'Post' do
-    resources :comments, concerns: :likeable, likeable_type: 'Comment'
+  resources :posts, shallow: true, concerns: :likeable do
+    resources :comments, concerns: :likeable
   end
 
   resources :users, only: %i[show], shallow: true do
