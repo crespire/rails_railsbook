@@ -82,4 +82,9 @@ RSpec.describe 'Comment system', type: :system do
       end
     end
   end
+
+  context "when deleting a comment" do
+    it "deletes child likes as well" do
+    end
+  end
 end

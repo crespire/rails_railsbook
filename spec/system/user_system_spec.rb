@@ -61,7 +61,15 @@ RSpec.describe 'User system', type: :system do
     expect(page).to have_text('Email has already been taken')
   end
 
-  it 'deletes a user with posts and comments' do
-    # stub - I wonder if this test wouldn't be better done somewhere else?
+  context 'when deleting a user' do
+    it "deletes a user's posts as well" do
+      # stub - I wonder if this test wouldn't be better done somewhere else?
+    end
+
+    it "deletes a user's comments as well" do
+    end
+
+    it "deletes a user's likes as well" do
+    end
   end
 end

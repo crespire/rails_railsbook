@@ -90,4 +90,12 @@ RSpec.describe 'Post system', type: :system do
       expect(page).not_to have_text('Test Delete')
     end
   end
+
+  context "when deleting a post" do
+    it "deletes all child comments as well" do
+    end
+
+    it "deletes all child likes as well" do
+    end
+  end
 end
