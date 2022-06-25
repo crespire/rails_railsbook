@@ -127,6 +127,8 @@ I've added liking and unliking on the comment partial, but I would like for the 
 
 Completed like/unlike on Post and Comment resources. I am not 100% sure I implemented them in the best way possible, but I am happy with how it works. My next step is to write an automated system test suite.
 
+This will require I figure out how to use factories with nested assocations as well.
+
 After that, I think I can move on to basic notifications, and get that working/tested. Then after that we're in the home stretch with CSS BEM styling and adding avatars, etc.
 
 #Post Script
