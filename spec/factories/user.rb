@@ -4,9 +4,9 @@ FactoryBot.define do
     name { Faker::Name.name }
     password { Faker::Internet.password }
 
-    factory :user_with_posts do
+    trait :with_posts do
       transient do
-        post_count { 5 }
+        post_count { 0 }
       end
 
       after(:create) do |user, eval|
