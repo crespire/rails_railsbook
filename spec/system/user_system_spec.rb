@@ -62,14 +62,16 @@ RSpec.describe 'User system', type: :system do
   end
 
   context 'when deleting a user' do
+    let!(:user) { FactoryBot.create(:user_with_posts) }
+
     it "deletes a user's posts as well" do
-      # stub - I wonder if this test wouldn't be better done somewhere else?
+      expect(user.posts.length).to eq(5)
     end
 
-    it "deletes a user's comments as well" do
+    xit "deletes a user's comments as well" do
     end
 
-    it "deletes a user's likes as well" do
+    xit "deletes a user's likes as well" do
     end
   end
 end
