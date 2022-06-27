@@ -63,12 +63,23 @@ RSpec.describe 'User system', type: :system do
 
   context 'when deleting a user' do
     let!(:user) { FactoryBot.create(:user_with_posts) }
+    let!(:user2) { FactoryBot.create(:user_with_posts) }
 
     it "deletes a user's posts as well" do
       expect(user.posts.length).to eq(5)
+      expect(Post.count).to eq(10)
+
+      expect { user.destroy }.to change { Post.count }.from(10).to(5)
     end
 
-    xit "deletes a user's comments as well" do
+    it "deletes a user's comments as well" do
+      post = user2.posts.first
+      create(:comment, post: post, user: user)
+
+      expect(user.comments.length).to eq(1)
+      expect(Comment.count).to eq(1)
+
+      expect { user.destroy }.to change { Comment.count }.from(1).to(0)
     end
 
     xit "deletes a user's likes as well" do
