@@ -7,6 +7,8 @@ RSpec.describe 'Post system', type: :system do
 
   context 'when there is no user logged in' do
     it 'redirects the user to authenticate' do
+      reset! # resets session
+
       visit root_path
       expect(page).to have_text('You need to sign in or sign up before continuing.')
       expect(current_path).to eq(new_user_session_path)
@@ -41,12 +43,12 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'does not allow a user to edit a non-owned post' do
-      FactoryBot.create(:post)
+      create(:post)
       expect(page).not_to have_text('Edit')
     end
 
     it 'allows a user to edit their own post' do
-      FactoryBot.create(:post, user_id: user.id)
+      create(:post, user_id: user.id)
 
       visit root_path
       click_link 'Edit'
@@ -59,7 +61,7 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'allows a user to delete their own post' do
-      FactoryBot.create(:post, user_id: user.id, content: 'Test Delete')
+      create(:post, user_id: user.id, content: 'Test Delete')
 
       visit root_path
       expect(page).to have_text('Test Delete')
@@ -73,7 +75,7 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'allows a user to delete their own post with comments' do
-      FactoryBot.create(:post, user_id: user.id, content: 'Test Delete')
+      create(:post, user_id: user.id, content: 'Test Delete')
       post = Post.first
       comment = post.comments.build(content: "Test Comment", user_id: user.id)
       comment.save
@@ -93,9 +95,12 @@ RSpec.describe 'Post system', type: :system do
 
   context "when deleting a post" do
     it "deletes all child comments as well" do
+      post = create(:post, :with_comments, comment_count: 5)
+      expect(Comment.count).to eq(5)
+      expect { post.destroy }.to change { Comment.count }.from(5).to(0)
     end
 
-    it "deletes all child likes as well" do
+    xit "deletes all child likes as well" do
     end
   end
 end
