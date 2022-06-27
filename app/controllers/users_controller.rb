@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show]
+  before_action :set_user, only: %i[show destroy]
   before_action :authenticate_user!
 
   # GET /users/1 or /users/1.json
@@ -11,6 +11,13 @@ class UsersController < ApplicationController
 
     @param = params[:query].downcase
     @results = User.where('lower(name) LIKE :query', query: "%#{@param}%").order('RANDOM()')
+  end
+
+  # DELETE /users/1
+  def destroy
+    @user.destroy
+    reset_session
+    redirect_to new_user_session_path, notice: "Account deleted.", status: 303
   end
 
   private
