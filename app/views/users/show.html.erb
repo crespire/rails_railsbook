@@ -1,6 +1,5 @@
 <div>
-  <%= @user.name %>
-  <h3>My friends</h3>
+  <h3><%= @user.name %>'s friends</h3>
   <ul>
     <% @user.friends.each do |friend| %>
       <li>
@@ -11,4 +10,8 @@
         <% end %>
       </li>
     <% end %>
+
+  <% if current_user == @user %>
+    <p>You can <%= link_to 'delete your account', user_registration(@user), data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure?'} %>.</p>
+  <% end %>
 </div>
