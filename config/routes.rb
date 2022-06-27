@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :notifications
   end
 
-  root 'posts#index'
-
+  delete 'users/:id', to: 'users#destroy'
   get '/search', to: 'users#search'
+  root 'posts#index'
 end
