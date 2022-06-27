@@ -12,5 +12,6 @@
     <% end %>
 </div>
 <% if current_user.id == @user.id %>
-  <p>Unhappy? We're sorry to see you go, but you can <%= link_to 'delete your account', current_user, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>.</p>
+  <p>Unhappy? We're sorry to see you go.
+  <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %></p>
 <% end %>
