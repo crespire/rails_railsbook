@@ -82,7 +82,15 @@ RSpec.describe 'User system', type: :system do
       expect { user.destroy }.to change { Comment.count }.from(1).to(0)
     end
 
-    xit "deletes a user's likes as well" do
+    it "deletes a user's likes as well" do
+      post = user2.posts.first
+      create(:like, likeable: post, user: user)
+
+      expect(user.likes.length).to eq(1)
+      expect(Like.count).to eq(1)
+      expect(post.likes.length).to eq(1)
+
+      expect { user.destroy }.to change { Like.count }.from(1).to(0)
     end
   end
 end
