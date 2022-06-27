@@ -91,6 +91,8 @@ RSpec.describe 'User system', type: :system do
       expect(Like.count).to eq(1)
 
       expect { user.destroy }.to change { Like.count }.from(1).to(0)
+      post.reload
+      expect(post.likes.length).to eq(0)
     end
   end
 end
