@@ -87,8 +87,8 @@ RSpec.describe 'User system', type: :system do
       create(:like, likeable: post, user: user)
 
       expect(user.likes.length).to eq(1)
-      expect(Like.count).to eq(1)
       expect(post.likes.length).to eq(1)
+      expect(Like.count).to eq(1)
 
       expect { user.destroy }.to change { Like.count }.from(1).to(0)
     end
