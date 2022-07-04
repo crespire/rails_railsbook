@@ -20,9 +20,8 @@ RSpec.describe 'Likes system', type: :system do
         find('div.c-post__content', text: post_self.content).sibling('div.c-post__status').click_link('Like')
 
         expect(page).to have_text('Likes: 1')
-        post_self.reload
+        expect(post_self.reload.likes.size).to eq(1)
         expect(Like.count).to eq(1)
-        expect(post_self.likes.size).to eq(1)
       end
 
       it "allows a user to like another user's post" do
@@ -36,9 +35,8 @@ RSpec.describe 'Likes system', type: :system do
         find('div.c-post__content', text: 'Capybara Test Post').sibling('div.c-post__status').click_link('Like')
 
         expect(page).to have_text('Likes: 1')
-        post.reload
+        expect(post.reload.likes.size).to eq(1)
         expect(Like.count).to eq(1)
-        expect(post.likes.size).to eq(1)
       end
     end
 
@@ -57,9 +55,8 @@ RSpec.describe 'Likes system', type: :system do
         find('div.c-post__content', text: post_self.content).sibling('div.c-post__status').click_link('Unlike')
 
         expect(page).to have_text('Likes: 0')
-        post_self.reload
+        expect(post_self.reload.likes.size).to eq(0)
         expect(Like.count).to eq(0)
-        expect(post_self.likes.size).to eq(0)
       end
 
       it "allows a user to remove their like on another user's post" do
@@ -72,15 +69,13 @@ RSpec.describe 'Likes system', type: :system do
         find('div.c-post__content', text: post.content).sibling('div.c-post__status').click_link('Unlike')
 
         expect(page).to have_text('Likes: 0')
-        post.reload
+        expect(post.reload.likes.size).to eq(0)
         expect(Like.count).to eq(0)
-        expect(post.likes.size).to eq(0)
       end
     end
   end
 
-  xcontext 'where there are comments by two users' do
-
+  context 'where there are comments by two users' do
     context 'where a user has not liked any content' do
       it 'allows a user to like their own comments' do
       end
@@ -89,7 +84,7 @@ RSpec.describe 'Likes system', type: :system do
       end
     end
 
-    context 'where a user has already liked some content' do
+    xcontext 'where a user has already liked some content' do
       it 'allows a user to remove their like on their own comments' do
       end
 
