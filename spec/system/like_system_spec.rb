@@ -44,6 +44,18 @@ RSpec.describe 'Likes system', type: :system do
       let!(:user1) { FactoryBot.create(:user, :with_posts, post_count: 1) }
       let!(:post) { FactoryBot.create(:post) }
 
+      it 'does not allow a user to like something more than once' do
+        post_self = user1.posts.first
+        create(:like, likeable: post_self, user: user1)
+        expect(post_self.likes.size).to eq(1)
+
+        login_as(user1, scope: :user)
+        visit root_path
+
+        like_panel = find('div.c-post__content', text: post_self.content).sibling('div.c-post__status')
+        expect(like_panel).to have_text('Unlike')
+      end
+
       it 'allows a user to remove their like on their own post' do
         post_self = user1.posts.first
         create(:like, likeable: post_self, user: user1)
