@@ -1,19 +1,24 @@
 <%= turbo_frame_tag dom_id(comment) do%>
-  <div class="c-post__comment"> 
-    <div class="c-post__badge-comment">
-      <span class="c-post__image-comment">img</span>
-      <span class="c-post__name-comment"><%= comment.user.name %></span>
+  <div class="c-comment"> 
+    <div class="c-comment__header">
+      <div class="c-comment__badge">
+        <span class="c-post__image-comment">img</span>
+        <span class="c-post__name-comment"><%= comment.user.name %></span>
+      </div>
+      <div class="c-comment__actions">
+        <% if current_user.id == comment.user.id %>
+          <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: "#{dom_id(comment)}_text" } %>
+          <%= link_to 'Delete', comment_path(comment), data: { turbo_frame: dom_id(comment), turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
     </div>
-    <div class="c-post__content-comment">      
-        <p class="c-post__body-comment">
-          <%= turbo_frame_tag "#{dom_id(comment)}_text" do %>
-            <%= comment.content %>
-          <% end %>
-        </p>
+    <div class="c-comment__content">      
+      <%= turbo_frame_tag "#{dom_id(comment)}_text" do %>
+        <%= comment.content %>
+      <% end %>
     </div>
     <div class="c-post__status-comment">
-      <p class="c-post__actions-comment">
-        <%= turbo_frame_tag "#{dom_id(comment)}_likes" do %>
+      <%= turbo_frame_tag "#{dom_id(comment)}_likes" do %>
           <% if current_user.already_liked?(comment) %>
             <%= link_to 'Unlike', like_path(comment, like: { likeable_id: comment.id, likeable_type: 'Comment' }), data: { turbo_method: :delete } %>
           <% else %>
@@ -21,11 +26,6 @@
           <% end %>
           <span>Likes: <%= comment.likes.size %> </span>
         <% end %>
-        <% if current_user.id == comment.user.id %>
-          <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: "#{dom_id(comment)}_text" } %>
-          <%= link_to 'Delete', comment_path(comment), data: { turbo_frame: dom_id(comment), turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-        <% end %>
-      </p>
     </div>
   </div>
 <% end %>
