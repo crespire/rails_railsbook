@@ -88,11 +88,32 @@ RSpec.describe 'Likes system', type: :system do
   end
 
   context 'where there are comments by two users' do
+    let!(:user1) { create(:user, :with_posts, post_count: 1) }
+    let!(:post) { create(:post) }
+    let!(:comment) { create(:comment, post: post) }
+    let!(:comment_self) { create(:comment, post: post, user: user1) }
+
     context 'where a user has not liked any content' do
       it 'allows a user to like their own comments' do
+        login_as(user1, scope: :user)
+        visit root_path
+
+        find('div.c-comment__content', text: comment_self.content).sibling('div.c-comment__status').click_link('Like')
+
+        expect(page).to have_text('Likes: 1')
+        expect(comment_self.reload.likes.size).to eq(1)
+        expect(Like.count).to eq(1)
       end
 
-      xit "allows a user to like another user's comment" do
+      it "allows a user to like another user's comment" do
+        login_as(user1, scope: :user)
+        visit root_path
+
+        find('div.c-comment__content', text: comment.content).sibling('div.c-comment__status').click_link('Like')
+
+        expect(page).to have_text('Likes: 1')
+        expect(comment.reload.likes.size).to eq(1)
+        expect(Like.count).to eq(1)
       end
     end
 
