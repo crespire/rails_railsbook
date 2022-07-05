@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_05_185340) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_05_211937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_185340) do
     t.string "trigger_type", null: false
     t.integer "trigger_id", null: false
     t.bigint "triggered_by_id"
+    t.string "message"
     t.index ["triggered_by_id"], name: "index_notifications_on_triggered_by_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end

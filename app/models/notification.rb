@@ -4,6 +4,7 @@ class Notification < ApplicationRecord
   validates :trigger_type, presence: true
   validates :trigger_id, presence: true
   validates :triggered_by_id, presence: true
+  validates :message, presence: true
 
   scope :unseen, -> { where('seen = false') }
   scope :seen, -> { where('seen = true') }
