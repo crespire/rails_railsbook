@@ -6,7 +6,7 @@
   <div>
     <% if user_signed_in? %>    
       Hello, <%= link_to current_user.name, user_path(current_user) %>!
-      <%= link_to "Notifications (#{current_user.notifications.size})", user_notifications_path(current_user) %>
+      <%= link_to "Notifications (#{current_user.notifications.unseen.size})", user_notifications_path(current_user) %>
       <%= link_to 'Requests', user_requests_path(current_user) %>
       <%= link_to 'Log Out', destroy_user_session_path, data: { "turbo-method": :delete } %>
     <% end %>
