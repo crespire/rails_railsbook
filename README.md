@@ -131,6 +131,14 @@ This will require I figure out how to use factories with nested assocations as w
 
 After that, I think I can move on to basic notifications, and get that working/tested. Then after that we're in the home stretch with CSS BEM styling and adding avatars, etc.
 
+I've completed the testing for the like system, so now it's time to move on to the notification system.
+
+Thinking about how the notification system should work, basically we will have an index action, create, and "read" action.
+
+Any action like sending a request or sending a like will create a notification. In the case of requests, the receiving party will have a notification. In the case of likes, the liked resource's owner will have a notification.
+
+Then we index all notifcations that are not seen and bunch them first. Any time we load a notfication on the index, we update it to "seen" - then we only count "unseen" ones (this can be accomplished with a scope).
+
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
