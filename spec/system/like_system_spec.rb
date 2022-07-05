@@ -92,7 +92,7 @@ RSpec.describe 'Likes system', type: :system do
       it 'allows a user to like their own comments' do
       end
 
-      it "allows a user to like another user's comment" do
+      xit "allows a user to like another user's comment" do
       end
     end
 
