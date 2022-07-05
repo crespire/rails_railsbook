@@ -117,15 +117,50 @@ RSpec.describe 'Likes system', type: :system do
       end
     end
 
-    xcontext 'where a user has already liked some content' do
+    context 'where a user has already liked some content' do
       it 'allows a user to remove their like on their own comments' do
+        create(:like, likeable: comment_self, user: user1)
+        expect(comment_self.likes.size).to eq(1)
+
+        login_as(user1, scope: :user)
+        visit root_path
+
+        element = find('div.c-comment__content', text: comment_self.content).sibling('div.c-comment__status')
+        element.click_link('Unlike')
+
+        expect(element).to have_text('Likes: 0')
+        expect(comment_self.reload.likes.size).to eq(0)
       end
 
-      it "allows a user to remove their own like on another user's comment" do
+      it "allows a user to remove their like on another user comment" do
+        create(:like, likeable: comment, user: user1)
+        expect(comment.likes.size).to eq(1)
+
+        login_as(user1, scope: :user)
+        visit root_path
+
+        element = find('div.c-comment__content', text: comment.content).sibling('div.c-comment__status')
+        element.click_link('Unlike')
+
+        expect(element).to have_text('Likes: 0')
+        expect(comment.reload.likes.size).to eq(0)
       end
     end
   end
 
-  xcontext 'Correctly deletes likes when the parent resource is deleted' do
+  context 'correctly deletes likes when the parent resource is deleted' do
+    let!(:user1) { create(:user, :with_posts, post_count: 1) }
+
+    it 'correctly deletes a like on a child comment when the post is deleted' do
+      post = user1.posts.first
+      create(:comment, post: post, user: user1)
+      expect(post.comments.size).to eq(1)
+      comment = post.comments.first
+
+      create(:like, likeable: comment, user: user1)
+      expect(comment.reload.likes.size).to eq(1)
+
+      expect { post.destroy }.to change { Like.count }.from(1).to(0)
+    end
   end
 end
