@@ -139,6 +139,22 @@ Any action like sending a request or sending a like will create a notification. 
 
 Then we index all notifcations that are not seen and bunch them first. Any time we load a notfication on the index, we update it to "seen" - then we only count "unseen" ones (this can be accomplished with a scope).
 
+Having worked through a bit, there are three cases in the app where I have to send a notification:
+* You receive a request
+* Your post receives a comment
+* Your post or comment receives a like
+
+Request is easy, once a request is created, also create a Notification belonging to the receiver, type: request, triggered by sender.
+
+Comment received is a little trickier. On comment create, also create notification belonging to the post owner, type: comment, triggered by commenter.
+
+Like received. On like create, also create notification belonging to the resource's owner, type: like, triggered by liked_by.
+
+Generally then, each Notifiable has:
+* Target: which can be parent resource's owner, or sender
+* Type: resource's class
+* Triggered by: resource's owner
+
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
