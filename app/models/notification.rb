@@ -1,7 +1,11 @@
 class Notification < ApplicationRecord
   belongs_to :user, counter_cache: true
 
-  scope :new, -> { where('seen = false') }
+  validates :trigger_type, presence: true
+  validates :trigger_id, presence: true
+  validates :triggered_by_id, presence: true
+
+  scope :unseen, -> { where('seen = false') }
   scope :seen, -> { where('seen = true') }
 
   def mark_seen
