@@ -1,5 +1,8 @@
 class NotificationsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @notifications = current_user.notifications.all
+    @new = current_user.notifications.unseen
+    @old = current_user.notifications.seen
   end
 end
