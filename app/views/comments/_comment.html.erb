@@ -5,12 +5,14 @@
         <span class="c-post__image-comment">img</span>
         <span class="c-post__name-comment"><%= comment.user.name %></span>
       </div>
-      <div class="c-comment__actions">
-        <% if current_user.id == comment.user.id %>
-          <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: "#{dom_id(comment)}_text" } %>
-          <%= link_to 'Delete', comment_path(comment), data: { turbo_frame: dom_id(comment), turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-        <% end %>
-      </div>
+      <% if current_user == comment.user %>
+        <div class="c-comment__actions">
+          <% if current_user.id == comment.user.id %>
+            <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: "#{dom_id(comment)}_text" } %>
+            <%= link_to 'Delete', comment_path(comment), data: { turbo_frame: dom_id(comment), turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <div class="c-comment__content">      
       <%= turbo_frame_tag "#{dom_id(comment)}_text" do %>
