@@ -13,7 +13,6 @@ RSpec.describe 'Comment system', type: :system do
     end
 
     context 'with a post from another user' do
-
       before do
         create :post
       end
@@ -73,7 +72,7 @@ RSpec.describe 'Comment system', type: :system do
         expect(user.comments.size).to eq(1)
 
         accept_confirm do
-          find('p.c-post__actions-comment').click_link 'Delete'
+          find('div.c-comment__actions').click_link 'Delete'
         end
 
         expect(page).to_not have_text('Test Comment')
@@ -84,7 +83,7 @@ RSpec.describe 'Comment system', type: :system do
   end
 
   context "when deleting a comment" do
-    it "deletes child likes as well" do
+    xit "deletes child likes as well" do
     end
   end
 end
