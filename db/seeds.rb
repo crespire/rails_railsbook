@@ -19,13 +19,14 @@ until Request.count == 25
   user_b = User.all.sample
   next if user_a == user_b
 
-  user_a.sent_requests.create(friend: user_b)
+  request = user_a.sent_requests.create(friend: user_b)
+  request.notify
 end
 
 puts 'Created 25 requests'
 
 10.times do
-  request = Request.all.sample
+  request = Request.pending.sample
   request.accept_request
 end
 
@@ -38,7 +39,15 @@ end
 puts 'Created 12 posts belonging to random users'
 
 6.times do
-  Post.all.sample.comments.create(content: 'Comment on post', user: User.all.sample)
+  comment = Post.all.sample.comments.create(content: 'Comment on post', user: User.all.sample)
+  comment.notify
 end
 
 puts 'Created 6 comments on random posts, belonging to random users.'
+
+3.times do
+  like = Post.all.sample.likes.create(liked_by: User.all.sample.id)
+  like.notify
+end
+
+puts 'Created 3 likes on posts'
