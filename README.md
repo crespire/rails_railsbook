@@ -155,13 +155,22 @@ Generally then, each Notifiable has:
 * Type: resource's class
 * Triggered by: resource's owner
 
+I ended up swapping off using callbacks (primarily) and going with a concern approach. I still use one callback (`after_save`) to populate the information I need for the notification details, and have the details memoized so that it doesn't have to pull that information again unless the `notify` is called some time after an object's save (which I don't think would be the case).
+
+This way, any time a notifiable resource is saved, in its controller, there is a call to `resource.notify` that generates the correct notification for said resource.
+
+The testing is done for the project as of this point, so that is good.
+
+My next step is to explore Omniauth, and my goal is to enable Twitter and Google for this toy app. After that, I will probably write some simple request tests related to Omniauth, as I think it'll be a good opportunity to flex the mocks/stubs muscle again (haven't used them since Chess!).
+
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
 
 Features List to be implemented:
-* Likes system (current task)
-* Notifications for requests, likes and comments
+* Notifications
+  * Currently mostly done
+  * TODO: Update nav Notification link with Turbo Stream to have a real time count of notifications.
 * Omniauth using two end points (remember to turn off Turbo for these links, as we are not sending ajax requests)
   * Twitter
   * Google
