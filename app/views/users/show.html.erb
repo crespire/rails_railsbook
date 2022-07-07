@@ -1,15 +1,32 @@
 <div>
-  <h3><%= @user.name %>'s friends</h3>
-  <ul>
-    <% @user.friends.each do |friend| %>
-      <li>
-        <% request = @user.find_request(friend) %>
-        <%= turbo_frame_tag dom_id(request) do %>
-          <%= link_to friend.name, user_path(friend) %>        
-          (<%= link_to 'Delete?', request_path(request), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>)
-        <% end %>
-      </li>
+  <div>
+    <% unless current_user.all_friends.include?(@user) || current_user == @user %>
+      <%= turbo_frame_tag "request_#{dom_id(@user)}" do %>
+        <%= link_to 'Send request', user_requests_path(current_user, request: { friend_id: @user} ), data: { 'turbo-method': :post } %></li>
+      <% end %>
     <% end %>
+  </div>
+  <div>
+    <h3><%= @user.name %>'s friends</h3>
+    <ul>
+      <% @user.friends.each do |friend| %>
+        <li>
+          <% request = @user.find_request(friend) %>
+          <%= turbo_frame_tag dom_id(request) do %>
+            <%= link_to friend.name, user_path(friend) %>
+            <% if current_user == @user %>
+              (<%= link_to 'Delete?', request_path(request), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>)
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <% if current_user.pending_friends.present? && @user == current_user%>
+    <div>
+      <%= link_to 'You have some pending requests!', user_requests_path(current_user) %>
+    </div>
+  <% end %>
 </div>
 <% if current_user.id == @user.id %>
   <p>Unhappy? We're sorry to see you go.
