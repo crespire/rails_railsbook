@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save!
+        @comment.notify
         format.turbo_stream { flash.now[:notice] = 'Comment added!' }
         format.html { redirect_to :root, notice: 'Comment added!' }
       else

@@ -4,6 +4,7 @@ class LikesController < ApplicationController
   def create
     @like = Like.new(like_params)
     if @like.save
+      @like.notify
       flash[:success] = 'Thanks for liking!'
     else
       flash[:alert] = @like.errors.full_messages.join(', ')
