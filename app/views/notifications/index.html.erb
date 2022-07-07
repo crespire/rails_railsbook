@@ -5,14 +5,13 @@
     <h3>What's New?</h3>
     <ul>
       <% @new.each do |notification| %>
-        <% notification.mark_seen %>
         <li><%= notification.message %></li>
       <% end %>
     </ul>
   <% end %>
 
   <% if @old.length.zero? %>
-    <h3>Nothing to see here...</h3>
+    <h3>Nothing old to see...</h3>
   <% else %>
     <h3>Old Notifications</h3>
     <ul>
@@ -21,4 +20,6 @@
       <% end %>
     </ul>
   <% end %>
+
+  <% @new.each(&:mark_seen) %>
 </div>
