@@ -73,7 +73,7 @@ RSpec.describe 'User system', type: :system do
       expect(User.count).to eq(1)
     end
 
-    it "deletes their posts as well" do
+    it 'deletes their posts as well' do
       login_as(user, scope: :user)
       expect(user.posts.length).to eq(5)
       expect(Post.count).to eq(10)
@@ -84,7 +84,15 @@ RSpec.describe 'User system', type: :system do
       expect(Post.count).to eq(5)
     end
 
-    it "deletes a user's comments as well" do
+    xcontext 'deletes requests' do
+      it 'sent by the user' do
+      end
+
+      it 'recieved by the user' do
+      end
+    end
+
+    it "deletes their comments as well" do
       post = user2.posts.first
       create(:comment, post: post, user: user)
 
@@ -94,7 +102,7 @@ RSpec.describe 'User system', type: :system do
       expect { user.destroy }.to change { Comment.count }.from(1).to(0)
     end
 
-    it "deletes a user's likes as well" do
+    it "deletes their likes as well" do
       post = user2.posts.first
       create(:like, likeable: post, user: user)
 
