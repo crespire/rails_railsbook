@@ -9,7 +9,11 @@ module Notifiable
     end
 
     def notify
-      Notification.create(actor: user, notifiable: self, target: @notification[:target], message: @notification[:message])
+      notification_details
+      Notification.create(actor: user,
+                          target: @notification[:target],
+                          notifiable: self,
+                          message: @notification[:message])
     end
 
     private
