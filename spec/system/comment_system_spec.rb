@@ -83,7 +83,13 @@ RSpec.describe 'Comment system', type: :system do
   end
 
   context "when deleting a comment" do
-    xit "deletes child likes as well" do
+    let!(:comment) { create(:comment) }
+
+    it "deletes child likes as well" do
+      create(:like, likeable: comment)
+      expect(comment.reload.likes.size).to eq(1)
+      comment.destroy
+      expect(Like.count).to eq(0)
     end
   end
 end
