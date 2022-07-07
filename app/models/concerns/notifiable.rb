@@ -22,8 +22,6 @@ module Notifiable
 
     def notify
       set_details
-      return unless set_details.length == 2
-
       Notification.create(actor: user, notifiable: self, target: @details[:notify_target], message: @details[:message])
     end
   end
