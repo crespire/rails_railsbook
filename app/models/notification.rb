@@ -1,9 +1,10 @@
 class Notification < ApplicationRecord
-  belongs_to :user, counter_cache: true
+  belongs_to :notifiable, polymorphic: true, counter_cache: true
+  belongs_to :user, foreign_key: :target_id, counter_cache: true
 
-  validates :trigger_type, presence: true
-  validates :trigger_id, presence: true
-  validates :triggered_by_id, presence: true
+  validates :target_id, presence: true
+  validates :notifiable_type, presence: true
+  validates :notifiable_id, presence: true
   validates :message, presence: true
 
   scope :unseen, -> { where('seen = false') }

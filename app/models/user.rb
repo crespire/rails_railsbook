@@ -26,7 +26,7 @@ class User < ApplicationRecord
   has_many :likes, foreign_key: :liked_by, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, foreign_key: :target_id, dependent: :destroy
 
   def friends
     friends_sent + friends_rec
