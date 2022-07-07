@@ -2,32 +2,32 @@ module Notifiable
   extend ActiveSupport::Concern
 
   included do
-    attr_reader :details
+    attr_reader :notification
 
-    after_commit do
-      set_details
+    after_save do
+      notification_details
     end
 
     def notify
-      Notification.create(actor: user, notifiable: self, target: @details[:notify_target], message: @details[:message])
+      Notification.create(actor: user, notifiable: self, target: @notification[:target], message: @notification[:message])
     end
 
     private
 
-    def set_details
-      @details ||= Hash.new
-      @details[:message] ||= "#{user.name}"
+    def notification_details
+      @notification ||= {}
+      @notification[:message] ||= user.name.to_s
 
       case self
       when Request
-        @details[:notify_target] ||= friend
-        @details[:message] += ' sent you a friend request.'
+        @notification[:target] ||= friend
+        @notification[:message] += ' sent you a friend request.'
       when Like
-        @details[:notify_target] ||= likeable.user
-        @details[:message] += " liked your #{likeable_type.downcase}."
+        @notification[:target] ||= likeable.user
+        @notification[:message] += " liked your #{likeable_type.downcase}."
       when Comment
-        @details[:notify_target] ||= post.user
-        @details[:message] += ' commented on your post.'
+        @notification[:target] ||= post.user
+        @notification[:message] += ' commented on your post.'
       else
         raise 'Invalid notify type.'
       end
