@@ -1,7 +1,4 @@
 class Request < ApplicationRecord
-  after_create :notify
-  after_destroy :remove_notify
-
   belongs_to :user
   belongs_to :friend, class_name: :User
 

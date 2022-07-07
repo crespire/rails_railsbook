@@ -1,7 +1,4 @@
 class Comment < ApplicationRecord
-  after_create :notify
-  after_destroy :remove_notify
-
   belongs_to :post, counter_cache: true
   belongs_to :user, counter_cache: true
 
