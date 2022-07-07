@@ -84,11 +84,30 @@ RSpec.describe 'User system', type: :system do
       expect(Post.count).to eq(5)
     end
 
-    xcontext 'deletes requests' do
-      it 'sent by the user' do
+    context 'deletes requests' do
+      before do
+        login_as(user)
+        visit user_path(user2.id)
+        click_link('Send request')
+        expect(page).to have_text('Request sent!')
+        visit root_path
+        expect(Request.count).to eq(1)
       end
 
-      it 'recieved by the user' do
+      it 'sent by the deleted user' do
+        login_as(user)
+        visit user_path(user)
+        accept_confirm { click_button 'Delete my account.' }
+        expect(page).to have_text('Account deleted.')
+        expect(Request.count).to eq(0)
+      end
+
+      it 'recieved by the deleted user' do
+        login_as(user2)
+        visit user_path(user2)
+        accept_confirm { click_button 'Delete my account.' }
+        expect(page).to have_text('Account deleted.')
+        expect(Request.count).to eq(0)
       end
     end
 
