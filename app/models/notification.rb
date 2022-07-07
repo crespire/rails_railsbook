@@ -14,6 +14,6 @@ class Notification < ApplicationRecord
   def mark_seen
     return if seen
 
-    update_attribute(:seen, true)
+    update(seen: true)
   end
 end
