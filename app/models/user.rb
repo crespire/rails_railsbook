@@ -16,7 +16,8 @@ class User < ApplicationRecord
 
   has_many :received_requests,
            foreign_key: :friend_id,
-           class_name: :Request
+           class_name: :Request,
+           dependent: :destroy
 
   has_many :friends_sent, -> { merge(Request.accepted) }, through: :sent_requests, source: :friend
   has_many :friends_rec, -> { merge(Request.accepted) }, through: :received_requests, source: :user
