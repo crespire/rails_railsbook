@@ -61,35 +61,38 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'allows a user to delete their own post' do
-      create(:post, user_id: user.id, content: 'Test Delete')
-
-      visit root_path
-      expect(page).to have_text('Test Delete')
-      accept_confirm do
-        find('div.l-feed').click_link 'Delete'
-      end
-      expect(current_path).to eq(root_path)
-
-      expect(user.posts.count).to eq(0)
-      expect(page).not_to have_text('Test Delete')
-    end
-
-    it 'allows a user to delete their own post with comments' do
-      create(:post, user_id: user.id, content: 'Test Delete')
-      post = Post.first
-      comment = post.comments.build(content: "Test Comment", user_id: user.id)
-      comment.save
+      create(:post, user: user, content: 'Test Delete')
+      expect(user.posts.size).to eq(1)
 
       visit root_path
       expect(page).to have_text('Test Delete')
       accept_confirm do
         find('div.c-post__actions').click_link 'Delete'
       end
-      expect(current_path).to eq(root_path)
 
-      expect(user.posts.count).to eq(0)
-      expect(user.comments.count).to eq(0)
+      expect(current_path).to eq(root_path)
       expect(page).not_to have_text('Test Delete')
+      expect(Post.count).to eq(0)
+    end
+
+    it 'allows a user to delete their own post with comments' do
+      create(:post, user: user, content: 'Test Delete')
+      post = Post.first
+      comment = post.comments.build(content: "Test Comment", user_id: user.id)
+      comment.save
+      expect(user.reload.posts.size).to eq(1)
+      expect(user.comments.size).to eq(1)
+
+      visit root_path
+      expect(page).to have_text('Test Delete')
+      accept_confirm do
+        find('div.c-post__actions').click_link 'Delete'
+      end
+
+      expect(current_path).to eq(root_path)
+      expect(page).not_to have_text('Test Delete')
+      expect(Comment.count).to eq(0)
+      expect(Post.count).to eq(0)
     end
   end
 
@@ -97,10 +100,14 @@ RSpec.describe 'Post system', type: :system do
     it "deletes all child comments as well" do
       post = create(:post, :with_comments, comment_count: 5)
       expect(Comment.count).to eq(5)
-      expect { post.destroy }.to change { Comment.count }.from(5).to(0)
+      expect { post.destroy }.to change { Comment.count }.by(-5)
     end
 
-    xit "deletes all child likes as well" do
+    it "deletes all child likes as well" do
+      post = create(:post, :with_comments, comment_count: 5)
+      5.times { create(:like, likeable: post) }
+      expect(Like.count).to eq(5)
+      expect { post.destroy }.to change { Like.count }.by(-5)
     end
   end
 end
