@@ -64,22 +64,24 @@ RSpec.describe 'User system', type: :system do
   context 'when deleting a user' do
     let!(:user) { FactoryBot.create(:user, :with_posts, post_count: 5) }
     let!(:user2) { FactoryBot.create(:user, :with_posts, post_count: 5) }
-    
+
     it 'deletes a user successfully' do
-      # log in, click button, check users in db
+      login_as(user, scope: :user)
+      visit user_path(user)
+      accept_confirm { click_button 'Delete my account.' }
+      expect(page).to have_text('Account deleted.')
+      expect(User.count).to eq(1)
     end
 
-    it "deletes a user's posts as well" do
-      # just do this bit in the database, because the only view is to delete your own account
-      using_session(:user) do
-        login_as(user, scope: :user)
-        expect(user.posts.length).to eq(5)
-        expect(Post.count).to eq(10)
+    it "deletes their posts as well" do
+      login_as(user, scope: :user)
+      expect(user.posts.length).to eq(5)
+      expect(Post.count).to eq(10)
 
-        visit user_path(user)
-        accept_confirm { click_button 'Delete my account.' }
-        expect(Post.count).to eq(5)
-      end
+      visit user_path(user)
+      accept_confirm { click_button 'Delete my account.' }
+      expect(page).to have_text('Account deleted.')
+      expect(Post.count).to eq(5)
     end
 
     it "deletes a user's comments as well" do
