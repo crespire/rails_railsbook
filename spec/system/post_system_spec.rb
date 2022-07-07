@@ -7,7 +7,7 @@ RSpec.describe 'Post system', type: :system do
 
   context 'when there is no user logged in' do
     it 'redirects the user to authenticate' do
-      reset! # resets session
+      click_button 'Log Out' if page.has_button?('Log Out')
 
       visit root_path
       expect(page).to have_text('You need to sign in or sign up before continuing.')
