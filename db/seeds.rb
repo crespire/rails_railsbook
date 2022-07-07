@@ -50,4 +50,6 @@ puts 'Created 6 comments on random posts, belonging to random users.'
   like.notify
 end
 
-puts 'Created 3 likes on posts'
+puts 'Created 3 likes on posts.'
+
+puts "Generated #{Notification.count} notifications (expect 34)."
