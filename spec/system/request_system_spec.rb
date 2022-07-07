@@ -38,9 +38,11 @@ RSpec.describe 'Request/friend system', type: :system do
       find('input#query').fill_in with: 'Bob'
       click_button 'Search'
       first('li').click_link('Send request')
+      click_button('Log Out')
     end
 
     it 'allows the sending user to delete a pending request' do
+      login_as(user_a)
       visit user_requests_path(user_a)
 
       expect(page).to have_text('Request sent to')
@@ -52,62 +54,54 @@ RSpec.describe 'Request/friend system', type: :system do
     end
 
     it 'allows receiving user to accept a pending request' do
-      using_session('Bob') do
-        login_as(user_b)
-        visit user_requests_path(user_b)
+      login_as(user_b)
+      visit user_requests_path(user_b)
 
-        expect(page).to have_text('Request received from')
-        find('li', text: 'Request received from').click_link('Accept')
-        expect(page).to have_text('Accepted!')
-      end
+      expect(page).to have_text('Request received from')
+      find('li', text: 'Request received from').click_link('Accept')
+      expect(page).to have_text('Accepted!')
     end
   end
 
   context 'after an accepted request' do
     before(:each) do
-      using_session('Ken') do
-        login_as(user_a)
-        visit root_path
-        find('input#query').fill_in with: 'Bob'
-        click_button 'Search'
-        first('li').click_link('Send request')
-      end
+      login_as(user_a)
+      visit root_path
+      find('input#query').fill_in with: 'Bob'
+      click_button 'Search'
+      first('li').click_link('Send request')
+      click_button('Log Out')
 
-      using_session('Bob') do
-        login_as(user_b)
-        visit user_requests_path(user_b)
-        find('li', text: 'Request received from').click_link('Accept')
-      end
+      login_as(user_b)
+      visit user_requests_path(user_b)
+      find('li', text: 'Request received from').click_link('Accept')
+      click_button('Log Out')
     end
 
     it 'allows the sending user to delete an accepted request' do
       expect(user_a.reload.friends.count).to eq(1)
       expect(user_b.reload.friends.count).to eq(1)
 
-      using_session('Ken') do
-        login_as(user_a)
-        visit user_path(user_a)
-        page.accept_alert do
-          first('li').click_link('Delete?')
-        end
-        expect(page).to have_text('Deleted!')
-        expect(user_a.reload.friends.count).to eq(0)
+      login_as(user_a)
+      visit user_path(user_a)
+      page.accept_alert do
+        first('li').click_link('Delete?')
       end
+      expect(page).to have_text('Deleted!')
+      expect(user_a.reload.friends.count).to eq(0)
     end
 
     it 'allows the receiving user to delete an accepted request' do
       expect(user_a.reload.friends.count).to eq(1)
       expect(user_b.reload.friends.count).to eq(1)
 
-      using_session('Bob') do
-        login_as(user_b)
-        visit user_path(user_b)
-        page.accept_alert do
-          first('li').click_link('Delete?')
-        end
-        expect(page).to have_text('Deleted!')
-        expect(user_b.reload.friends.count).to eq(0)
+      login_as(user_b)
+      visit user_path(user_b)
+      page.accept_alert do
+        first('li').click_link('Delete?')
       end
+      expect(page).to have_text('Deleted!')
+      expect(user_b.reload.friends.count).to eq(0)
     end
   end
 end
