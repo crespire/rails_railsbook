@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Likes system', type: :system do
   before do
-    driven_by(:selenium_chrome)
+    driven_by(:selenium_chrome_headless)
   end
 
   context 'where there are posts by two users' do
