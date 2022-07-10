@@ -6,9 +6,9 @@ class RequestsController < ApplicationController
 
   def create
     @request = current_user.sent_requests.build(request_params)
-    if @request.save
-      @request.notify
-    end
+    return unless @request.save
+
+    @request.notify
   end
 
   def update
