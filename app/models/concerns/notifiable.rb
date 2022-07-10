@@ -32,7 +32,7 @@ module Notifiable
     private
 
     def notification_details
-      return @notification if defined?(@notification)
+      return if defined?(@notification)
 
       @notification ||= {}
       name = user.name.to_s
