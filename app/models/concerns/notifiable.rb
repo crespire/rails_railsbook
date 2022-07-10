@@ -32,22 +32,27 @@ module Notifiable
     private
 
     def notification_details
+      return @notification if defined?(@notification)
+
       @notification ||= {}
-      @notification[:message] = user.name.to_s
+      name = user.name.to_s
 
       case self
       when Request
         @notification[:target] ||= friend
-        @notification[:message] += ' sent you a friend request.'
+        action = ' sent you a friend request.'
       when Like
         @notification[:target] ||= likeable.user
-        @notification[:message] += " liked your #{likeable_type.downcase}."
+        action = " liked your #{likeable_type.downcase}."
       when Comment
         @notification[:target] ||= post.user
-        @notification[:message] += ' commented on your post.'
+        action = ' commented on your post.'
       else
         raise 'Invalid notify type.'
       end
+
+      @notification[:message] = name + action
+      @notification
     end
   end
 end
