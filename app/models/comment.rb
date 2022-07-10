@@ -5,6 +5,7 @@ class Comment < ApplicationRecord
   belongs_to :user, counter_cache: true
 
   has_many :likes, as: :likeable, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :content, presence: true
 end

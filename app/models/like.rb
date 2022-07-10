@@ -4,6 +4,8 @@ class Like < ApplicationRecord
   belongs_to :likeable, polymorphic: true, counter_cache: true
   belongs_to :user, foreign_key: :liked_by, counter_cache: true
 
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
   validates :liked_by, presence: true
   validates :likeable_type, presence: true
   validates :likeable_id, presence: true

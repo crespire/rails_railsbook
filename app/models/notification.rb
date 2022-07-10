@@ -12,8 +12,6 @@ class Notification < ApplicationRecord
   scope :seen, -> { where(seen: true) }
 
   def mark_seen
-    return if seen
-
-    update(seen: true)
+    update!(seen: true)
   end
 end
