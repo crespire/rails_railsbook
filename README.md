@@ -163,14 +163,13 @@ The testing is done for the project as of this point, so that is good.
 
 My next step is to explore Omniauth, and my goal is to enable Twitter and Google for this toy app. After that, I will probably write some simple request tests related to Omniauth, as I think it'll be a good opportunity to flex the mocks/stubs muscle again (haven't used them since Chess!).
 
+Adding real time notification count updates took a bit more brain flex than I had anticipated, but I got it working! Now we can move on to Omniauth.
+
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
 
 Features List to be implemented:
-* Notifications
-  * Currently mostly done
-  * TODO: Update nav Notification link with Turbo Stream to have a real time count of notifications.
 * Omniauth using two end points (remember to turn off Turbo for these links, as we are not sending ajax requests)
   * Twitter
   * Google
