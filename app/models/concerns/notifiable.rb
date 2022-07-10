@@ -8,7 +8,7 @@ module Notifiable
       notification_details
       broadcast_replace_later_to([@notification[:target].name, 'notifications'],
                                  partial: 'notifications/link',
-                                 locals: { user: @notification[:target], update: false },
+                                 locals: { user: @notification[:target], destroy: false },
                                  target: "#{@notification[:target].class.to_s.downcase}_#{@notification[:target].id}_notify_count")
     end
 
@@ -17,7 +17,7 @@ module Notifiable
       # Have to use non-async here because we destroy the resource after this callback.
       broadcast_replace_to([@notification[:target].name, 'notifications'],
                                  partial: 'notifications/link',
-                                 locals: { user: @notification[:target], update: true },
+                                 locals: { user: @notification[:target], destroy: true },
                                  target: "#{@notification[:target].class.to_s.downcase}_#{@notification[:target].id}_notify_count")
     end
 
