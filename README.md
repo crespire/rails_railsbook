@@ -165,12 +165,18 @@ My next step is to explore Omniauth, and my goal is to enable Twitter and Google
 
 Adding real time notification count updates took a bit more brain flex than I had anticipated, but I got it working! Now we can move on to Omniauth.
 
+Finished omniauth! I ended up adding Github and Google, rather than Twitter and Google, but it seems relatively simple to add another provider if I want.
+
+Now to style the whole thing, which I think will be a little overwhelming. I've already got some of the scafolding done in terms of CSS, all my own generated views follow (somewhat) the BEM methodology with namespacing.
+
+l = layout
+c = component
+
+Then it's just block__element-modifier. I think I should first look into the asset pipeline and figure out how to parse SCSS, as it has not really been something I've been doing until now.
+
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
 
 Features List to be implemented:
-* Omniauth using two end points (remember to turn off Turbo for these links, as we are not sending ajax requests)
-  * Twitter
-  * Google
 * BEM CSS styling
