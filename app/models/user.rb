@@ -56,4 +56,17 @@ class User < ApplicationRecord
   def already_liked?(resource)
     Like.where(liked_by: id, likeable_type: resource.class.to_s, likeable_id: resource.id).exists?
   end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data['email']).first
+
+    unless user
+      user = User.create(name: data['name'],
+                         email: data['email'],
+                         password: Devise.friendly_token[0, 20]
+      )
+    end
+    user
+end
 end
