@@ -1,9 +1,22 @@
 // app/assets/stylesheets/layout/_header.scss
+/*
+header
+  nav
+    header__search
+    header__nav
+*/
 
-.l-header nav {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: var(--space-xxs);
-  justify-content: space-between;
+.l-header {
+  & nav {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: var(--space-xxs);
+    justify-content: space-between;
+  }
+
+  &__search {}
+
+  &__nav {}
 }
+
