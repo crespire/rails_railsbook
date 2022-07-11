@@ -8,8 +8,8 @@
       <% if current_user == post.user %>
         <div class="c-post__actions">
           <% if current_user.id == post.user.id %>
-            <%= link_to 'Edit', edit_post_path(post), data: { turbo_frame: dom_id(post) } %>
-            <%= link_to 'Delete', post_path(post), data: { turbo_frame: dom_id(post), turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+            <%= link_to 'Edit', edit_post_path(post), data: { turbo_frame: dom_id(post) }, class: 'link' %>
+            <%= link_to 'Delete', post_path(post), data: { turbo_frame: dom_id(post), turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'link' %>
           <% end %>
         </div>
       <% end %>
@@ -22,9 +22,9 @@
     <div class="c-post__status">
       <%= turbo_frame_tag "#{dom_id(post)}_likes" do %>
         <% if current_user.already_liked?(post) %>
-          <%= link_to 'Unlike', like_path(post, like: { likeable_id: post.id, likeable_type: 'Post'} ), data: { turbo_method: :delete } %>
+          <%= link_to 'Unlike', like_path(post, like: { likeable_id: post.id, likeable_type: 'Post'} ), data: { turbo_method: :delete }, class: 'link' %>
         <% else %>
-          <%= link_to 'Like', post_likes_path(post, like: {liked_by: current_user.id, likeable_id: post.id, likeable_type: 'Post'}), data: { turbo_method: :post } %>
+          <%= link_to 'Like', post_likes_path(post, like: {liked_by: current_user.id, likeable_id: post.id, likeable_type: 'Post'}), data: { turbo_method: :post }, class: 'link' %>
         <% end %>
         <span>Likes: <%= post.likes.size %> </span>
       <% end %>

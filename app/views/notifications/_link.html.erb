@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "#{dom_id(user)}_notify_count" do %>
   <% notify = user.notifications.unseen.size %>
   <% count = destroy ? notify - 1 : notify %>
-  <%= link_to "Notifications (#{ count.negative? ? 0 : count })", notifications_path, data: { turbo: false } %>
+  <%= link_to "Notifications (#{ count.negative? ? 0 : count })", notifications_path, data: { turbo: false }, class: 'link' %>
 <% end %>

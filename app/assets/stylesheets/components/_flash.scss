@@ -3,6 +3,8 @@
 .l-flash {
   background-color: var(--color-secondary-rotate);
   color: var(--color-text-header);
+  margin-left: auto;
+  margin-right: auto;
 
   &__notice {
     font-style: italic;

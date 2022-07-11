@@ -3,13 +3,13 @@
     <%= render 'layouts/search' if user_signed_in? %>
   </div>
   <div class="l-header__nav">
-    <%= link_to 'Home', root_path %>
+    <%= link_to 'Home', root_path, class: 'link' %>
     <% if user_signed_in? %>
-      <span>Hello, <%= link_to current_user.name, user_path(current_user), class: "a--no-pad" %>!</span>
+      <span>Hello, <%= link_to current_user.name, user_path(current_user), class: 'link link--no-pad' %>!</span>
       <%= turbo_frame_tag "#{dom_id(current_user)}_notify_count" do %>
-        <%= link_to "Notifications (#{current_user.notifications.unseen.size})", notifications_path, data: { turbo: false } %>
+        <%= link_to "Notifications (#{current_user.notifications.unseen.size})", notifications_path, data: { turbo: false }, class: 'link' %>
       <% end %>
-      <%= link_to 'Requests', user_requests_path(current_user) %>
+      <%= link_to 'Requests', user_requests_path(current_user), class: 'link' %>
       <%= button_to 'Log Out', destroy_user_session_path, method: :delete, data: { turbo: false } %>
     <% end %>
   </div>
