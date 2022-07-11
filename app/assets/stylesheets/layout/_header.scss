@@ -13,6 +13,7 @@ header
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding: var(--space-xs);
   }
 
   &__search {
@@ -24,8 +25,9 @@ header
   &__nav {
     display: flex;
     gap: 0 var(--space-xxxs);
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 var(--space-s);
   }
 }
 

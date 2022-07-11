@@ -1,0 +1,14 @@
+// app/assets/stylesheets/compontents/_btn.scss
+
+.l-flash {
+  background-color: var(--color-secondary-rotate);
+  color: var(--color-text-header);
+
+  &__notice {
+    font-style: italic;
+  }
+
+  &__alert {
+    font-weight: bold;
+  }
+}

@@ -8,9 +8,12 @@
 @import "config/reset";
 
 // Components
-@import "components/btn";
+@import "components/button";
+@import "components/link";
 @import "components/form";
+@import "components/flash";
 
 // Layouts
 @import "layout/container";
 @import "layout/header";
+@import "layout/main";

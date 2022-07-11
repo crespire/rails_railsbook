@@ -1,0 +1,14 @@
+// app/assets/stylesheets/components/_link.scss
+
+.link {
+  padding: var(--space-xxs);
+  color: var(--color-primary);
+  border-radius: var(--border-radius);
+  background-origin: border-box; // Invisible borders with linear gradients
+  background-color: transparent;
+  border: solid 2px transparent;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
