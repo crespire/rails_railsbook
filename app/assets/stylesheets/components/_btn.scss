@@ -1,6 +1,8 @@
+// app/assets/stylesheets/compontents/_btn.scss
+
 button {
   display: inline-block;
-  padding: var(--space-xxs) var(--space-m);
+  padding: var(--space-xxs);
   border-radius: var(--border-radius);
   background-origin: border-box; // Invisible borders with linear gradients
   background-color: transparent;

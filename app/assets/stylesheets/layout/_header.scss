@@ -9,14 +9,21 @@ header
 .l-header {
   & nav {
     display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: var(--space-xxs);
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
-  &__search {}
+  &__search {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 
-  &__nav {}
+  &__nav {
+    display: flex;
+    gap: 0 var(--space-xxs);
+    justify-content: space-evenly;
+    align-items: center;
+  }
 }
 

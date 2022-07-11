@@ -13,6 +13,9 @@
   <body class="l-container">
     <header class="l-header">
       <%= render 'layouts/nav' %>
+      <% if user_signed_in? %>
+        <%= turbo_stream_from current_user, 'notifications' %>
+      <% end %>
     </header>
     <div class="l-flash">
       <p class="l-flash__notice"><%= notice %></p>
