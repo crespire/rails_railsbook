@@ -10,7 +10,7 @@
       <%- if devise_mapping.omniauthable? %>
         <%- resource_class.omniauth_providers.each do |provider| %>
           <% pretty_provider = provider == :google_oauth2 ? :google : provider %>
-          <%= button_to "Sign in with #{OmniAuth::Utils.camelize(pretty_provider)}", omniauth_authorize_path(resource_name, provider), method: :post, data: { turbo: false } %>
+          <%= button_to "Log in with #{OmniAuth::Utils.camelize(pretty_provider)}", omniauth_authorize_path(resource_name, provider), method: :post, data: { turbo: false }, class: 'link link--no-bold' %>
         <% end %>
       <% end %>
       <br>

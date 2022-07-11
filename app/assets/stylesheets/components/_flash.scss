@@ -1,16 +1,19 @@
 // app/assets/stylesheets/compontents/_btn.scss
 
 .l-flash {
-  background-color: var(--color-secondary-rotate);
   color: var(--color-text-header);
+  width: 100%;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 
   &__notice {
+    background-color: palegoldenrod;
     font-style: italic;
   }
 
   &__alert {
+    background-color: palevioletred;
     font-weight: bold;
   }
 }
