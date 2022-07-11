@@ -1,9 +1,9 @@
 <nav>
-  <div class="l-nav__application">
-    <%= link_to 'Home', root_path %>
+  <div class="l-header__search">
     <%= render 'layouts/search' if user_signed_in? %>
   </div>
-  <div class="l-nav__user-options">
+  <div class="l-header__nav">
+    <%= link_to 'Home', root_path %>
     <% if user_signed_in? %>
       <%= turbo_stream_from current_user, 'notifications' %>
       Hello, <%= link_to current_user.name, user_path(current_user) %>!      
