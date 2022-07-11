@@ -1,0 +1,9 @@
+// app/assets/stylesheets/layout/_header.scss
+
+.l-header nav {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: var(--space-xxs);
+  justify-content: space-between;
+}
