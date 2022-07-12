@@ -10,7 +10,7 @@
         <%= link_to "Notifications (#{current_user.notifications.unseen.size})", notifications_path, data: { turbo: false }, class: 'link' %>
       <% end %>
       <%= link_to 'Requests', user_requests_path(current_user), class: 'link' %>
-      <%= button_to 'Log Out', destroy_user_session_path, method: :delete, data: { turbo: false } %>
+      <%= button_to 'Log Out', destroy_user_session_path, method: :delete, data: { turbo: false }, form_class: 'form form-short' %>
     <% end %>
   </div>
 </nav>

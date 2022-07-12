@@ -1,0 +1,14 @@
+// app/assets/stylesheets/compontents/_btn.scss
+
+.l-new_post {
+  
+  & form {
+    display: inline-block;
+    width: 100%;
+
+    #post_content {
+      resize: none;
+      width: 90%;
+    }
+  }
+}
