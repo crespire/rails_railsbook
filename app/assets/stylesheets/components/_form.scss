@@ -2,7 +2,7 @@
 
 form {
   display: inline-block;
-  width: 100%;
+  width: auto;
 
   & input[type='text'] {
     width: 11.75rem;
@@ -18,9 +18,5 @@ form {
     text-decoration: none;
     cursor: pointer;
     outline: none;
-  }
-
-  &-short {
-    width: auto;
   }
 }
