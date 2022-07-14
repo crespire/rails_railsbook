@@ -1,10 +1,7 @@
 <%= turbo_frame_tag dom_id(comment) do%>
   <div class="c-comment"> 
     <div class="c-comment__header">
-      <div class="c-comment__badge">
-        <span class="c-post__image-comment">img</span>
-        <span class="c-post__name-comment"><%= comment.user.name %></span>
-      </div>
+      <%= render 'users/badge', locals: { item: comment } %>
       <% if current_user == comment.user %>
         <div class="c-comment__actions">
           <% if current_user.id == comment.user.id %>
