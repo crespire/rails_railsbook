@@ -54,7 +54,7 @@ class User < ApplicationRecord
   end
 
   def already_liked?(resource)
-    Like.where(liked_by: id, likeable_type: resource.class.to_s, likeable_id: resource.id).exists?
+    self.likes.include?(resource)
   end
 
   def self.from_omniauth(access_token)
