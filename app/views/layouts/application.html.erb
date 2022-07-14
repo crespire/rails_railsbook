@@ -11,7 +11,7 @@
   </head>
 
   <body class="l-container">
-    <%= turbo_stream_from 'post_feed' %>
+    <%= turbo_stream_from 'updates_feed' %>
     <header class="l-header">
       <%= render 'layouts/nav' %>
       <% if user_signed_in? %>
