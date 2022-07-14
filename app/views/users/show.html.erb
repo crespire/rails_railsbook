@@ -2,7 +2,7 @@
   <div>
     <% unless current_user.all_friends.include?(@user) || current_user == @user %>
       <%= turbo_frame_tag "request_#{dom_id(@user)}" do %>
-        <%= link_to 'Send request', user_requests_path(current_user, request: { friend_id: @user} ), data: { 'turbo-method': :post } %></li>
+        <%= link_to 'Send request', user_requests_path(current_user, request: { friend_id: @user} ), data: { 'turbo-method': :post }, class: 'link' %></li>
       <% end %>
     <% end %>
   </div>
@@ -15,7 +15,7 @@
           <%= turbo_frame_tag dom_id(request) do %>
             <%= link_to friend.name, user_path(friend) %>
             <% if current_user == @user %>
-              (<%= link_to 'Delete?', request_path(request), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>)
+              <%= link_to 'Delete?', request_path(request), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'link' %>
             <% end %>
           <% end %>
         </li>

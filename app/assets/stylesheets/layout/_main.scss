@@ -1,0 +1,15 @@
+// app/assets/stylesheets/layout/_main.scss
+
+.l-main {
+  width: 100%;
+  padding-right: var(--space-m);
+  padding-left: var(--space-m);
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media(tabletAndUp) {
+    padding-right: var(--space-l);
+    padding-left: var(--space-l);
+    max-width: 60rem;
+  }
+}

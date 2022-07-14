@@ -2,7 +2,6 @@
               url: post_comments_path(post),
               data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' } do |form| %>
   <%= form.text_area :content,
-                     size: '30x2',
                      placeholer: "Add a comment...",
                      required: true %>
   <%= form.submit 'Add comment' %>

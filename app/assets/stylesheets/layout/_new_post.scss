@@ -1,0 +1,17 @@
+// app/assets/stylesheets/layout/_new_post.scss
+
+.l-new_post {
+  padding: var(--space-xxs);
+ 
+  & form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    #post_content {
+      resize: none;
+      width: 93%;
+    }
+  }
+}

@@ -26,7 +26,11 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+<<<<<<< HEAD
         @post.broadcast_prepend_to 'post_feed', locals: { post: @post, current_user: current_user }, target: 'post_feed'
+=======
+        @post.broadcast_prepend_to 'updates_feed', locals: { post: @post, current_user: current_user }, target: 'post_feed'
+>>>>>>> feature/css
         format.html { redirect_to :root, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else

@@ -1,0 +1,25 @@
+// app/assets/stylesheets/layout/_header.scss
+
+.l-header {
+  background-color: var(--color-tertiary);
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: var(--space-xs);
+  }
+
+  &__search {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+}
+

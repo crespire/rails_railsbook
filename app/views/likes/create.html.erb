@@ -1,6 +1,6 @@
 <% resource = params[:like][:likeable_type].constantize.find(params[:like][:likeable_id]) %>
 
 <%= turbo_frame_tag "#{params[:like][:likeable_type].downcase}_#{params[:like][:likeable_id]}_likes" do %>
-  <%= link_to 'Unlike', like_path(resource, like: { likeable_id: resource.id, likeable_type: resource.class.to_s }), data: { turbo_method: :delete } %>
+  <%= link_to 'Unlike', like_path(resource, like: { likeable_id: resource.id, likeable_type: resource.class.to_s }), data: { turbo_method: :delete }, class: 'link' %>
   <span>Likes: <%= resource.likes.size %> </span>
 <% end %>

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   # GET /search
   def search
-    return unless params[:query].present?
+    raise 'No search term' unless params[:query].present?
 
     @param = params[:query].downcase
     @results = User.where('lower(name) LIKE :query', query: "%#{@param}%").order('RANDOM()')

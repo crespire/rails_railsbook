@@ -1,0 +1,24 @@
+// app/assets/stylesheets/components/_button.scss
+
+button {
+  display: inline-block;
+  color: var(--color-primary);
+  border-radius: var(--border-radius);
+  background-origin: border-box; // Invisible borders with linear gradients
+  background-color: transparent;
+  border: solid 2px transparent;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  transition: filter 400ms, color 200ms;
+
+  &:hover,
+  &:focus,
+  &:focus-within,
+  &:active {
+    transition: filter 250ms, color 200ms;
+  }
+
+  // Modifiers will go there
+}

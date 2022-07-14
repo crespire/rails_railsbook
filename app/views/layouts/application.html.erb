@@ -10,12 +10,23 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= render 'layouts/nav' %>
-    <div class="flash">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+  <body class="l-container">
+    <%= turbo_stream_from 'updates_feed' %>
+    <header class="l-header">
+      <%= render 'layouts/nav' %>
+      <% if user_signed_in? %>
+        <%= turbo_stream_from current_user, 'notifications' %>
+      <% end %>
+    </header>
+    <div class="l-flash">
+      <p class="l-flash__notice"><%= notice %></p>
+      <p class="l-flash__alert"><%= alert %></p>
     </div>
-    <%= yield %>
+    <main class="l-main">
+      <%= yield %>
+    </main>
+    <footer class="l-footer">
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>

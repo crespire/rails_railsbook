@@ -1,0 +1,22 @@
+// app/assets/stylesheets/compontents/_form.scss
+
+form {
+  display: inline-block;
+  width: auto;
+
+  & input[type='text'] {
+    width: 11.75rem;
+  }
+
+  & input[type='submit'] {
+    padding: var(--space-xxs);
+    color: var(--color-primary);
+    border-radius: var(--border-radius);
+    background-origin: border-box; // Invisible borders with linear gradients
+    background-color: transparent;
+    border: solid 2px transparent;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+  }
+}
