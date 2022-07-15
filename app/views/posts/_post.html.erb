@@ -2,7 +2,7 @@
   <div class="c-post">
     <div class="c-post__header">
       <div class="c-post__badge">
-        <%= render 'users/badge', locals: { item: post } %>
+        <%= render 'users/badge', resource: post %>
       </div>
       <% if current_user == post.user %>
         <div class="c-post__actions">
