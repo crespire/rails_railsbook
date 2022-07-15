@@ -2,8 +2,7 @@
   <div class="c-post">
     <div class="c-post__header">
       <div class="c-post__badge">
-        <span class="c-post__image">img</span>
-        <span class="c-post__name"><%= post.user.name %></span>
+        <%= render 'users/badge', locals: { item: post } %>
       </div>
       <% if current_user == post.user %>
         <div class="c-post__actions">

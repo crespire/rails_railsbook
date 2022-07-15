@@ -25,7 +25,10 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save!
         @comment.notify
-        @comment.broadcast_append_to 'updates_feed', locals: { comment: @comment, current_user: current_user }, target: "post_#{@comment.post.id}_comments"
+        @comment.broadcast_append_to 'updates_feed',
+                                     locals: { comment: @comment, current_user: current_user },
+                                     target: "post_#{@comment.post.id}_comments"
+
         format.turbo_stream { flash.now[:notice] = 'Comment added!' }
         format.html { redirect_to :root, notice: 'Comment added!' }
       else
