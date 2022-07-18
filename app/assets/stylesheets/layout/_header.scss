@@ -5,21 +5,36 @@
 
   &__nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     padding: var(--space-xs);
   }
 
   &__search {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    width: 100%; 
+
+    form {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      label {
+        flex: 1 1;
+        text-align: center;
+      }
+      input[type='submit'] { flex: 1 1 }
+      input[type='text'] { flex: 1 5 75% }
+    }
   }
 
   &__links {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
   }
 }
 
