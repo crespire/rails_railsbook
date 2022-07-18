@@ -43,4 +43,15 @@ c-post
   &__responses {
     padding: var(--space-m);
   }
+
+  &__input {
+    form {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    textarea { flex: 90% }
+    input { flex: 10% }
+  }
 }
