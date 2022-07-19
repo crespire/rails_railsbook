@@ -1,12 +1,12 @@
-<div>
-  <div>
+<div class='l-profile'>
+  <div class='l-profile__request'>
     <% unless current_user.all_friends.include?(@user) || current_user == @user %>
       <%= turbo_frame_tag "request_#{dom_id(@user)}" do %>
-        <%= link_to 'Send request', user_requests_path(current_user, request: { friend_id: @user} ), data: { 'turbo-method': :post }, class: 'link' %></li>
+        You are not friends! <%= link_to 'Send request', user_requests_path(current_user, request: { friend_id: @user} ), data: { 'turbo-method': :post }, class: 'link' %></li>
       <% end %>
     <% end %>
   </div>
-  <div>
+  <div class='l-profile__friends'>
     <h3><%= @user.name %>'s friends</h3>
     <ul>
       <% @user.friends.each do |friend| %>
@@ -23,12 +23,19 @@
     </ul>
   </div>
   <% if current_user.pending_friends.present? && @user == current_user%>
-    <div>
+    <div class='l-profile__pending'>
       <%= link_to 'You have some pending requests!', user_requests_path(current_user) %>
     </div>
   <% end %>
+  <% if current_user.id == @user.id %>
+    <div class='l-profile__delete'>
+      Unhappy? We're sorry to see you go. <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+    </div>
+  <% end %>
+  <div class='l-profile__posts'>
+    <h3><%= @user.name %>'s Posts</h3>
+    <% @user.posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+  </div>
 </div>
-<% if current_user.id == @user.id %>
-  <p>Unhappy? We're sorry to see you go.
-  <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %></p>
-<% end %>
