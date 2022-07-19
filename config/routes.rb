@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   end
 
   delete 'users/:id', to: 'users#destroy'
-  get '/search', to: 'users#search'
+  get 'search', to: 'users#search'
   get 'notifications', to: 'notifications#index'
+  get 'profile', to: 'users#show'
   root 'posts#index'
 end
