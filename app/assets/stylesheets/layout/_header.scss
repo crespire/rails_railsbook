@@ -9,6 +9,8 @@
     align-items: center;
     flex-wrap: wrap;
     padding: var(--space-xs);
+
+    span { padding: var(--space-xs) }
   }
 
   &__search {

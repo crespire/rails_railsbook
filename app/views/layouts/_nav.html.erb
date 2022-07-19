@@ -4,6 +4,7 @@
   </div>
   <div class="l-header__links">
     <%= link_to 'Home', root_path, class: 'link' %>
+    <%= link_to 'Users', users_path, class: 'link' %>
     <% if user_signed_in? %>
       <span>Hello, <%= link_to current_user.name, user_path(current_user), class: 'link link--no-pad' %>!</span>
       <%= turbo_frame_tag "#{dom_id(current_user)}_notify_count" do %>
