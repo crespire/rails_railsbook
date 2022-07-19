@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show destroy]
   before_action :authenticate_user!
 
+  # GET /users
+  def index
+    @results = User.all
+    render 'search'
+  end
+
   # GET /users/1 or /users/1.json
   def show; end
 

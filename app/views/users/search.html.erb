@@ -1,5 +1,4 @@
-<p>Matches:
-<ul>
+<ul class="l-results">
   <% @results.each do |result| %>
     <li><%= link_to result.name, user_path(result), class: 'link link--no-pad' %>
     <% unless current_user.all_friends.include?(result) || current_user == result %>

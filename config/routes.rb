@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :comments, concerns: :likeable
   end
 
-  resources :users, only: %i[show], shallow: true do
+  resources :users, only: %i[index show], shallow: true do
     resources :requests, only: %i[index create update destroy]
   end
 
