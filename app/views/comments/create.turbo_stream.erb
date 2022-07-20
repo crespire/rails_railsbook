@@ -1,1 +1,2 @@
 <%= turbo_stream.append "#{dom_id(@post)}_comments", @comment %>
+<%= turbo_stream.replace "flash", partial: 'layouts/flash' %>
