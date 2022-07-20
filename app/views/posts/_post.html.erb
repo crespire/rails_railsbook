@@ -1,10 +1,11 @@
 <%= turbo_frame_tag dom_id(post) do %>
+<% actions ||= :on %>
   <div class="c-post">
     <div class="c-post__header">
       <div class="c-post__badge">
         <%= render 'users/badge', resource: post %>
       </div>
-      <% if current_user == post.user %>
+      <% if current_user == post.user && actions == :on %>
         <div class="c-post__actions">
           <% if current_user.id == post.user.id %>
             <%= link_to 'Edit', edit_post_path(post), data: { turbo_frame: dom_id(post) }, class: 'link' %>

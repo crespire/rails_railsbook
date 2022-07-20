@@ -28,7 +28,7 @@ class PostsController < ApplicationController
       if @post.save
 
         @post.broadcast_prepend_to 'updates_feed',
-                                   locals: { post: @post, current_user: current_user },
+                                   locals: { post: @post, current_user: current_user, actions: :off },
                                    target: 'post_feed'
 
         format.html { redirect_to :root, notice: "Post was successfully created." }
