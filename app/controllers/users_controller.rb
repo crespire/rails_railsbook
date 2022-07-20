@@ -10,6 +10,14 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show; end
 
+  def edit
+    @user = current_user
+    render 'profile'
+  end
+
+  def update
+  end
+
   # GET /search
   def search
     raise 'No search term' unless params[:query].present?
