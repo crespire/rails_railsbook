@@ -22,9 +22,8 @@ c-post
     border-left: 10px solid transparent;
     padding: var(--space-s);
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__badge {
