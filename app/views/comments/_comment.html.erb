@@ -1,8 +1,9 @@
 <%= turbo_frame_tag dom_id(comment) do%>
+<% actions ||= :on %>
   <div class="c-comment"> 
     <div class="c-comment__header">
       <%= render 'users/badge', resource: comment %>
-      <% if current_user == comment.user %>
+      <% if current_user == comment.user && actions == :on %>
         <div class="c-comment__actions">
           <% if current_user.id == comment.user.id %>
             <%= link_to 'Edit', edit_comment_path(comment), data: { turbo_frame: "#{dom_id(comment)}_text" }, class: 'link' %>

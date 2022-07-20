@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
       if @comment.save!
         @comment.notify
         @comment.broadcast_append_to 'updates_feed',
-                                     locals: { comment: @comment, current_user: current_user },
+                                     locals: { comment: @comment, current_user: current_user, actions: :off },
                                      target: "post_#{@comment.post.id}_comments"
 
         format.turbo_stream { flash.now[:notice] = 'Comment added!' }
