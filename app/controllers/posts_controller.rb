@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
   before_action :authenticate_user!
-  
+
   def index
-    @posts = Post.includes(:user, :comments, :likes).all.order(id: :desc)
-    @post = current_user.posts.build
+    query_ids = [current_user.id] + current_user.friends_sent_ids + current_user.friends_rec_ids
+    @posts = Post.includes(:user).where(user_id: query_ids).order(id: :desc)
   end
 
   def new

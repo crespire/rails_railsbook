@@ -31,7 +31,7 @@
     </div>
     <div class="c-post__responses">
       <%= turbo_frame_tag "#{dom_id(post)}_comments" do %>
-        <% post.comments.each do |comment| %>
+        <% post.comments.includes(:user).each do |comment| %>
           <%= render 'comments/comment', comment: comment %>
         <% end %>
       <% end %>

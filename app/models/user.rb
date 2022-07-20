@@ -54,7 +54,7 @@ class User < ApplicationRecord
   end
 
   def already_liked?(resource)
-    likes.exists?(likeable_id: resource.id, likeable_type: resource.class.name)
+    likes.pluck(:likeable_type, :likeable_id).include?([resource.class.name, resource.id])
   end
 
   def self.from_omniauth(access_token)
