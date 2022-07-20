@@ -21,5 +21,5 @@
     </ul>
   <% end %>
 
-  <% @new.each(&:mark_seen) %>
+  <% @new.includes(:target, :actor, :notifiable).each(&:mark_seen) %>
 </div>
