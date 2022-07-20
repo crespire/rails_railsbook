@@ -9,5 +9,5 @@ class Like < ApplicationRecord
   validates :liked_by, presence: true
   validates :likeable_type, presence: true
   validates :likeable_id, presence: true
-  validates :liked_by, uniqueness: { scope: %i[likeable_id likeable_type] }
+  validates :liked_by, uniqueness: { scope: %i[likeable_id likeable_type], message: 'you already!' }
 end
