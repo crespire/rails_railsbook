@@ -26,13 +26,13 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        format.turbo_stream { flash.now[:notice] = 'Post added!' }
+        format.html { redirect_to :root, notice: 'Post added!' }
+        format.json { render :show, status: :created, location: @post }
 
         @post.broadcast_prepend_to 'updates_feed',
                                    locals: { post: @post, current_user: current_user, actions: :off },
                                    target: 'post_feed'
-
-        format.html { redirect_to :root, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
