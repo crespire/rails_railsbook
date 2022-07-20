@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @results = User.all
-    render 'search'
   end
 
   # GET /users/1 or /users/1.json

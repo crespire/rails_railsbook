@@ -1,0 +1,10 @@
+<ul class="l-results">
+  <% @results.each do |result| %>
+    <li><%= link_to result.name, user_path(result), class: 'link link--no-pad' %>
+    <% unless current_user.all_friends.include?(result) || current_user == result %>
+      <%= turbo_frame_tag "request_#{dom_id(result)}" do %>
+        <%= link_to 'Send request', user_requests_path(current_user, request: { friend_id: result} ), data: { 'turbo-method': :post }, class: 'link' %></li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
