@@ -4,14 +4,11 @@
   padding: var(--space-xxs);
  
   & form {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 
-    #post_content {
-      resize: none;
-      width: 93%;
-    }
+    textarea { flex: 90% }
+    input { flex: 10% }
   }
 }
