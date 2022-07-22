@@ -1,0 +1,9 @@
+// app/assets/stylesheets/components/_badge.scss
+
+.c-badge {
+
+  &__image img {
+    max-width: 30px;
+    object-fit: contain;
+  }
+}
