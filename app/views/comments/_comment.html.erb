@@ -2,7 +2,7 @@
 <% actions ||= :on %>
   <div class="c-comment"> 
     <div class="c-comment__header">
-      <%= render 'users/badge', resource: comment %>
+      <%= render 'users/badge', owner: comment.user %>
       <% if current_user == comment.user && actions == :on %>
         <div class="c-comment__actions">
           <% if current_user.id == comment.user.id %>

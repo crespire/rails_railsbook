@@ -1,4 +1,8 @@
 <div class="c-user__badge">
-  <span class="c-user__image"></span>
-  <span class="c-user__name"><%= link_to resource.user.name, user_path(resource.user), data: { turbo: false } %></span>
+  <span class="c-user__image">
+    <% if owner.avatar.attached? %>
+      <%= image_tag owner.avatar.variant(resize_to_limit: [100, 100]).processed %>
+    <% end %>
+  </span>
+  <span class="c-user__name"><%= link_to owner.name, user_path(owner), data: { turbo: false } %></span>
 </div>
