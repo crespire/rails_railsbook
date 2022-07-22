@@ -31,6 +31,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_one_attached :avatar
+
   def friends
     friends_sent + friends_rec
   end
@@ -65,6 +67,8 @@ class User < ApplicationRecord
       user = User.create(name: data['name'],
                          email: data['email'],
                          password: Devise.friendly_token[0, 20])
+
+      user.avatar.attach(data['image'])
     end
     user
   end
