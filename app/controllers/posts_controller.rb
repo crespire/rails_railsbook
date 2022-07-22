@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def index
     query_ids = [current_user.id] + current_user.friends_sent_ids + current_user.friends_rec_ids
-    @posts = Post.includes(:user).where(user_id: query_ids).order(id: :desc)
+    @posts = Post.includes([:user, { user: :avatar_attachment }]).where(user_id: query_ids).order(id: :desc)
   end
 
   def new
