@@ -66,9 +66,8 @@ class User < ApplicationRecord
     unless user
       user = User.create(name: data['name'],
                          email: data['email'],
+                         external_picture: data['image'],
                          password: Devise.friendly_token[0, 20])
-
-      user.avatar.attach(data['image'])
     end
     user
   end
