@@ -1,9 +1,16 @@
 // app/assets/stylesheets/components/_badge.scss
 
 .c-badge {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
   &__image img {
     max-width: 30px;
-    object-fit: contain;
+    object-fit: scale-down;
+  }
+
+  &__name {
+    margin-left: var(--space-m);
   }
 }

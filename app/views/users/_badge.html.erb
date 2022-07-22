@@ -1,6 +1,6 @@
 <div class="c-badge">
   <span class="c-badge__image">
-    <%= image_tag owner.profile_picture %>
+    <%= image_tag owner.profile_picture(size: 30) %>
   </span>
   <span class="c-badge__name"><%= link_to owner.name, user_path(owner), data: { turbo: false } %></span>
 </div>
