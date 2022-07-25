@@ -174,6 +174,8 @@ c = component
 
 Then it's just block__element-modifier. I think I should first look into the asset pipeline and figure out how to parse SCSS, as it has not really been something I've been doing until now.
 
+See Github issues, migrating to that.
+
 #Post Script
 
 I originally also took out the second on long term implementation goals, but I am going to put it back here so that I don't forget about important features I'd like to implement.
