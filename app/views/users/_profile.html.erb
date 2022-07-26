@@ -1,4 +1,9 @@
 <div class="c-profile">
-  <%= image_tag user.profile_picture(size: 150), class: 'image-large' %>
-  <%= user.name %>
+  <div class="c-profile__image">
+    <%= image_tag user.profile_picture(size: 150), class: 'image-large' %>
+  </div>
+  <div class="c-profile__details">
+    <span class="large"><%=user.name%></span>
+    <span>Member for <%= distance_of_time_in_words_to_now(user.created_at) %>.</span>
+  </div>
 </div>
