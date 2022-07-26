@@ -8,11 +8,11 @@
 
 User.create(name: 'test1', email: 'test1@test.com', password: 'password')
 
-(2..50).to_a.each do |i|
+(2..30).to_a.each do |i|
   User.create(name: Faker::Name.name, email: "test#{i}@test.com", password: 'password')
 end
 
-puts 'Created 50 users'
+puts 'Created 30 users'
 
 until Request.count == 25
   user_a = User.all.sample
@@ -31,6 +31,16 @@ puts 'Created 25 requests'
 end
 
 puts 'Accepted 10 requests'
+
+test1 = User.first
+User.all.each_with_index do |user, i|
+  next if i.zero?
+  next if test1.all_friends.include?(user)
+
+  test1.sent_requests.create(friend: user, accepted: true)
+end
+
+puts 'All users friends with test1'
 
 12.times do |i|
   User.all.sample.posts.create(content: "Content of #{i} post")
