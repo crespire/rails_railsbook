@@ -34,7 +34,7 @@
   <% end %>
   <div class='l-profile__posts'>
     <h3><%= @user.name %>'s Posts</h3>
-    <% @user.posts.each do |post| %>
+    <% @user.posts.includes(:user, :rich_text_content).each do |post| %>
       <%= render post %>
     <% end %>
   </div>
