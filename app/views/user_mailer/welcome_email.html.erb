@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Petbook, <%= @user.name %></h1>
+    <p>
+      You have successfully signed up!<br />
+      You can sign in using <%= @user.email %> and the password you selected.<br>
+    </p>
+    <p>
+      To login to the site, just follow <%= link_to 'this link', @url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

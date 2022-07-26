@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: %i[github google_oauth2]
 
+  after_create :send_welcome_email
+
   validates :name, presence: true
   validates :email, uniqueness: true
   validates :email, presence: true
@@ -80,5 +82,11 @@ class User < ApplicationRecord
     else
       'default_pic.png'
     end
+  end
+
+  protected
+
+  def send_welcome_email
+    UserMailer.with(user: self).welcome_email.deliver_later
   end
 end
