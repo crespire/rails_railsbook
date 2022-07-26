@@ -17,22 +17,23 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="field-extra">
+    <%= f.label :password %>
     <% if @minimum_password_length %>
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
+    <%= f.password_field :password, placeholder: "Leave blank unless changing", autocomplete: "new-password" %>    
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_again %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  <div class="field-extra">
+    <%= f.label :current_password %>
+    <em>Required to change password.</em>
+    <%= f.password_field :current_password, autocomplete: "current-password" %>    
   </div>
 
   <div class="field">
@@ -49,5 +50,3 @@
 <div class='l-profile__delete'>
   Unhappy? We're sorry to see you go. <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
 </div>
-
-<%= link_to "Back", :back, class: 'link' %>

@@ -1,14 +1,5 @@
 // app/assets/stylesheets/components/_comment.scss
 
-/*
-c-comment
-  c-comment__header
-    c-user__badge
-    c-comment__actions (if comment is owned)
-  c-comment__content
-  c-comment__status
-*/
-
 .c-comment {
   margin-bottom: 10px;
   background-color: var(--color-tertiary);

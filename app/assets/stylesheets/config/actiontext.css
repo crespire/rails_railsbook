@@ -30,6 +30,9 @@
   max-width: 100% !important;
 }
 
-trix-toolbar {
-  display: none;
+trix-toolbar > .trix-button-row > span[data-trix-button-group='text-tools'],
+trix-toolbar > .trix-button-row > span[data-trix-button-group='history-tools'],
+trix-toolbar > .trix-button-row > span[data-trix-button-group='block-tools']
+ {
+  display: none !important;
 }
