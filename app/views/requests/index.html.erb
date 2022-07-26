@@ -1,23 +1,25 @@
 <div class="l-requests">
-  <div class="l-requests__pending">
-    <h2>Pending Requests</h2>
-    <ul>
-      <% current_user.received_requests.pending.each do |request| %>
-        <li>Request received from <%= request.user.name %>
-          <%= turbo_frame_tag dom_id(request) do %>
-            <%= link_to 'Accept', request_path(request, accept: true), data: { 'turbo-method': :patch }, class: 'link' %>
-          <% end %>
-        </li>
-      <% end %>
-      <% current_user.sent_requests.pending.each do |request| %>
-        <li>Request sent to <%= request.friend.name %>
-          <%= turbo_frame_tag dom_id(request) do %>
-            <%= link_to 'Delete', request_path(request), data: { 'turbo-method': :delete, 'turbo-confirm': 'Delete request?' }, class: 'link' %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+  <% if current_user.pending_friends.length.positive? %>
+    <div class="l-requests__pending">
+      <h2>Pending Requests</h2>
+      <ul>
+        <% current_user.received_requests.pending.each do |request| %>
+          <li>Request received from <%= request.user.name %>
+            <%= turbo_frame_tag dom_id(request) do %>
+              <%= link_to 'Accept', request_path(request, accept: true), data: { 'turbo-method': :patch }, class: 'link' %>
+            <% end %>
+          </li>
+        <% end %>
+        <% current_user.sent_requests.pending.each do |request| %>
+          <li>Request sent to <%= request.friend.name %>
+            <%= turbo_frame_tag dom_id(request) do %>
+              <%= link_to 'Delete', request_path(request), data: { 'turbo-method': :delete, 'turbo-confirm': 'Delete request?' }, class: 'link' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="l-requests_accepted">
     <h2>Your Friends</h2>
     <ul>
