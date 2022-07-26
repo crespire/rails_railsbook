@@ -49,7 +49,11 @@
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
 <div class='l-profile__delete'>
-  Unhappy? We're sorry to see you go. <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+  <div class="l-profile__delete-text">
+    Unhappy? We're sorry to see you go.
+  </div>
+  <div class="l-profile__delete-button">
+    <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+  </div>
 </div>

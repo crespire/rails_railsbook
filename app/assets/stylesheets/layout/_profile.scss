@@ -1,0 +1,11 @@
+// app/assets/stylesheets/layout/_profile.scss
+
+.l-profile {
+  &__delete {
+    padding: var(--space-xxs);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}
