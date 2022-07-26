@@ -6,27 +6,9 @@
       <% end %>
     <% end %>
   </div>
-  <div class='l-profile__friends'>
-    <h3><%= @user.name %>'s friends</h3>
-    <ul>
-      <% @user.friends.each do |friend| %>
-        <li>
-          <% request = @user.find_request(friend) %>
-          <%= turbo_frame_tag dom_id(request) do %>
-            <%= link_to friend.name, user_path(friend) %>
-            <% if current_user == @user %>
-              <%= link_to 'Delete?', request_path(request), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'link' %>
-            <% end %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+  <div class="l-profile__detail">
+    <%= render 'users/profile', user: @user %>
   </div>
-  <% if current_user.pending_friends.present? && @user == current_user%>
-    <div class='l-profile__pending'>
-      <%= link_to 'You have some pending requests!', user_requests_path(current_user) %>
-    </div>
-  <% end %>
   <div class='l-profile__posts'>
     <h3><%= @user.name %>'s Posts</h3>
     <% @user.posts.includes(:user, :rich_text_content).each do |post| %>
