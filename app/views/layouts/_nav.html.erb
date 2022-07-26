@@ -6,7 +6,7 @@
     <%= link_to 'Home', root_path, class: 'link' %>
     <%= link_to 'Users', users_path, class: 'link' %>
     <% if user_signed_in? %>
-      <span>Hello, <%= link_to current_user.name, profile_path, class: 'link link--no-pad' %>!</span>
+      <span>Hello, <%= link_to current_user.name, edit_user_registration_path, class: 'link link--no-pad' %>!</span>
       <%= turbo_frame_tag "#{dom_id(current_user)}_notify_count" do %>
         <%= link_to "Notifications (#{current_user.notifications.unseen.size})", notifications_path, data: { turbo: false }, class: 'link' %>
       <% end %>

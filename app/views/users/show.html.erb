@@ -27,11 +27,6 @@
       <%= link_to 'You have some pending requests!', user_requests_path(current_user) %>
     </div>
   <% end %>
-  <% if current_user.id == @user.id %>
-    <div class='l-profile__delete'>
-      Unhappy? We're sorry to see you go. <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
-    </div>
-  <% end %>
   <div class='l-profile__posts'>
     <h3><%= @user.name %>'s Posts</h3>
     <% @user.posts.includes(:user, :rich_text_content).each do |post| %>

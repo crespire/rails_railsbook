@@ -46,7 +46,8 @@
 <% end %>
 
 <h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<div class='l-profile__delete'>
+  Unhappy? We're sorry to see you go. <%= button_to 'Delete my account.', current_user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
+</div>
 
 <%= link_to "Back", :back, class: 'link' %>
