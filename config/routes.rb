@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   delete 'users/:id', to: 'users#destroy'
   get 'search', to: 'users#search'
   get 'notifications', to: 'notifications#index'
+  get 'requests', to: 'requests#index'
+  get 'users/:id/requests', to: redirect('/requests')
   root 'posts#index'
 end
