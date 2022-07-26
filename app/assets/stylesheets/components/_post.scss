@@ -1,17 +1,5 @@
 // app/assets/stylesheets/components/_post.scss
 
-/*
-c-post
-  c-post__header
-    c-post__badge
-      c-user__badge
-    c_post__actions (if owned)
-  c-post__content
-  c-post__status
-  c-post__responses
-  c-post__input
-*/
-
 .c-post {
   padding: var(--space-xs);
   background-color: var(--color-secondary-bg);

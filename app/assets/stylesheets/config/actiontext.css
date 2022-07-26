@@ -32,7 +32,14 @@
 
 trix-toolbar > .trix-button-row > span[data-trix-button-group='text-tools'],
 trix-toolbar > .trix-button-row > span[data-trix-button-group='history-tools'],
-trix-toolbar > .trix-button-row > span[data-trix-button-group='block-tools']
- {
+trix-toolbar > .trix-button-row > span[data-trix-button-group='block-tools'] {
   display: none !important;
+}
+
+trix-toolbar > .trix-button-row > span[data-trix-button-group='file-tools'] {
+  margin: 0;
+}
+
+trix-toolbar {
+  margin: 0;
 }
