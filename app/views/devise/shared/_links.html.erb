@@ -1,7 +1,7 @@
 <div class="l-registration__links">
   <div class="l-registration__main">
     <%- if controller_name != 'sessions' %>
-      <br /><%= link_to "Log in", new_session_path(resource_name), class: 'link' %>
+      <%= link_to "Log in", new_session_path(resource_name), class: 'link' %>
     <% end %>
   </div>
 
@@ -20,7 +20,7 @@
 
   <div class="l-registration__support">
     <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-      <br /><%= link_to "Forgot your password?", new_password_path(resource_name), class: 'link' %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'link' %>
     <% end %>
 
     <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

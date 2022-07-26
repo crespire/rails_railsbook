@@ -15,7 +15,7 @@ form {
 
   & div.field {
     display: grid;
-    grid-template-columns: 5em 1fr;
+    grid-template-columns: 8em 1fr;
     grid-template-rows: 1fr;
 
     & label {
@@ -30,6 +30,7 @@ form {
 
   &#new_user {
     flex-direction: column;
+    padding: var(--space-xs);
 
     input[type='submit'] {
       display: inline-block;
