@@ -1,6 +1,6 @@
 <%= form_with model: Post.new, data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' } do |form| %>
   <%= form.rich_text_area :content,
-                     placeholder: "What's on your mind?",
+                     placeholder: "What's on your mind? You can drag and drop images into here as well!",
                      required: true %>
   <%= form.submit 'Post' %>
 <% end %>
