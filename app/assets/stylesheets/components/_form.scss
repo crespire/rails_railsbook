@@ -12,4 +12,36 @@ form {
   & input[type='submit'] {
     flex: 1 1 10%;
   }
+
+  & div.field {
+    display: grid;
+    grid-template-columns: 5em 1fr;
+    grid-template-rows: 1fr;
+
+    & label {
+      grid-column-start: 1;
+      grid-column-end: 1;
+    }
+
+    & input {
+      grid-column-start: 2;
+    }
+  }
+
+  &#new_user {
+    flex-direction: column;
+
+    input[type='submit'] {
+      display: inline-block;
+      color: var(--color-primary);
+      border-radius: var(--border-radius);
+      background-origin: border-box; // Invisible borders with linear gradients
+      background-color: transparent;
+      border: solid 2px transparent;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      outline: none;
+    }
+  }
 }
