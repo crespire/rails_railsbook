@@ -6,3 +6,4 @@ import '@rails/actiontext'
 import '@rails/activestorage'
 import "trix"
 import "@rails/actiontext"
+import 'trix-editor-overrides'

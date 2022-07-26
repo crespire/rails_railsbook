@@ -12,3 +12,6 @@ pin "@rails/actiontext", to: "@rails--actiontext.js", preload: true # @7.0.3
 pin "@rails/activestorage", to: "@rails--activestorage.js", preload: true # @7.0.3
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
+
+# Add trix overrides
+pin 'trix-editor-overrides', to: 'lib/trix-editor-overrides.js', preload: true
