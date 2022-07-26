@@ -8,5 +8,5 @@ class Comment < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_rich_text :content
 
-  validates :content, presence: true
+  # validates :content, presence: true
 end
