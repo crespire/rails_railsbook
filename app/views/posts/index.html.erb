@@ -3,7 +3,7 @@
 </div>
 <div class="l-feed">
   <%= turbo_frame_tag 'post_feed' do %> 
-    <% @posts.each do |post| %>
+    <% @posts.includes(:rich_text_content).each do |post| %>
       <%= render 'posts/post', post: post %>
     <% end %>
   <% end %>
