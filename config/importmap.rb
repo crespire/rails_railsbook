@@ -10,3 +10,5 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "trix", preload: true # @2.0.0
 pin "@rails/actiontext", to: "@rails--actiontext.js", preload: true # @7.0.3
 pin "@rails/activestorage", to: "@rails--activestorage.js", preload: true # @7.0.3
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.js"
