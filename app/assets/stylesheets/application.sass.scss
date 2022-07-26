@@ -6,6 +6,7 @@
 // Configuration
 @import "config/variables";
 @import "config/reset";
+@import 'config/actiontext.css';
 
 // Components
 @import "components/button";
@@ -20,4 +21,4 @@
 @import "layout/header";
 @import "layout/main";
 @import "layout/flash";
-@import "layout/new_post";@import 'actiontext.css';
+@import "layout/new_post";

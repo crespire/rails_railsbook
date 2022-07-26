@@ -1,7 +1,7 @@
 <%= form_with model: Comment.new,
               url: post_comments_path(post),
               data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' } do |form| %>
-  <%= form.text_area :content,
+  <%= form.rich_text_area :content,
                      placeholer: "Add a comment...",
                      required: true %>
   <%= form.submit 'Add comment' %>

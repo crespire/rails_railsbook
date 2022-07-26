@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
 
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
+  has_rich_text :content
 
   validates :content, presence: true
 end
