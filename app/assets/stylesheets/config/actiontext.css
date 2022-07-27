@@ -43,3 +43,7 @@ trix-toolbar > .trix-button-row > span[data-trix-button-group='file-tools'] {
 trix-toolbar {
   margin: 0;
 }
+
+.trix-content {
+  line-height: 1.5em;
+}
