@@ -36,7 +36,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   def friends
-    friends_sent + friends_rec
+    friends_sent & friends_rec
   end
 
   def pending_friends
@@ -61,6 +61,16 @@ class User < ApplicationRecord
     likes.pluck(:likeable_type, :likeable_id).include?([resource.class.name, resource.id])
   end
 
+  def profile_picture(size: 100)
+    if avatar.attached?
+      avatar.variant(resize_to_limit: [size, size]).processed
+    elsif external_picture?
+      external_picture
+    else
+      'default_pic.png'
+    end
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
@@ -72,16 +82,6 @@ class User < ApplicationRecord
                          password: Devise.friendly_token[0, 20])
     end
     user
-  end
-
-  def profile_picture(size: 100)
-    if avatar.attached?
-      avatar.variant(resize_to_limit: [size, size]).processed
-    elsif external_picture?
-      external_picture
-    else
-      'default_pic.png'
-    end
   end
 
   protected
