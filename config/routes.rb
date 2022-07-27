@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get 'notifications', to: 'notifications#index'
   get 'requests', to: 'requests#index'
   get 'users/:id/requests', to: redirect('/requests')
+  get 'credits', to: 'static_pages#credits'
   root 'posts#index'
 end
