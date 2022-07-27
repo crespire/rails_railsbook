@@ -1,0 +1,13 @@
+// app/assets/stylesheets/layout/_footer.scss
+
+.l-footer {
+  background-color: var(--color-tertiary);
+  padding: var(--space-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    margin: 0 .75em;
+  }
+}
