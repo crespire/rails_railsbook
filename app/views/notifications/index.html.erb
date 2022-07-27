@@ -1,25 +1,28 @@
 <div class="l-notifications">
-  <% if @new.length.zero? %>
-    <h3>You're all caught up!</h3>
-  <% else %>
-    <h3>What's New?</h3>
-    <ul>
-      <% @new.each do |notification| %>
-        <li><%= notification.message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  <% if @old.length.zero? %>
-    <h3>Nothing old to see...</h3>
-  <% else %>
-    <h3>Old Notifications</h3>
-    <ul>
-      <% @old.each do |notification| %>
-        <li><%= notification.message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+  <div class="l-notifications__new">
+    <% if @new.length.zero? %>
+      <h3>You're all caught up!</h3>
+    <% else %>
+      <h3>What's New?</h3>
+      <ul>
+        <% @new.each do |notification| %>
+          <li><%= notification.message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="l-notifications__old">
+    <% if @old.length.zero? %>
+      <h3>Nothing old to see...</h3>
+    <% else %>
+      <h3>Old Notifications</h3>
+      <ul>
+        <% @old.each do |notification| %>
+          <li><%= notification.message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 
   <% @new.includes(:target, :actor, :notifiable).each(&:mark_seen) %>
 </div>
