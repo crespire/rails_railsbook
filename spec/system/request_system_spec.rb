@@ -14,7 +14,7 @@ RSpec.describe 'Request/friend system', type: :system do
       login_as(user_a)
       visit root_path
       find('input#query').fill_in with: 'Bob'
-      click_button 'Search'
+      click_button 'Go!'
       first('li').click_link('Send request')
     end
 
@@ -26,7 +26,7 @@ RSpec.describe 'Request/friend system', type: :system do
 
     it 'does not allow a user to send a request to self' do
       find('input#query').fill_in with: user_a.name
-      click_button 'Search'
+      click_button 'Go!'
       expect(page).not_to have_text('Send request')
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe 'Request/friend system', type: :system do
       login_as(user_a)
       visit root_path
       find('input#query').fill_in with: 'Bob'
-      click_button 'Search'
+      click_button 'Go!'
       first('li').click_link('Send request')
       click_button('Log Out')
     end
@@ -68,7 +68,7 @@ RSpec.describe 'Request/friend system', type: :system do
       login_as(user_a)
       visit root_path
       find('input#query').fill_in with: 'Bob'
-      click_button 'Search'
+      click_button 'Go!'
       first('li').click_link('Send request')
       click_button('Log Out')
 
@@ -83,9 +83,9 @@ RSpec.describe 'Request/friend system', type: :system do
       expect(user_b.reload.friends.count).to eq(1)
 
       login_as(user_a)
-      visit user_path(user_a)
+      visit requests_path(user_a)
       page.accept_alert do
-        first('li').click_link('Delete?')
+        first('li').click_link('Delete')
       end
       expect(page).to have_text('Deleted!')
       expect(user_a.reload.friends.count).to eq(0)
@@ -96,9 +96,9 @@ RSpec.describe 'Request/friend system', type: :system do
       expect(user_b.reload.friends.count).to eq(1)
 
       login_as(user_b)
-      visit user_path(user_b)
+      visit requests_path(user_b)
       page.accept_alert do
-        first('li').click_link('Delete?')
+        first('li').click_link('Delete')
       end
       expect(page).to have_text('Deleted!')
       expect(user_b.reload.friends.count).to eq(0)
