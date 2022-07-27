@@ -60,7 +60,7 @@ gem 'omniauth-github', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 1.0', '>= 1.0.1'
 
 # Add AWS
-gem "aws-sdk-s3", require: false
+gem "aws-sdk-s3"
 
 # Add VIPS
 gem "ruby-vips"
