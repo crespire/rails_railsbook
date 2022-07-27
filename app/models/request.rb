@@ -14,7 +14,6 @@ class Request < ApplicationRecord
   scope :pending, -> { where('accepted = false') }
 
   def accept_request
-    self.accepted = true
-    self.save
+    update!(accepted: true)
   end
 end
