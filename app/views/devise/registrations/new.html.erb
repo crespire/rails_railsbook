@@ -26,10 +26,38 @@
     <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
-  </div>
+  <details>
+    <summary>Optional Fields</summary>
+    <div class="field">
+      <%= f.label :profile_picture %>
+      <%= f.file_field :avatar %>
+    </div>
+
+    <div class="field">
+      <%= f.label :gender_identity %>
+      <%= f.select :gender, ['Man', 'Woman', 'Transgender', 'Non-binary/non-conforming', 'Prefer not to say'] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :website %>
+      <%= f.url_field :website %>
+    </div>
+
+    <div class="field">
+      <%= f.label :birthday %>
+      <%= f.date_field :birthday %>
+    </div>
+
+    <div class="field-single">
+      <%= f.check_box :show_birth_year %>
+      <%= f.label :show_birth_year, "Show Year?" %>      
+    </div>
+
+    <div class="field">
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+    </div>
+  </details>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

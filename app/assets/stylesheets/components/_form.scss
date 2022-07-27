@@ -65,4 +65,18 @@ form {
       outline: none;
     }
   }
+
+  & details > * {
+    margin-bottom: var(--space-xs);
+
+    select {
+      min-width: fit-content;
+    }
+
+    div.field-single {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+    }
+  }
 }
