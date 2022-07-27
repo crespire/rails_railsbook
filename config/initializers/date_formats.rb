@@ -1,3 +1,3 @@
 # config/initializers/date_formats.rb
-Date::DATE_FORMATS[:daymonth] = '%B %-d'
-Date::DATE_FORMATS[:full] = '%B %-d %Y'
+
+Date::DATE_FORMATS[:short_ordinal] = ->(date) { date.strftime("%B #{date.day.ordinalize}") }

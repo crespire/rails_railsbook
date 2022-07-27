@@ -3,7 +3,17 @@
     <%= image_tag user.profile_picture(size: 150), class: 'image-large' %>
   </div>
   <div class="c-profile__details">
-    <span class="large"><%=user.name%></span>
+    <span class="large"><%= user.name %></span>
     <span>Member for <%= distance_of_time_in_words_to_now(user.created_at) %>.</span>
+    <span>Gender Identity: <%= user.gender %></span>
+    <% if user.birthday %>
+      <span>Birthday: <%= user.birthday.to_fs(user.show_birth_year ? :long_ordinal : :short_ordinal) %></span>
+    <% end %>
+    <% if user.website %>
+      <span>Website: <%= link_to user.website %></span>
+    <% end %>
+    <% if user.location %>
+      <span>Location: <%= user.location %></span>
+    <% end %>
   </div>
 </div>
