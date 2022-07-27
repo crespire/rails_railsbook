@@ -48,7 +48,7 @@ class User < ApplicationRecord
   end
 
   def all_requests
-    sent_requests + received_requests
+    sent_requests.includes(:friend) + received_requests.includes(:user)
   end
 
   def find_request(other)

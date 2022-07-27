@@ -26,7 +26,8 @@ class RequestsController < ApplicationController
   private
 
   def set_request
-    @request = current_user.all_requests.find { |r| r.id == params[:id].to_i }
+    @request = Request.find(params[:id])
+    raise 'Injection detected.' unless @request.friend == current_user || @request.user == current_user
   end
 
   # Strong Params
