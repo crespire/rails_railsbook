@@ -8,13 +8,13 @@
 
 User.create(name: 'test1', email: 'test1@test.com', password: 'password')
 
-(2..30).to_a.each do |i|
+(2..5).to_a.each do |i|
   User.create(name: Faker::Name.name, email: "test#{i}@test.com", password: 'password')
 end
 
-puts 'Created 30 users'
+puts 'Created 5 users'
 
-until Request.count == 25
+until Request.count == 3
   user_a = User.all.sample
   user_b = User.all.sample
   next if user_a == user_b
@@ -23,14 +23,14 @@ until Request.count == 25
   request.notify
 end
 
-puts 'Created 25 requests'
+puts 'Created 3 requests'
 
-10.times do
+2.times do
   request = Request.pending.sample
   request.accept_request
 end
 
-puts 'Accepted 10 requests'
+puts 'Accepted 2 requests'
 
 test1 = User.first
 User.all.each_with_index do |user, i|
@@ -62,4 +62,4 @@ end
 
 puts 'Created 3 likes on posts.'
 
-puts "Generated #{Notification.count} notifications (expect 34)."
+puts "Generated #{Notification.count} notifications (expect 12)."
