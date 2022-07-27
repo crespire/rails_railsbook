@@ -36,7 +36,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   def friends
-    friends_sent & friends_rec
+    friends_sent + friends_rec
   end
 
   def pending_friends
