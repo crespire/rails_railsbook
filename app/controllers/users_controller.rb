@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     raise 'No search term' unless params[:query].present?
 
     @param = params[:query].downcase
-    @results = User.where('lower(name) LIKE :query', query: "%#{@param}%").order('RANDOM()')
+    @results = User.where('lower(name) LIKE :query', query: "%#{@param}%").order(id: :asc)
   end
 
   # DELETE /users/1
