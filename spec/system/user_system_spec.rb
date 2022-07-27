@@ -11,7 +11,7 @@ RSpec.describe 'User system', type: :system do
     fill_in 'Email', with: 'test0@test.com'
     fill_in 'Name', with: 'test0'
     fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
     click_button 'Sign up'
 
     expect(page).to have_text('Hello, test0!')
@@ -24,7 +24,7 @@ RSpec.describe 'User system', type: :system do
 
     fill_in 'Name', with: 'test0'
     fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
     click_button 'Sign up'
 
     message = page.find('#user_email').native.attribute('validationMessage')
@@ -39,7 +39,7 @@ RSpec.describe 'User system', type: :system do
     fill_in 'Email', with: 'testbademail.com'
     fill_in 'Name', with: 'test0'
     fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
     click_button 'Sign up'
 
     message = page.find('#user_email').native.attribute('validationMessage')
@@ -55,7 +55,7 @@ RSpec.describe 'User system', type: :system do
     fill_in 'Email', with: user.email
     fill_in 'Name', with: 'Fake user'
     fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
     click_button 'Sign up'
 
     expect(page).to have_text('Email has already been taken')
@@ -67,7 +67,7 @@ RSpec.describe 'User system', type: :system do
 
     it 'deletes a user successfully' do
       login_as(user, scope: :user)
-      visit user_path(user)
+      visit edit_user_registration_path(user)
       accept_confirm { click_button 'Delete my account.' }
       expect(page).to have_text('Account deleted.')
       expect(User.count).to eq(1)
@@ -78,7 +78,7 @@ RSpec.describe 'User system', type: :system do
       expect(user.posts.length).to eq(5)
       expect(Post.count).to eq(10)
 
-      visit user_path(user)
+      visit edit_user_registration_path(user)
       accept_confirm { click_button 'Delete my account.' }
       expect(page).to have_text('Account deleted.')
       expect(Post.count).to eq(5)
@@ -96,7 +96,7 @@ RSpec.describe 'User system', type: :system do
 
       it 'sent by the deleted user' do
         login_as(user)
-        visit user_path(user)
+        visit edit_user_registration_path(user)
         accept_confirm { click_button 'Delete my account.' }
         expect(page).to have_text('Account deleted.')
         expect(Request.count).to eq(0)
@@ -104,7 +104,7 @@ RSpec.describe 'User system', type: :system do
 
       it 'recieved by the deleted user' do
         login_as(user2)
-        visit user_path(user2)
+        visit edit_user_registration_path(user2)
         accept_confirm { click_button 'Delete my account.' }
         expect(page).to have_text('Account deleted.')
         expect(Request.count).to eq(0)
