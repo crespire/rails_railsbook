@@ -1,0 +1,13 @@
+// app/assets/stylesheets/layout/_search.scss
+
+.l-users {
+  padding: var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.l-results {
+  padding-left: var(--space-xs);
+}
