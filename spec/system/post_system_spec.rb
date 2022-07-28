@@ -32,14 +32,11 @@ RSpec.describe 'Post system', type: :system do
       expect(page).to have_text('Test Post from Capybara')
     end
 
-    # Currently, posting empty content is allowed. Have to fix this before I can make this test run.
-    it 'does not allow submission of an empty post', :focus do
+    it 'does not allow submission of an empty post' do
       visit root_path
       click_button 'Post'
 
-      message = page.find(:xpath, '//*[@id="post_content"]').native.attribute('validationMessage')
-
-      expect(message).to have_text('Please fill in this field.')
+      expect(page).to have_text('Content can not be blank.')
       expect(current_path).to eq(root_path)
     end
 
@@ -48,6 +45,7 @@ RSpec.describe 'Post system', type: :system do
       expect(page).not_to have_text('Edit')
     end
 
+    # In-place editing is broken due to ActionText, so I expect this test to fail.
     it 'allows a user to edit their own post' do
       create(:post, user_id: user.id)
 
