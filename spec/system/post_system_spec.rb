@@ -46,7 +46,7 @@ RSpec.describe 'Post system', type: :system do
     end
 
     # In-place editing is broken due to ActionText, so I expect this test to fail.
-    it 'allows a user to edit their own post' do
+    it 'allows a user to edit their own post', :focus do
       create(:post, user_id: user.id)
 
       visit root_path
