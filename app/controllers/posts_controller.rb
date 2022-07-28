@@ -33,6 +33,8 @@ class PostsController < ApplicationController
                                    locals: { post: @post, current_user: current_user, actions: :off },
                                    target: 'post_feed'
       else
+        message = "Post #{@post.errors.full_messages.join('').downcase}"
+        flash.now[:alert] = message
         format.turbo_stream { render :new, status: :unprocessable_entity }
         format.html { render :new, status: :unprocessable_entity }
       end

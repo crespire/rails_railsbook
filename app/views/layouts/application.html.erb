@@ -18,7 +18,9 @@
         <%= turbo_stream_from current_user, 'notifications' %>
       <% end %>
     </header>
-    <%= render 'layouts/flash' %>
+    <div id="flash" class="l-flash">
+      <%= render 'layouts/flash' %>
+    </div>
     <main class="l-main">
       <%= yield %>
     </main>

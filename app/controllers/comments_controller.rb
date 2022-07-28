@@ -32,6 +32,8 @@ class CommentsController < ApplicationController
                                      locals: { comment: @comment, current_user: current_user, actions: :off },
                                      target: "post_#{@comment.post.id}_comments"
       else
+        message = "Comment #{@comment.errors.full_messages.join('').downcase}"
+        flash.now[:alert] = message
         format.turbo_stream { render :new, status: :unprocessable_entity }
         format.html { render :new, status: :unprocessable_entity }
       end
