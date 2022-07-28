@@ -8,4 +8,5 @@ class Post < ApplicationRecord
 
   validate :attachment_type_allowed
   validate :attachment_size_allowed
+  validates_with RichContentValidator
 end
