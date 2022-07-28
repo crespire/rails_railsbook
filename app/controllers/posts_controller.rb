@@ -50,6 +50,9 @@ class PostsController < ApplicationController
         format.turbo_stream
         format.html { redirect_to :root, notice: "Post updated!" }
       else
+        message = "Post #{@post.errors.full_messages.join('').downcase}"
+        flash.now[:alert] = message
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
         format.html { render :edit, status: :unprocessable_entity }
       end
     end

@@ -48,6 +48,9 @@ class CommentsController < ApplicationController
         format.turbo_stream {}
         format.html { redirect_to :root, notice: 'Comment updated!' }
       else
+        message = "Comment #{@comment.errors.full_messages.join('').downcase}"
+        flash.now[:alert] = message
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
