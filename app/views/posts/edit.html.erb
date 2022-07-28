@@ -1,4 +1,4 @@
 <h1>Edit Post</h1>
-<%= turbo_frame_tag @post do %>
+<%= turbo_frame_tag "#{dom_id(@post)}_content" do %>
   <%= render 'posts/form' %>
 <% end %>
