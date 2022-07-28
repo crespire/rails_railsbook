@@ -1,6 +1,6 @@
     <div id="flash" class="l-flash">
       <% flash.each do |flash_type, message| %>
-        <div class="flash__message flash__message-<%= flash_type %>"
+        <div class="l-flash__message l-flash__message-<%= flash_type %>"
              data-controller='toggle-display'
              data-action='animationend->toggle-display#hide'
         >
