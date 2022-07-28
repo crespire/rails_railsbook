@@ -23,20 +23,18 @@ RSpec.describe 'Post system', type: :system do
     end
 
     it 'successfully posts a post as a user' do
-      create :post
-
       visit root_path
       find(:xpath, '//*[@id="post_content"]').set('Test Post from Capybara')
-      click_button 'Post'
+      click_button 'Add post'
 
       expect(page).to have_text('Test Post from Capybara')
     end
 
     it 'does not allow submission of an empty post' do
       visit root_path
-      click_button 'Post'
+      click_button 'Add post'
 
-      expect(page).to have_text('Content can not be blank.')
+      expect(page).to have_text('content can not be blank.')
       expect(current_path).to eq(root_path)
     end
 
@@ -45,16 +43,15 @@ RSpec.describe 'Post system', type: :system do
       expect(page).not_to have_text('Edit')
     end
 
-    # In-place editing is broken due to ActionText, so I expect this test to fail.
-    it 'allows a user to edit their own post', :focus do
+    it 'allows a user to edit their own post' do
       create(:post, user_id: user.id)
 
       visit root_path
       click_link 'Edit'
       expect(current_path).to eq(root_path)
 
-      find('div.l-feed').fill_in 'post_content', with: 'Test Post from Capybara with an edit!'
-      find('div.l-feed').click_button 'Post'
+      find(:xpath, '//*[@id="post_content"]').set('Test Post from Capybara with an edit!')
+      find('div.l-feed').click_button 'Update'
       expect(page).to have_text('Test Post from Capybara with an edit!')
       expect(current_path).to eq root_path
     end
