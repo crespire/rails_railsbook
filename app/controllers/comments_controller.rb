@@ -32,6 +32,7 @@ class CommentsController < ApplicationController
                                      locals: { comment: @comment, current_user: current_user, actions: :off },
                                      target: "post_#{@comment.post.id}_comments"
       else
+        format.turbo_stream { render :new, status: :unprocessable_entity }
         format.html { render :new, status: :unprocessable_entity }
       end
     end

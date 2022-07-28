@@ -34,6 +34,7 @@ class PostsController < ApplicationController
                                    locals: { post: @post, current_user: current_user, actions: :off },
                                    target: 'post_feed'
       else
+        format.turbo_stream { render :new, status: :unprocessable_entity }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
