@@ -14,12 +14,14 @@ RSpec.describe 'Comment system', type: :system do
 
     context 'with a post from another user' do
       before do
-        create :post
+        create(:post)
+        post_owner = Post.first.user
+        create(:request, :accepted, user: user, friend: post_owner)
       end
 
       it 'allows a user to comment on the post' do
         visit root_path
-        find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+        find(:xpath, '//*[@id="comment_content"]').set('Test Comment')
         click_button 'Add comment'
 
         expect(page).to have_text('Test Comment')
@@ -28,37 +30,37 @@ RSpec.describe 'Comment system', type: :system do
       it 'does not allow a user to submit a blank comment' do
         visit root_path
         find('div.c-post__input').click_button 'Add comment'
-        message = page.find('#comment_content').native.attribute('validationMessage')
 
-        expect(message).to have_text('Please fill in this field.')
+        expect(page).to have_text('content can not be blank.')
         expect(current_path).to eq(root_path)
       end
 
       it 'allows a user to edit their own comment' do
         visit root_path
-        find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+        find(:xpath, '//*[@id="comment_content"]').set('Test Comment')
         click_button 'Add comment'
 
         find('div.c-post__responses').click_link 'Edit'
-        find('div.c-post__responses').fill_in 'comment_content', with: 'Test Comment Edited'
+        expect(current_path).to eq(root_path)
+        find(:xpath, '//*[@id="comment_content"]').set('Test Comment Edited')
         click_button 'Update'
 
         expect(page).to have_text('Test Comment Edited')
         expect(current_path).to eq(root_path)
       end
 
-      it 'does not allow a user to update to a blank comment' do
+      # Can't seem to clear the comment input... this is where I'm at right now.
+      it 'does not allow a user to update to a blank comment', :focus do
         visit root_path
-        find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+        find(:xpath, '//*[@id="comment_content"]').set('Test Comment')
         click_button 'Add comment'
 
-        find('div.c-post__responses').click_link 'Edit'
-        find('div.c-post__responses').fill_in 'comment_content', with: ''
+        find('div.c-comment__actions').click_link 'Edit'
+        expect(current_path).to eq(root_path)
+        find(:xpath, '//*[@id="comment_content"]').send_keys Array.new(15, :backspace)
         click_button 'Update'
 
-        message = page.find('div.c-post__responses').find('#comment_content').native.attribute('validationMessage')
-
-        expect(message).to have_text('Please fill in this field.')
+        expect(page).to have_text('content can not be blank.')
         expect(current_path).to eq(root_path)
       end
 
