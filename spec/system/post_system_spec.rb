@@ -26,17 +26,17 @@ RSpec.describe 'Post system', type: :system do
       create :post
 
       visit root_path
-      find('div.l-new_post').fill_in 'post_content', with: 'Test Post from Capybara'
+      find(:xpath, '//*[@id="post_content"]').set('Test Post from Capybara')
       click_button 'Post'
 
       expect(page).to have_text('Test Post from Capybara')
     end
 
-    it 'does not allow submission of an empty post' do
+    it 'does not allow submission of an empty post', :focus do
       visit root_path
       click_button 'Post'
 
-      message = page.find('#post_content').native.attribute('validationMessage')
+      message = page.find(:xpath, '//*[@id="post_content"]').native.attribute('validationMessage')
 
       expect(message).to have_text('Please fill in this field.')
       expect(current_path).to eq(root_path)
