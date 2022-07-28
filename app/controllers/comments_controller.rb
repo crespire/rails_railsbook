@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     respond_to do |format|
-      if @comment.save!
+      if @comment.save
         format.turbo_stream { flash.now[:notice] = 'Comment added!' }
         format.html { redirect_to :root, notice: 'Comment added!' }
 
