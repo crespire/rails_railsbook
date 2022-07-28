@@ -6,3 +6,6 @@ import { application } from "./application"
 
 import ResetFormController from "./reset_form_controller"
 application.register("reset-form", ResetFormController)
+
+import ToggleDisplayController from "./toggle_display_controller"
+application.register("toggle-display", ToggleDisplayController)

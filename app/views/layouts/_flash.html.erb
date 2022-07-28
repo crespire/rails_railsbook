@@ -1,4 +1,10 @@
-    <div id="flash" class="l-flash scale-in-center">
-      <p class="l-flash__notice"><%= notice %></p>
-      <p class="l-flash__alert"><%= alert %></p>
+    <div id="flash" class="l-flash">
+      <% flash.each do |flash_type, message| %>
+        <div class="flash__message flash__message-<%= flash_type %>"
+             data-controller='toggle-display'
+             data-action='animationend->toggle-display#hide'
+        >
+          <%= message %>
+        </div>
+      <% end %>
     </div>
