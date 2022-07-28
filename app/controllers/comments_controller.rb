@@ -43,6 +43,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update(comment_params)
+        format.turbo_stream {}
         format.html { redirect_to :root, notice: 'Comment updated!' }
       else
         format.html { render :edit, status: :unprocessable_entity }

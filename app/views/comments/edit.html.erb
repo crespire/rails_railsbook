@@ -1,11 +1,4 @@
 <h1>Edit Comment</h1>
 <%= turbo_frame_tag "#{dom_id(@comment)}_text" do %>
-  <%= form_with model: @comment,
-              data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' } do |form| %>
-  <%= form.text_area :content,
-                     size: '30x2',
-                     placeholer: "Can't be blank...",
-                     required: true %>
-  <%= form.submit 'Update' %>
-  <% end %>
+  <%= render 'comments/editform' %>
 <% end %>
