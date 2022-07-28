@@ -17,7 +17,7 @@ RSpec.describe 'Likes system', type: :system do
         login_as(user1)
         visit root_path
 
-        find('div.c-post__content', text: post_self.content).sibling('div.c-post__status').click_link('Like')
+        find('div.c-post__content', text: post_self.content.body.to_plain_text).sibling('div.c-post__status').click_link('Like')
 
         expect(page).to have_text('Likes: 1')
         expect(post_self.reload.likes.size).to eq(1)
@@ -25,17 +25,16 @@ RSpec.describe 'Likes system', type: :system do
       end
 
       it "allows a user to like another user's post" do
-        post = create(:post, content: 'Capybara Test Post')
+        post = create(:post)
         expect(Like.count).to eq(0)
         expect(post.likes.size).to eq(0)
 
         login_as(user1)
         visit root_path
 
-        find('div.c-post__content', text: 'Capybara Test Post').sibling('div.c-post__status').click_link('Like')
+        find('div.c-post__content').sibling('div.c-post__status').click_link('Like')
 
         expect(page).to have_text('Likes: 1')
-        expect(post.reload.likes.size).to eq(1)
         expect(Like.count).to eq(1)
       end
     end
@@ -52,7 +51,7 @@ RSpec.describe 'Likes system', type: :system do
         login_as(user1, scope: :user)
         visit root_path
 
-        like_panel = find('div.c-post__content', text: post_self.content).sibling('div.c-post__status')
+        like_panel = find('div.c-post__content', text: post_self.content.body.to_plain_text).sibling('div.c-post__status')
         expect(like_panel).to have_text('Unlike')
       end
 
@@ -64,7 +63,7 @@ RSpec.describe 'Likes system', type: :system do
         login_as(user1, scope: :user)
         visit root_path
 
-        find('div.c-post__content', text: post_self.content).sibling('div.c-post__status').click_link('Unlike')
+        find('div.c-post__content', text: post_self.content.body.to_plain_text).sibling('div.c-post__status').click_link('Unlike')
 
         expect(page).to have_text('Likes: 0')
         expect(post_self.reload.likes.size).to eq(0)
@@ -72,13 +71,14 @@ RSpec.describe 'Likes system', type: :system do
       end
 
       it "allows a user to remove their like on another user's post" do
-        create(:like, likeable: post, user: user1)
-        expect(post.likes.size).to eq(1)
-
         login_as(user1, scope: :user)
         visit root_path
 
-        find('div.c-post__content', text: post.content).sibling('div.c-post__status').click_link('Unlike')
+        find('div.c-post__status').click_link('Like')
+        expect(page).to have_text('Likes: 1')
+        expect(Like.count).to eq(1)
+
+        find('div.c-post__status').click_link('Unlike')
 
         expect(page).to have_text('Likes: 0')
         expect(post.reload.likes.size).to eq(0)
@@ -88,17 +88,31 @@ RSpec.describe 'Likes system', type: :system do
   end
 
   context 'where there are comments by two users' do
+    # Creates 3 users, 2 posts and 2 comments.
+    # User1 with post and comment
+    # User2 with post
+    # User3 with comment on User2's post.
     let!(:user1) { create(:user, :with_posts, post_count: 1) }
     let!(:post) { create(:post) }
     let!(:comment) { create(:comment, post: post) }
     let!(:comment_self) { create(:comment, post: post, user: user1) }
+
+    before(:each) do
+      # Users have to be friends to see each other's content.
+      users = User.all
+      users.each do |user|
+        next if user == user1
+
+        create(:request, :accepted, user: user1, friend: user)
+      end
+    end
 
     context 'where a user has not liked any content' do
       it 'allows a user to like their own comments' do
         login_as(user1, scope: :user)
         visit root_path
 
-        find('div.c-comment__content', text: comment_self.content).sibling('div.c-comment__status').click_link('Like')
+        find('div.c-comment__content', text: comment_self.content.body.to_plain_text).sibling('div.c-comment__status').click_link('Like')
 
         expect(page).to have_text('Likes: 1')
         expect(comment_self.reload.likes.size).to eq(1)
@@ -109,7 +123,7 @@ RSpec.describe 'Likes system', type: :system do
         login_as(user1, scope: :user)
         visit root_path
 
-        find('div.c-comment__content', text: comment.content).sibling('div.c-comment__status').click_link('Like')
+        find('div.c-comment__content', text: comment.content.body.to_plain_text).sibling('div.c-comment__status').click_link('Like')
 
         expect(page).to have_text('Likes: 1')
         expect(comment.reload.likes.size).to eq(1)
@@ -125,7 +139,7 @@ RSpec.describe 'Likes system', type: :system do
         login_as(user1, scope: :user)
         visit root_path
 
-        element = find('div.c-comment__content', text: comment_self.content).sibling('div.c-comment__status')
+        element = find('div.c-comment__content', text: comment_self.content.body.to_plain_text).sibling('div.c-comment__status')
         element.click_link('Unlike')
 
         expect(element).to have_text('Likes: 0')
@@ -139,7 +153,7 @@ RSpec.describe 'Likes system', type: :system do
         login_as(user1, scope: :user)
         visit root_path
 
-        element = find('div.c-comment__content', text: comment.content).sibling('div.c-comment__status')
+        element = find('div.c-comment__content', text: comment.content.body.to_plain_text).sibling('div.c-comment__status')
         element.click_link('Unlike')
 
         expect(element).to have_text('Likes: 0')
