@@ -32,6 +32,7 @@ RSpec.describe 'Post system', type: :system do
       expect(page).to have_text('Test Post from Capybara')
     end
 
+    # Currently, posting empty content is allowed. Have to fix this before I can make this test run.
     it 'does not allow submission of an empty post', :focus do
       visit root_path
       click_button 'Post'
