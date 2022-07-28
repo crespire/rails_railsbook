@@ -1,0 +1,2 @@
+<% error_message = @comment.errors.full_messages.join('<br />') %>
+<%= turbo_stream.update 'flash', partial: 'layouts/flash', locals: { alert: error_message } %>
