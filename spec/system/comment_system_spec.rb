@@ -49,15 +49,14 @@ RSpec.describe 'Comment system', type: :system do
         expect(current_path).to eq(root_path)
       end
 
-      # Can't seem to clear the comment input... this is where I'm at right now.
-      it 'does not allow a user to update to a blank comment', :focus do
+      it 'does not allow a user to update to a blank comment' do
         visit root_path
         find(:xpath, '//*[@id="comment_content"]').set('Test Comment')
         click_button 'Add comment'
 
         find('div.c-comment__actions').click_link 'Edit'
         expect(current_path).to eq(root_path)
-        find(:xpath, '//*[@id="comment_content"]').send_keys Array.new(15, :backspace)
+        find(:xpath, '//div[@class="c-comment__content"]//trix-editor[@id="comment_content"]', match: :first).click.send_keys [:control, 'a'], :delete
         click_button 'Update'
 
         expect(page).to have_text('content can not be blank.')
@@ -66,7 +65,7 @@ RSpec.describe 'Comment system', type: :system do
 
       it 'allows a user to delete their own comment' do
         visit root_path
-        find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+        find(:xpath, '//*[@id="comment_content"]').set('Test Comment')
         click_button 'Add comment'
 
         expect(page).to have_text('Test Comment')
