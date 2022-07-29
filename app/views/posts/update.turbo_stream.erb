@@ -1,2 +1,2 @@
-<%= turbo_stream.update 'flash', partial: 'layouts/flash', locals: { notice: 'Post updated!' } %>
+<%= turbo_stream.prepend 'flash', partial: 'layouts/flash' %>
 <%= turbo_stream.update @post %>
