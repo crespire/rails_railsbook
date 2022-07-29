@@ -10,12 +10,13 @@ RSpec.describe 'Notifications spec', type: :system do
 
     before do
       login_as user, scope: :user
-      create :post
+      post = create(:post)
+      create(:request, :accepted, user: user, friend: post.user)
     end
 
     it 'the correct notification is created' do
       visit root_path
-      find('div.c-post__input').fill_in 'comment_content', with: 'Test Comment'
+      find(:xpath, '//*[@id="comment_content"]').set('Test Comment')
       click_button 'Add comment'
 
       expect(page).to have_text('Test Comment')
@@ -32,11 +33,15 @@ RSpec.describe 'Notifications spec', type: :system do
     let!(:user_a) { FactoryBot.create(:user, :with_posts, post_count: 1) }
     let!(:user_b) { create(:user) }
 
+    before(:each) do
+      create(:request, :accepted, user: user_a, friend: user_b)
+    end
+
     it 'the correct notification is created' do
       login_as(user_b)
       visit root_path
 
-      find('div.c-post__content', text: user_a.posts.first.content).sibling('div.c-post__status').click_link('Like')
+      find('div.c-post__status').click_link('Like')
 
       expect(page).to have_text('Likes: 1')
       expect(Notification.count).to eq(1)
@@ -56,7 +61,7 @@ RSpec.describe 'Notifications spec', type: :system do
       login_as(user_a)
       visit root_path
       find('input#query').fill_in with: 'Bob'
-      click_button 'Search'
+      click_button 'Go!'
       first('li').click_link('Send request')
 
       expect(page).to have_text('Request sent!')
