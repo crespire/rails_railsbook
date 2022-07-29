@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'when there is content' do
+  context 'when there is content to send #already_liked?' do
     it 'returns true when passed a resource the user has already liked'
 
     it 'returns false when passed a resource the user has already liked'
