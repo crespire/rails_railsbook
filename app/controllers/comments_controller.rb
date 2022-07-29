@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update(comment_params)
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = 'Comment updated!' }
         format.html { redirect_to :root, notice: 'Comment updated!' }
       else
         message = "Comment #{@comment.errors.full_messages.join('').downcase}"

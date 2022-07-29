@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = 'Post updated!' }
         format.html { redirect_to :root, notice: "Post updated!" }
       else
         message = "Post #{@post.errors.full_messages.join('').downcase}"
