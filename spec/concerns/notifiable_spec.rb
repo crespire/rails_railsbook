@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Notifiable do
+RSpec.describe Notifiable, type: :concerns do
   context 'when the resource is a like' do
     let(:post) { create(:post) }
     let(:like) { create(:like, likeable: post) }
