@@ -20,8 +20,6 @@ RSpec.describe User, type: :model do
       end
     
       it 'returns the right number of objects when sent #all_friends'
-    
-      it 'returns the right number of objects when sent #all_requests'
     end
 
     context 'when the user is the receiver' do

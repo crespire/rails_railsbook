@@ -47,10 +47,6 @@ class User < ApplicationRecord
     friends + pending_friends
   end
 
-  def all_requests
-    sent_requests.includes(:friend) + received_requests.includes(:user)
-  end
-
   def find_request(other)
     return nil if other == self
 
