@@ -60,7 +60,7 @@ class User < ApplicationRecord
   def profile_picture(size: 100)
     if avatar.attached?
       avatar.variant(resize_to_limit: [size, size]).processed
-    elsif external_picture?
+    elsif external_picture
       external_picture
     else
       'default_pic.png'
