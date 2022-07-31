@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'notifications@petbook.crespire.dev'
+  default from: 'hello@crespire.dev'
 
   def welcome_email
     @user = params[:user]
