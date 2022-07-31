@@ -42,7 +42,7 @@ RSpec.describe 'Comment system', type: :system do
 
         find('div.c-post__responses').click_link 'Edit'
         expect(current_path).to eq(root_path)
-        find(:xpath, '//*[@id="comment_content"]').set('Test Comment Edited')
+        find(:xpath, '//div[@class="c-comment__content"]//trix-editor[@id="comment_content"]', match: :first).set('Test Comment Edited')
         click_button 'Update'
 
         expect(page).to have_text('Test Comment Edited')
