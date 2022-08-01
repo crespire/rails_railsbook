@@ -65,6 +65,9 @@ gem "aws-sdk-s3"
 # Add VIPS
 gem "ruby-vips"
 
+# Use Faker
+gem 'faker'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -75,11 +78,8 @@ group :development, :test do
   # Use RSpec
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
 
-  # Use FactoryBoy
+  # Use FactoryBot
   gem 'factory_bot_rails'
-
-  # Use Faker
-  gem 'faker'
 end
 
 group :development do
