@@ -7,9 +7,9 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 
 # Add JS for trix and actiontext plus dependencies.
-pin "trix", preload: true # @2.0.0
-pin "@rails/actiontext", to: "@rails--actiontext.js", preload: true # @7.0.3
-pin "@rails/activestorage", to: "@rails--activestorage.js", preload: true # @7.0.3
+pin "trix", to: "https://ga.jspm.io/npm:trix@2.0.0-beta.0/dist/trix.js"
+pin "@rails/actiontext", to: "https://ga.jspm.io/npm:@rails/actiontext@7.0.3-1/app/javascript/actiontext/index.js"
+pin "@rails/activestorage", to: "https://ga.jspm.io/npm:@rails/activestorage@7.0.3-1/app/assets/javascripts/activestorage.esm.js"
 
 # Add trix overrides
 pin 'trix-editor-overrides', to: 'lib/trix-editor-overrides.js', preload: true
