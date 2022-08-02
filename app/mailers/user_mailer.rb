@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def welcome_email
     @user = params[:user]
-    @url = 'http://petbook.crespire.dev/users/sign_in'
-    mail(to: @user.email, subject: "Welcome to Petbook!")
+    @url = 'http://railsbook.crespire.dev/users/sign_in'
+    mail(to: @user.email, subject: "Welcome to Railsbook!")
   end
 end
