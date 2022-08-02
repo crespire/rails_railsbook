@@ -2,10 +2,10 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "controllers/application"
 
-import ResetFormController from "./reset_form_controller"
+import ResetFormController from "controllers/reset_form_controller"
 application.register("reset-form", ResetFormController)
 
-import ToggleDisplayController from "./toggle_display_controller"
+import ToggleDisplayController from "controllers/toggle_display_controller"
 application.register("toggle-display", ToggleDisplayController)
