@@ -2,7 +2,7 @@
 
 window.addEventListener("trix-file-accept", function(event) {
   const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/apng']
-  const maxFileSize = (1024 * 1024) * 2 // 2MB 
+  const maxFileSize = (1024 * 1024) * 5 // 5MB 
 
   if (!acceptedTypes.includes(event.file.type)) {
     event.preventDefault()
@@ -11,6 +11,6 @@ window.addEventListener("trix-file-accept", function(event) {
 
   if (event.file.size > maxFileSize) {
     event.preventDefault()
-    alert("Attachments must be 2MB or smaller.")
+    alert("Attachments must be 5MB or smaller.")
   }
 })
