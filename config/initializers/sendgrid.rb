@@ -4,7 +4,7 @@ if(Rails.env.production?)
     :port           => '587',
     :authentication => :plain,
     :user_name      => 'apikey',
-    :password       => Rails.application.credentials.dig(:sendgrid_key),
+    :password       => ENV['SENDGRID_API_KEY'],
     :domain         => 'crespire.dev'
   }
   ActionMailer::Base.delivery_method = :smtp
