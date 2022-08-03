@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   get 'requests', to: 'requests#index'
   get 'users/:id/requests', to: redirect('/requests')
   get 'credits', to: 'static_pages#credits'
+  get 'privacy', to: 'static_pages#privacy'
   root 'posts#index'
 end
