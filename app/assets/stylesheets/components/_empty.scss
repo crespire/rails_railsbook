@@ -6,6 +6,7 @@
   border-style: dashed;
   text-align: center;
   display: none;
+  margin: var(--space-m);
 
   &__text {
     font-size: var(--font-size-l);

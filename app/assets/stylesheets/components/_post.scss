@@ -43,3 +43,9 @@
     input { flex: 20% }
   }
 }
+
+turbo-frame#post_feed :last-child {
+  .c-post {
+    margin-bottom: var(--space-xxs);
+  }
+}
