@@ -23,10 +23,11 @@
   <div class="l-requests_accepted">
     <h2>Your Friends</h2>
     <ul>
-      <% current_user.all_friends.each do |friend| %>
+      <% current_user.friends.each do |friend| %>
+        <% request = current_user.find_request(friend) %>
         <% next if friend == current_user %>
-        <li><%= link_to friend.name, user_path(friend) %>
-          <% request = current_user.find_request(friend) %>
+
+        <li><%= link_to friend.name, user_path(friend) %>          
           <%= turbo_frame_tag dom_id(request) do %>
             <%= link_to 'Delete', request_path(request), data: { 'turbo-method': :delete, 'turbo-confirm': 'Delete friend?' }, class: 'link' %>
           <% end %>
