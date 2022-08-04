@@ -21,6 +21,6 @@ class Request < ApplicationRecord
   private
 
   def friend_self
-    errors.add(:friend, "can't be yourself.") unless user != friend
+    errors.add(:friend, "can't be yourself.") if user == friend
   end
 end
