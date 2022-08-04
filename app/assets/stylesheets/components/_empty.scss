@@ -1,0 +1,20 @@
+// app/assets/stylesheets/components/_empty.scss
+
+.empty-state {
+  padding: var(--space-m);
+  border: var(--border);
+  border-style: dashed;
+  text-align: center;
+  display: none;
+
+  &__text {
+    font-size: var(--font-size-l);
+    color: var(--color-text-header);
+    margin-bottom: var(--space-l);
+    font-weight: bold;
+  }
+
+  &:only-child {
+    display: revert;
+  }
+}

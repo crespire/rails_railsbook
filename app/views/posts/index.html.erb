@@ -2,7 +2,8 @@
   <%= render 'posts/form' %>
 </div>
 <div class="l-feed">
-  <%= turbo_frame_tag 'post_feed' do %> 
+  <%= turbo_frame_tag 'post_feed' do %>
+    <%= render "posts/empty" %>
     <% @posts.includes(:rich_text_content).each do |post| %>
       <%= render 'posts/post', post: post %>
     <% end %>
