@@ -37,12 +37,12 @@ A like
 - belongs to a liker, class user
 - belongs to likeable (polymorphic)
 
-A reqeuest
+A request
 
 - belongs to user as sender
 - belongs to user as receiver
 
-# Implemention notes
+# Implementation notes
 I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through association. There's the join model (request) which links to users. I ended up leveraging the request join model and a boolean so as to implement the idea of friend as a scope on requests. I ended up implementing both the like and comment as polymorphic associations, so that we can like and comment on anything.
 
 Currently, thinking about how to write specs so that behaviours of the models can be verified automatically.
@@ -95,7 +95,7 @@ Currently have friends working in a "one way" basis. The requestor/sender side w
 
 As an update, I have decided against the "mirrored" relationship approach. While it seems fine in concept, I think it will have problems at scale, both relying on callbacks that get triggered for each transaction, and how quickly the data might grow as you add users. I know this is essentially a toy app, so that won't be something I have to really worry about, but I still think it's worth thinking at that scale as an exercise.
 
-I've stuck with the bi-furcated associations approach, and added a few custom methods to my User model to consolidate the associations into a single method call. This is similiar to how I was doing it previously, but instead of writing queries in the custom methods, I am leveraging Rails associations.
+I've stuck with the bi-furcated associations approach, and added a few custom methods to my User model to consolidate the associations into a single method call. This is similar to how I was doing it previously, but instead of writing queries in the custom methods, I am leveraging Rails associations.
 
 I've got the Request controller fleshed out (I think), with the key elements I need to make sure requests can be created. I think a "TDD" approach here would be helpful, because I have to think about how I want the over all system to work (in terms of where users can request friends, etc), then build out the testing to support the views, etc.
 
@@ -123,7 +123,7 @@ I feel like this is a logical method: when I have a view, I want to check if the
 
 Having sorted out the routes and the options, I think the rest is fairly simple. Check if the user has already liked the resource. If not, show a link to Like#create. Otherwise, show a link to Like#destroy.
 
-I've added liking and unliking on the comment partial, but I would like for the counts and actions to update in real time, so it seems like I'll have to fiddle around with a turbo frame! I think I will work on this until it's good, then port it over to the post like button.
+I've added liking and un-liking on the comment partial, but I would like for the counts and actions to update in real time, so it seems like I'll have to fiddle around with a turbo frame! I think I will work on this until it's good, then port it over to the post like button.
 
 Completed like/unlike on Post and Comment resources. I am not 100% sure I implemented them in the best way possible, but I am happy with how it works. My next step is to write an automated system test suite.
 
