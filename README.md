@@ -9,7 +9,7 @@ This is my implementation of basic Facebook functionality leveraging Rails 7 and
 
 You can find a live link in the repository's about section, if you wish to give it a spin.
 
-# Key Moments
+# Key Learning
 
 This project felt very large at first, but going through and building functionality step by step and building on previous iterations of the app was what helped me to finally accomplish what I wanted to accomplish.
 
