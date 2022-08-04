@@ -3,6 +3,7 @@
               data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' } do |form| %>
   <%= form.rich_text_area :content,
                      placeholer: "Add a comment...",
-                     required: true %>
+                     required: true,
+                     id: "#{dom_id(post)}_comment_input" %>
   <%= form.submit %>
 <% end %>

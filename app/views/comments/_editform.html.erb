@@ -1,5 +1,6 @@
 <%= form_with model: @comment do |form| %>
   <%= form.rich_text_area :content,
-                     required: true %>
+                     required: true,
+                     id: "#{dom_id}_edit" %>
   <%= form.submit %>
 <% end %>
