@@ -25,6 +25,8 @@ This project felt very large at first, but going through and building functional
 
 * This project also marked the first time I styled a big Rails project of mine. While I had the opportunity to leverage a framework like Tailwind, Bulma or Bootstrap, I decided to flex my skills and stick with SCSS and BEM methodology. I would say the design is acceptable, but I think I could have gotten a more interesting design had I gone with a framework. That being said, using SCSS and BEM did teach me a lot, so I am happy with the choice I made.
 
+* The final challenge was on the deploy side. I'd long swapped to PG on my development environment to keep deploys somewhat simple, but getting this app to a state where it was functional on Heroku took a little bit of troubleshooting and sleuthing on the internet. Learning to use Heroku, AWS S3, and Oauth were definitely a highlight. It felt like I was finally taking a step from making a toy app on my local dev machine to making an honest to goodness web application that others could use. It was very satisfying to figure it all out!
+
 # Future Opportunities
 There are a few things I left on the table in terms of this application that I would love to revisit in the future when I don't have other things I'm keen to learn or pick up.
 
