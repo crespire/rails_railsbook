@@ -43,17 +43,17 @@ A reqeuest
 - belongs to user as receiver
 
 # Implemention notes
-I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through assocation. There's the join model (request) which links to users. I ended up leveraging the request join model and a boolean so as to implement the idea of friend as a scope on requests. I ended up implementning both the like and comment as polymorphic associations, so that we can like and comment on anything.
+I've implemented two users and posts, and now trying to figure out what the associations for "friends" would be. So, I think first, there is a through association. There's the join model (request) which links to users. I ended up leveraging the request join model and a boolean so as to implement the idea of friend as a scope on requests. I ended up implementing both the like and comment as polymorphic associations, so that we can like and comment on anything.
 
 Currently, thinking about how to write specs so that behaviours of the models can be verified automatically.
 
 Having completed the post system tests and post system (for the most part), I am now shifting to working on comments for posts.
 
-Typically, comments are pretty straight-forward: a post has many comments, and comments belong to a post and a user. But I've taken the route of making comments a polymorphic assocation so that you can comment on comments, etc.
+Typically, comments are pretty straight-forward: a post has many comments, and comments belong to a post and a user. But I've taken the route of making comments a polymorphic association so that you can comment on comments, etc.
 
-I've set up my model this way, but now I am wondering how I can set up the controller to accomodate this. I have no intention of allowing individual comment views, or have an "index of" comments, as comments require context (ie, a post or the parent comment, which loops back to requiring the post).
+I've set up my model this way, but now I am wondering how I can set up the controller to accommodate this. I have no intention of allowing individual comment views, or have an "index of" comments, as comments require context (ie, a post or the parent comment, which loops back to requiring the post).
 
-I think the first step to sorting out my comments is to make commenting on posts work (via the appropriate controller actions) to confirm that the model/assocaiations are set up correctly.
+I think the first step to sorting out my comments is to make commenting on posts work (via the appropriate controller actions) to confirm that the model/associations are set up correctly.
 
 Once that is done, then I can work on commenting on comments, as I will at least (hopefully) have a basis for starting after getting commenting done.
 
@@ -62,7 +62,7 @@ Having considered how to approach nested comments, I think it's a little bit mor
 
 Nested comments seemed to be difficult to implement on the view side without causing a bunch of N+1 problems. Not a trivial task. I am not well versed enough in the Rails framework (yet!!) to come up with a good solution for it, and I think having posts with just one level of comments is sufficient. I also still want to keep Likes as a polymorphic model, so I will still have some exposure to using them in the project.
 
-Running into an issue with my Post/Comment association. I'm having issues either executing a Post destroy due to comment assocations, or having issues adding comments. Think on this a little bit.
+Running into an issue with my Post/Comment association. I'm having issues either executing a Post destroy due to comment associations, or having issues adding comments. Think on this a little bit.
 
 I've updated the readme to reflect the changes in my approach for my models.
 
@@ -87,7 +87,7 @@ The next step here is to work on the Requests controller and required views for 
 
 I am thinking I should utilize some sort of join model for "friends" instead of utilizing a query on the user model here, so I will have to re-think some of my associations.
 
-Ideally, I should be able to call `current_user.friends` with scopes `pending` and `accepted` - similiar to my requests right now. So I think I'll have to have a think about how to accomplish that.
+Ideally, I should be able to call `current_user.friends` with scopes `pending` and `accepted` - similar to my requests right now. So I think I'll have to have a think about how to accomplish that.
 
 Currently have friends working in a "one way" basis. The requestor/sender side works, but I am not sure how to make sure the other side (receiver) also work. Thinking on it...
 
@@ -101,7 +101,7 @@ I've got the Request controller fleshed out (I think), with the key elements I n
 
 It will be interesting to see how I can do all fo this with Turbo. 
 
-I've got the Requests/Friend system working as I want, so now it is time to move on to the likes system. I think doing likes next is good, as then I can just bolt on a notifcation system to all the moving parts after liking is completed.
+I've got the Requests/Friend system working as I want, so now it is time to move on to the likes system. I think doing likes next is good, as then I can just bolt on a notification system to all the moving parts after liking is completed.
 
 In terms of the like system:
 * You can like a post or comment from other users
@@ -119,7 +119,7 @@ def already_liked?(resource)
 end
 ```
 
-I feel like this is a logical method: when I have a view, I want to check if the user has liked this partiuclar resource. If they have, show a delete option, otherwise they can like the resource. The more I think about it, why not allow a user to like their own stuff?
+I feel like this is a logical method: when I have a view, I want to check if the user has liked this particular resource. If they have, show a delete option, otherwise they can like the resource. The more I think about it, why not allow a user to like their own stuff?
 
 Having sorted out the routes and the options, I think the rest is fairly simple. Check if the user has already liked the resource. If not, show a link to Like#create. Otherwise, show a link to Like#destroy.
 
@@ -127,7 +127,7 @@ I've added liking and unliking on the comment partial, but I would like for the 
 
 Completed like/unlike on Post and Comment resources. I am not 100% sure I implemented them in the best way possible, but I am happy with how it works. My next step is to write an automated system test suite.
 
-This will require I figure out how to use factories with nested assocations as well.
+This will require I figure out how to use factories with nested associations as well.
 
 After that, I think I can move on to basic notifications, and get that working/tested. Then after that we're in the home stretch with CSS BEM styling and adding avatars, etc.
 
@@ -137,7 +137,7 @@ Thinking about how the notification system should work, basically we will have a
 
 Any action like sending a request or sending a like will create a notification. In the case of requests, the receiving party will have a notification. In the case of likes, the liked resource's owner will have a notification.
 
-Then we index all notifcations that are not seen and bunch them first. Any time we load a notfication on the index, we update it to "seen" - then we only count "unseen" ones (this can be accomplished with a scope).
+Then we index all notifications that are not seen and bunch them first. Any time we load a notification on the index, we update it to "seen" - then we only count "unseen" ones (this can be accomplished with a scope).
 
 Having worked through a bit, there are three cases in the app where I have to send a notification:
 * You receive a request
@@ -161,13 +161,13 @@ This way, any time a notifiable resource is saved, in its controller, there is a
 
 The testing is done for the project as of this point, so that is good.
 
-My next step is to explore Omniauth, and my goal is to enable Twitter and Google for this toy app. After that, I will probably write some simple request tests related to Omniauth, as I think it'll be a good opportunity to flex the mocks/stubs muscle again (haven't used them since Chess!).
+My next step is to explore Oauth, and my goal is to enable Twitter and Google for this toy app. After that, I will probably write some simple request tests related to Oauth, as I think it'll be a good opportunity to flex the mocks/stubs muscle again (haven't used them since Chess!).
 
-Adding real time notification count updates took a bit more brain flex than I had anticipated, but I got it working! Now we can move on to Omniauth.
+Adding real time notification count updates took a bit more brain flex than I had anticipated, but I got it working! Now we can move on to Oauth.
 
-Finished omniauth! I ended up adding Github and Google, rather than Twitter and Google, but it seems relatively simple to add another provider if I want.
+Finished Oauth! I ended up adding Github and Google, rather than Twitter and Google, but it seems relatively simple to add another provider if I want.
 
-Now to style the whole thing, which I think will be a little overwhelming. I've already got some of the scafolding done in terms of CSS, all my own generated views follow (somewhat) the BEM methodology with namespacing.
+Now to style the whole thing, which I think will be a little overwhelming. I've already got some of the scaffolding done in terms of CSS, all my own generated views follow (somewhat) the BEM methodology with name spacing.
 
 l = layout
 c = component
