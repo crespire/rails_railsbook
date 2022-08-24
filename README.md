@@ -10,7 +10,7 @@ This is my implementation of basic Facebook functionality leveraging Rails 7 and
 
 You can find a live link in the repository's about section, if you wish to give it a spin.
 
-# Key Learning
+## Key Learning
 
 This project felt very large at first, but going through and building functionality step by step and building on previous iterations of the app was what helped me to finally accomplish what I wanted to accomplish.
 
@@ -28,11 +28,11 @@ This project felt very large at first, but going through and building functional
 
 * The final challenge was on the deploy side. I'd long swapped to PG on my development environment to keep deploys somewhat simple, but getting this app to a state where it was functional on Heroku took a little bit of troubleshooting and sleuthing on the internet. Learning to use Heroku, AWS S3, and Oauth were definitely a highlight. It felt like I was finally taking a step from making a toy app on my local dev machine to making an honest to goodness web application that others could use. It was very satisfying to figure it all out!
 
-# Future Opportunities
+## Future Opportunities
 There are a few things I left on the table in terms of this application that I would love to revisit in the future when I don't have other things I'm keen to learn or pick up.
 
 * Users created from Oauth are currently not able to edit their profiles. This is a pretty big deal, especially if they want to add supplementary information. Work to fix this would involve modifying the User model and making some changes to the Devise Oauth flow, then updating my edit user flow to accommodate these changes.
 * Leverage a CSS framework to make the application design a little less wonky. I think with a standardized CSS framework, I might have made different choices in my design. Definitely something to explore in another project.
 
-# About Me
+## About Me
 Visit [my about page](https://crespire.net/) to learn more about what I'm up to and how to contact me.
