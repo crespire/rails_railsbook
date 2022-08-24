@@ -98,13 +98,13 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'when sent #profile_picture', :focus do
+  context 'when sent #profile_picture' do
     let(:avatar_only) { create(:user, :with_pic_attached) }
     let(:external_only) { create(:user, :with_external_pic) }
     let(:both) { create(:user, :with_both_pics) }
     let(:default) { create(:user) }
 
-    it 'returns an attached avatar if it exists', :focus do
+    it 'returns an attached avatar if it exists' do
       expect(avatar_only.profile_picture).to be_a(ActiveStorage::VariantWithRecord)
     end
 
@@ -113,7 +113,7 @@ RSpec.describe User, type: :model do
       expect(avatar_only.profile_picture).to be_a(ActiveStorage::VariantWithRecord)
     end
 
-    it 'returns an external picture if it exists and there is not attached avatar', :focus do
+    it 'returns an external picture if it exists and there is not attached avatar' do
       expect(external_only.profile_picture).to be_a(String)
       expect(external_only.profile_picture).to include('gravatar.com')
     end
