@@ -6,6 +6,7 @@ This is my implementation of basic Facebook functionality leveraging Rails 7 and
 * Notifications
 * Likes
 * User authentication and Oauth through the devise gem
+* Rspec testing suite with ~83% coverage
 
 You can find a live link in the repository's about section, if you wish to give it a spin.
 
@@ -31,7 +32,6 @@ This project felt very large at first, but going through and building functional
 There are a few things I left on the table in terms of this application that I would love to revisit in the future when I don't have other things I'm keen to learn or pick up.
 
 * Users created from Oauth are currently not able to edit their profiles. This is a pretty big deal, especially if they want to add supplementary information. Work to fix this would involve modifying the User model and making some changes to the Devise Oauth flow, then updating my edit user flow to accommodate these changes.
-
 * Leverage a CSS framework to make the application design a little less wonky. I think with a standardized CSS framework, I might have made different choices in my design. Definitely something to explore in another project.
 
 # About Me
