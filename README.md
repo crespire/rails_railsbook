@@ -20,15 +20,15 @@ This project felt very large at first, but going through and building functional
 * Wrote a custom Rails validator, demonstrating a level of comfort with the Rails API documentation.
 * Developed an RSpec test suite in the Rails context. Learned to use supporting gems Faker and Capybara to implement the test suite. While I didn't strictly TDD this project, testing remained important.
 * Rolled custom CSS based the BEM methodology based on a tutorial resource.
-* Deployment is hard! While local development and test environments were already using PostgreSQL, getting the app deployed took quite a bit of trial and error, troubleshooting and searching the internet. From adjustments in the production environment to making sure all the services required were running and reachable, I learned a lot about Heroku, AWS S3, Sendgrid and Oauth.
+* Deployment is hard! While local development and test environments were already using PostgreSQL, getting the app deployed took quite a bit of trial and error, troubleshooting and searching the internet. From adjustments in the production environment to making sure all the services required were running and reachable, I learned a lot about Heroku/dokku, AWS S3, Sendgrid and Oauth.
 
 # Deployment notes
-In order to build this application successfully on dokku/heroku, the following buildpacks are required:
+In order to build and deploy this application successfully on dokku/heroku, the following buildpacks are required in this order:
 1. https://github.com/heroku/heroku-buildpack-apt.git
 1. https://github.com/brandoncc/heroku-buildpack-vips.git
 1. https://github.com/heroku/heroku-buildpack-ruby.git
 
-The apt pack allows us to use the Aptfile to install packages into the container that we require (libvips, etc).
+The apt pack allows us to use the Aptfile to install packages into the container that we require (libvips, etc). For lower-spec'd containers (1gb RAM), adding a 2GB swap file solved some `Kill` problems with dokku deployment.
 
 ## Future Opportunities
 There are a few things I left on the table in terms of this application that I would love to revisit in the future when I don't have other things I'm keen to learn or pick up.
@@ -37,4 +37,4 @@ There are a few things I left on the table in terms of this application that I w
 * Leverage a CSS framework to make the application design a little less wonky. I think with a standardized CSS framework, I might have made different choices in my design. Definitely something to explore in another project.
 
 ## About Me
-Visit [my about page](https://crespire.net/) to learn more about what I'm up to and how to contact me.
+Visit [my about page](https://crespire.dev/) to learn more about what I'm up to and how to contact me.
