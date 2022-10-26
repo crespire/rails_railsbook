@@ -39,7 +39,7 @@
 !/app/assets/builds/.keep
 
 # Ignore node modules
-/node_modules
+node_modules
 
 # Ignore .env
 .env
