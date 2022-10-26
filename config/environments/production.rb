@@ -17,7 +17,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Add default URL to render images on Turbo Streams properly
-  config.action_controller.default_url_options = { host: 'railsbook.crespire.dev', protocol: 'https' }
+  config.action_controller.default_url_options = { host: 'dokkubook.crespire.dev', protocol: 'https' }
 
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
@@ -72,7 +72,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Set default host for mailer
-  config.action_mailer.default_url_options = { host: 'railsbook.crespire.dev' }
+  config.action_mailer.default_url_options = { host: 'dokkubook.crespire.dev' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

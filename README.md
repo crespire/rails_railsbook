@@ -22,6 +22,14 @@ This project felt very large at first, but going through and building functional
 * Rolled custom CSS based the BEM methodology based on a tutorial resource.
 * Deployment is hard! While local development and test environments were already using PostgreSQL, getting the app deployed took quite a bit of trial and error, troubleshooting and searching the internet. From adjustments in the production environment to making sure all the services required were running and reachable, I learned a lot about Heroku, AWS S3, Sendgrid and Oauth.
 
+# Deployment notes
+In order to build this application successfully on dokku/heroku, the following buildpacks are required:
+1. https://github.com/heroku/heroku-buildpack-apt.git
+1. https://github.com/brandoncc/heroku-buildpack-vips.git
+1. https://github.com/heroku/heroku-buildpack-ruby.git
+
+The apt pack allows us to use the Aptfile to install packages into the container that we require (libvips, etc).
+
 ## Future Opportunities
 There are a few things I left on the table in terms of this application that I would love to revisit in the future when I don't have other things I'm keen to learn or pick up.
 
