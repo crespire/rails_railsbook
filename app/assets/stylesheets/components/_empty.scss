@@ -15,6 +15,10 @@
     font-weight: bold;
   }
 
+  &__code {
+    font-family: mono;
+  }
+
   &:only-child {
     display: revert;
   }
