@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     if @user.id == 1
-      redirect_to root_path, notice; "Can't delete user.", status: 400 and return
+      redirect_to root_path, notice: "Can't delete user.", status: 400 and return
     end
 
     @user.destroy
